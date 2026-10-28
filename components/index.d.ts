@@ -177,6 +177,31 @@ export interface StepperProps {
     className?: string;
 }
 export function Stepper({ steps, current, orientation, className }: StepperProps): React.JSX.Element;
+export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+    children: React.ReactNode;
+}
+export function Accordion({ className, children, ...rest }: AccordionProps): React.JSX.Element;
+export interface AccordionItemProps extends Omit<React.DetailsHTMLAttributes<HTMLElement>, "title"> {
+    title: React.ReactNode;
+    /** Druhý riadok pod nadpisom (napr. pre koho je sekcia). */
+    subtitle?: React.ReactNode;
+    /** Otvorená pri prvom zobrazení. */
+    defaultOpen?: boolean;
+    children: React.ReactNode;
+}
+export function AccordionItem({ title, subtitle, defaultOpen, className, children, ...rest }: AccordionItemProps): React.JSX.Element;
+export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
+    /** Hodnota od 0 po `max`. */
+    value: number;
+    max?: number;
+    /** Prístupný názov, napr. „Vyplnené oblasti“. */
+    label: string;
+    /** Text pre čítačku namiesto percent, napr. „8 z 11 oblastí“. */
+    valueText?: string;
+    /** brand = modrá (postup), success = zelená (splnené). */
+    tone?: "brand" | "success";
+}
+export function ProgressBar({ value, max, label, valueText, tone, className, ...rest }: ProgressBarProps): React.JSX.Element;
 
 // ---- navigation ----
 export interface TabItem {

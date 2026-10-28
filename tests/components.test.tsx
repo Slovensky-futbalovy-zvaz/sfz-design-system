@@ -44,6 +44,8 @@ describe("komponenty sa vyrenderujú", () => {
     ["Table", () => <SFZ.Table caption="Kluby" columns={columns} rows={rows} rowKey={(r) => r.klub} />],
     ["DataTable", () => <SFZ.DataTable caption="Kluby" columns={columns} rows={rows} rowKey={(r) => r.klub} />],
     ["Calendar", () => <SFZ.Calendar value="2026-10-24" month="2026-10" events={[{ date: "2026-10-24" }]} />],
+    ["Accordion", () => <SFZ.Accordion><SFZ.AccordionItem title="Metodika">Text</SFZ.AccordionItem></SFZ.Accordion>],
+    ["ProgressBar", () => <SFZ.ProgressBar value={8} max={11} label="Vyplnené oblasti" />],
   ];
   for (const [name, el] of cases) {
     it(name, () => {
@@ -88,5 +90,36 @@ describe("správanie", () => {
     render(<SFZ.Calendar month="2026-10" />);
     expect(screen.getByText("október 2026")).toBeTruthy();
     expect(screen.getAllByRole("columnheader")[0].textContent).toBe("Po");
+  });
+
+  it("AccordionItem je natívny details a defaultOpen ho otvorí", () => {
+    const { container } = render(
+      <SFZ.Accordion>
+        <SFZ.AccordionItem title="Otvorená" subtitle="Pre trénera" defaultOpen>Obsah A</SFZ.AccordionItem>
+        <SFZ.AccordionItem title="Zatvorená">Obsah B</SFZ.AccordionItem>
+      </SFZ.Accordion>,
+    );
+    const items = container.querySelectorAll("details");
+    expect(items).toHaveLength(2);
+    expect(items[0].open).toBe(true);
+    expect(items[1].open).toBe(false);
+    expect(screen.getByText("Pre trénera")).toBeTruthy();
+  });
+
+  it("ProgressBar hlási percentá, text pre čítačku a drží rozsah 0 – 100", () => {
+    render(<SFZ.ProgressBar value={8} max={11} label="Vyplnené oblasti" valueText="8 z 11 oblastí" />);
+    const bar = screen.getByRole("progressbar", { name: "Vyplnené oblasti" });
+    expect(bar.getAttribute("aria-valuenow")).toBe("73");
+    expect(bar.getAttribute("aria-valuetext")).toBe("8 z 11 oblastí");
+    cleanup();
+    render(<SFZ.ProgressBar value={150} label="Nad maximum" />);
+    expect(screen.getByRole("progressbar").getAttribute("aria-valuenow")).toBe("100");
+    cleanup();
+    render(<SFZ.ProgressBar value={Number.NaN} label="Bez hodnoty" />);
+    expect(screen.getByRole("progressbar").getAttribute("aria-valuenow")).toBe("0");
+  });
+
+  it("nové ikony sú v sade", () => {
+    for (const n of ["map", "map-pin", "compass", "book-open", "star"]) expect(SFZ.ICON_PATHS[n], n).toBeTruthy();
   });
 });

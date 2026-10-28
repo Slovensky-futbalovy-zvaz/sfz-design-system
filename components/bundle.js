@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"SFZ","components":[{"name":"Button"},{"name":"IconButton"},{"name":"Input"},{"name":"Textarea"},{"name":"Select"},{"name":"Checkbox"},{"name":"Toggle"},{"name":"Card"},{"name":"Badge"},{"name":"Chip"},{"name":"Alert"},{"name":"Toast"},{"name":"Avatar"},{"name":"Skeleton"},{"name":"EmptyState"},{"name":"Stepper"},{"name":"Tabs"},{"name":"NavBar"},{"name":"TabBar"},{"name":"Modal"},{"name":"Drawer"},{"name":"Table"},{"name":"DataTable"},{"name":"Calendar"},{"name":"Icon"}]} */
+/* @ds-bundle: {"format":4,"namespace":"SFZ","components":[{"name":"Button"},{"name":"IconButton"},{"name":"Input"},{"name":"Textarea"},{"name":"Select"},{"name":"Checkbox"},{"name":"Toggle"},{"name":"Card"},{"name":"Badge"},{"name":"Chip"},{"name":"Alert"},{"name":"Toast"},{"name":"Avatar"},{"name":"Skeleton"},{"name":"EmptyState"},{"name":"Stepper"},{"name":"Accordion"},{"name":"AccordionItem"},{"name":"ProgressBar"},{"name":"Tabs"},{"name":"NavBar"},{"name":"TabBar"},{"name":"Modal"},{"name":"Drawer"},{"name":"Table"},{"name":"DataTable"},{"name":"Calendar"},{"name":"Icon"}]} */
 
 var SFZ = (() => {
   var __create = Object.create;
@@ -42,6 +42,8 @@ var SFZ = (() => {
   // ../ds/project/components/src/index.ts
   var index_exports = {};
   __export(index_exports, {
+    Accordion: () => Accordion,
+    AccordionItem: () => AccordionItem,
     Alert: () => Alert,
     Avatar: () => Avatar,
     Badge: () => Badge,
@@ -59,6 +61,7 @@ var SFZ = (() => {
     IconButton: () => IconButton,
     Input: () => Input,
     Modal: () => Modal,
+    ProgressBar: () => ProgressBar,
     NavBar: () => NavBar,
     Select: () => Select,
     Skeleton: () => Skeleton,
@@ -104,7 +107,12 @@ var SFZ = (() => {
     download: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3",
     edit: "M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z",
     trash: "M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2",
-    loader: "M21 12a9 9 0 1 1-6.22-8.56"
+    loader: "M21 12a9 9 0 1 1-6.22-8.56",
+    "map": "M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0zM15 5.764v15M9 3.236v15",
+    "map-pin": "M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6z",
+    "compass": "M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM16.24 7.76l-1.804 5.411a2 2 0 0 1-1.265 1.265L7.76 16.24l1.804-5.411a2 2 0 0 1 1.265-1.265z",
+    "book-open": "M12 7v14M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z",
+    "star": "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"
   };
   function Icon({ name, size = 20, label, className, ...rest }) {
     var _a;
@@ -247,6 +255,30 @@ var SFZ = (() => {
       const state = i < current ? "done" : i === current ? "current" : "todo";
       return /* @__PURE__ */ React3.createElement("li", { key: i, className: cx2("sfz-step", `is-${state}`), "aria-current": state === "current" ? "step" : void 0 }, /* @__PURE__ */ React3.createElement("span", { className: "sfz-step__marker", "aria-hidden": "true" }, state === "done" ? /* @__PURE__ */ React3.createElement(Icon, { name: "check", size: 14 }) : i + 1), /* @__PURE__ */ React3.createElement("span", { className: "sfz-step__text" }, /* @__PURE__ */ React3.createElement("span", { className: "sfz-step__label" }, s.label), s.description && /* @__PURE__ */ React3.createElement("span", { className: "sfz-step__desc" }, s.description)));
     }));
+  }
+
+  function Accordion({ className, children, ...rest }) {
+    return /* @__PURE__ */ React3.createElement("div", { className: cx2("sfz-accordion", className), ...rest }, children);
+  }
+  function AccordionItem({ title, subtitle, defaultOpen, className, children, ...rest }) {
+    return /* @__PURE__ */ React3.createElement("details", { className: cx2("sfz-accordion__item", className), open: defaultOpen, ...rest }, /* @__PURE__ */ React3.createElement("summary", { className: "sfz-accordion__summary" }, /* @__PURE__ */ React3.createElement("span", { className: "sfz-accordion__text" }, /* @__PURE__ */ React3.createElement("span", { className: "sfz-accordion__title" }, title), subtitle && /* @__PURE__ */ React3.createElement("span", { className: "sfz-accordion__subtitle" }, subtitle)), /* @__PURE__ */ React3.createElement("span", { className: "sfz-accordion__chevron", "aria-hidden": "true" }, /* @__PURE__ */ React3.createElement(Icon, { name: "chevron-down", size: 18 }))), /* @__PURE__ */ React3.createElement("div", { className: "sfz-accordion__body" }, children));
+  }
+  function ProgressBar({ value, max = 100, label, valueText, tone = "brand", className, ...rest }) {
+    const pct = Math.max(0, Math.min(100, Math.round(value / max * 100))) || 0;
+    return /* @__PURE__ */ React3.createElement(
+      "div",
+      {
+        role: "progressbar",
+        "aria-label": label,
+        "aria-valuemin": 0,
+        "aria-valuemax": 100,
+        "aria-valuenow": pct,
+        "aria-valuetext": valueText,
+        className: cx2("sfz-progress", `sfz-progress--${tone}`, className),
+        ...rest
+      },
+      /* @__PURE__ */ React3.createElement("span", { className: "sfz-progress__bar", style: { width: `${pct}%` } })
+    );
   }
 
   // ../ds/project/components/src/navigation.tsx

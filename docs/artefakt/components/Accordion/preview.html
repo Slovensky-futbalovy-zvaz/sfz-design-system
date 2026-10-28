@@ -1,0 +1,9 @@
+<!-- @dsCard group="Obsah" height=240 subtitle="Zoskupené rozbaľovacie sekcie" -->
+<style>body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.col{display:flex;flex-direction:column;gap:12px;max-width:480px}</style>
+<div id="root"></div>
+<script>
+const h=React.createElement, S=SFZ;
+function App(){
+return h("div",{className:"col"},h(S.Accordion,null,h(S.AccordionItem,{title:"Licencie trénerov",subtitle:"Pre trénera a vedenie klubu",defaultOpen:true},"Každé družstvo v súťaži potrebuje trénera s licenciou zodpovedajúcou kategórii."),h(S.AccordionItem,{title:"Ako získať nového trénera"},"Oslovte rodičov a bývalých hráčov."),h(S.AccordionItem,{title:"Vzdelávanie a rozvoj"},"Kurzy Grassroots C a UEFA C.")));}
+ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+</script>

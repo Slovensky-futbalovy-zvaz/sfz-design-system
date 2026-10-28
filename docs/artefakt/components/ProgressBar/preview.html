@@ -1,0 +1,9 @@
+<!-- @dsCard group="Spätná väzba" height=120 subtitle="Ukazovateľ postupu" -->
+<style>body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.col{display:flex;flex-direction:column;gap:12px;max-width:480px}</style>
+<div id="root"></div>
+<script>
+const h=React.createElement, S=SFZ;
+function App(){
+return h("div",{className:"col"},h("span",null,"8 z 11 oblastí"),h(S.ProgressBar,{value:8,max:11,label:"Vyplnené oblasti",valueText:"8 z 11 oblastí"}),h("span",null,"3 z 7 cieľov splnených"),h(S.ProgressBar,{value:3,max:7,label:"Splnené ciele",tone:"success"}));}
+ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+</script>

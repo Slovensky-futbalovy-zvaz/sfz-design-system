@@ -221,3 +221,75 @@ export function Stepper({ steps, current, orientation = "horizontal", className 
     </ol>
   );
 }
+
+/* ---------- Accordion ---------- */
+export interface AccordionProps extends React.HTMLAttributes<HTMLDivElement> {
+  children: React.ReactNode;
+}
+
+/** Zoskupené rozbaľovacie sekcie (vzor iOS zoskupeného zoznamu). Položky sú `AccordionItem`. */
+export function Accordion({ className, children, ...rest }: AccordionProps) {
+  return (
+    <div className={cx("sfz-accordion", className)} {...rest}>
+      {children}
+    </div>
+  );
+}
+
+export interface AccordionItemProps extends Omit<React.DetailsHTMLAttributes<HTMLElement>, "title"> {
+  title: React.ReactNode;
+  /** Druhý riadok pod nadpisom (napr. pre koho je sekcia). */
+  subtitle?: React.ReactNode;
+  /** Otvorená pri prvom zobrazení. */
+  defaultOpen?: boolean;
+  children: React.ReactNode;
+}
+
+/** Natívny `<details>`: funguje bez JavaScriptu, klávesnica a čítačky ho poznajú. */
+export function AccordionItem({ title, subtitle, defaultOpen, className, children, ...rest }: AccordionItemProps) {
+  return (
+    <details className={cx("sfz-accordion__item", className)} open={defaultOpen} {...rest}>
+      <summary className="sfz-accordion__summary">
+        <span className="sfz-accordion__text">
+          <span className="sfz-accordion__title">{title}</span>
+          {subtitle && <span className="sfz-accordion__subtitle">{subtitle}</span>}
+        </span>
+        <span className="sfz-accordion__chevron" aria-hidden="true">
+          <Icon name="chevron-down" size={18} />
+        </span>
+      </summary>
+      <div className="sfz-accordion__body">{children}</div>
+    </details>
+  );
+}
+
+/* ---------- ProgressBar ---------- */
+export interface ProgressBarProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Hodnota od 0 po `max`. */
+  value: number;
+  max?: number;
+  /** Prístupný názov, napr. „Vyplnené oblasti“. */
+  label: string;
+  /** Text pre čítačku namiesto percent, napr. „8 z 11 oblastí“. */
+  valueText?: string;
+  /** brand = modrá (postup), success = zelená (splnené). */
+  tone?: "brand" | "success";
+}
+
+export function ProgressBar({ value, max = 100, label, valueText, tone = "brand", className, ...rest }: ProgressBarProps) {
+  const pct = Math.max(0, Math.min(100, Math.round((value / max) * 100))) || 0;
+  return (
+    <div
+      role="progressbar"
+      aria-label={label}
+      aria-valuemin={0}
+      aria-valuemax={100}
+      aria-valuenow={pct}
+      aria-valuetext={valueText}
+      className={cx("sfz-progress", `sfz-progress--${tone}`, className)}
+      {...rest}
+    >
+      <span className="sfz-progress__bar" style={{ width: `${pct}%` }} />
+    </div>
+  );
+}

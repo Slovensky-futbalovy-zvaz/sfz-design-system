@@ -2,6 +2,19 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-10-28 – Accordion, ProgressBar, nové ikony
+
+**Čo sa urobilo**
+- Pridané `Accordion` / `AccordionItem`, `ProgressBar` a ikony `map`, `map-pin`, `compass`, `book-open`, `star` – v `components/src`, `index.d.ts`, `bundle.js` aj `bundle.css`.
+- Dokumentácia v `components/docs`, náhľady v `docs/artefakt/components`, pregenerované `docs/ukazky/index.html`, testy vykreslenia a správania.
+
+**Čo treba vedieť**
+- Podnet: aplikácia Rozvoj klubu (redesign na SFZ Design System) ich mala dočasne vo vlastnej vrstve; po vydaní verzie ich prevezme z balíka.
+- `bundle.js` je stále udržiavaný ručne – zmeny prenesené ručne a overené parsovaním.
+
+**Ďalej**
+- Vydať verziu (minor) cez GitHub Releases.
+
 ## 2026-10-22 (večer) – v1.5.1, premenovanie repozitára
 
 **Čo sa urobilo**

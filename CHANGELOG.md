@@ -2,6 +2,13 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [Unreleased]
+
+### Pridané
+- `Accordion` a `AccordionItem`: zoskupené rozbaľovacie sekcie na natívnom `<details>` (bez JavaScriptu, prístupné), `defaultOpen`, podnadpis; dokumentácia, ukážka a testy.
+- `ProgressBar`: ukazovateľ postupu (`role="progressbar"`, percentá orezané na 0 – 100, `valueText` pre čítačku, tón `brand` / `success`); dokumentácia, ukážka a testy.
+- Ikony `map`, `map-pin`, `compass`, `book-open`, `star` (Lucide) v `Icon` aj v `bundle.js`.
+
 ## [1.5.1] – 2026-10-22
 
 ### Zmenené
