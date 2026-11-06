@@ -303,6 +303,6 @@
 
 /* ---------- ProgressBar ---------- */
 .sfz-progress{height:8px;border-radius:var(--radius-pill);background:var(--hairline);overflow:hidden}
-.sfz-progress__bar{display:block;height:100%;border-radius:inherit;background:var(--brand-blue);transition:width var(--duration-base) var(--easing-standard)}
+.sfz-progress__bar{display:block;height:100%;border-radius:inherit;background:var(--brand-blue-ink);transition:width var(--duration-base) var(--easing-standard)}
 .sfz-progress--success .sfz-progress__bar{background:var(--success)}
 @media (prefers-reduced-motion:reduce){.sfz-accordion__chevron,.sfz-progress__bar{transition:none}}
