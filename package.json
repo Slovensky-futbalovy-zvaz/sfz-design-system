@@ -1,6 +1,6 @@
 {
   "name": "@slovensky-futbalovy-zvaz/design-system",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Design systém Slovenského futbalového zväzu – tokeny, React komponenty, logá",
   "type": "module",
   "license": "SEE LICENSE IN LICENSE.md",
