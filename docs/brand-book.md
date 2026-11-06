@@ -51,7 +51,7 @@ Bundle `components/bundle.js` vystavuje `window.SFZ` (React 18, bez ďalších z
 - **Prekrytia:** `Modal` (na mobile sheet zdola), `Drawer`
 - **Dáta:** `Table`, `DataTable` (hľadanie, filter, zoradenie, stránkovanie), `Calendar`
 
-Pravidlá: jedno `primary` tlačidlo na obrazovku; stav vždy slovom + farbou; popisok nad vstupom; chyby pri poli, nie v Toaste; `NavBar` + `TabBar` sú jedna navigácia v dvoch šírkach; tabuľky sa na mobile skladajú do kariet. Každý komponent má README s props a do/don't.
+Pravidlá: jedno `primary` tlačidlo na obrazovku; stav vždy slovom + farbou; popisok nad vstupom; chyby pri poli, nie v Toaste; `NavBar` + `TabBar` sú jedna navigácia v dvoch šírkach; tabuľky sa na mobile skladajú do kariet. Každý komponent má README s props a do/don't. Živé ukážky všetkých komponentov mimo artefaktu: `docs/ukazky/index.html` v repozitári; balík `@slovensky-futbalovy-zvaz/design-system` v GitHub Packages.
 
 ### Použitie v Next.js (App Router)
 
@@ -78,7 +78,7 @@ Pravidlá: jedno `primary` tlačidlo na obrazovku; stav vždy slovom + farbou; p
 
 ## QR kód
 
-QR kód SFZ má okrúhle body, zaoblené rohové značky a v strede logo SFZ (variant A) na bielom kruhu; tvar kruh alebo štvorec, farba `brand-blue` alebo `ink`, pozadie vždy biele. Odkaz si zadá každý sám v generátore `tools/qr/index.html` alebo cez `npm run qr`. Na modrej ploche len v bielej karte, na slajde aspoň 280 px, v tlači aspoň 3 cm; dlhé odkazy skráťte a kód pred použitím naskenujte.
+QR kód SFZ má okrúhle body, zaoblené rohové značky a v strede logo SFZ (variant A) na bielom kruhu; tvar kruh alebo štvorec, farba `brand-blue` alebo `ink`, pozadie vždy biele. Odkaz si zadá každý sám v generátore `tools/qr/index.html` v repozitári Slovensky-futbalovy-zvaz/sfz-design-system alebo cez `npm run qr`. Na modrej ploche len v bielej karte, na slajde aspoň 280 px, v tlači aspoň 3 cm; dlhé odkazy skráťte a kód pred použitím naskenujte.
 
 ## Komponenty pre slajdy
 
