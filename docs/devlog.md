@@ -2,6 +2,17 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-06 – v1.6.0
+
+**Čo sa urobilo**
+- Brand book v repozitári a v artefakte SFZ Design System zjednotený (#2).
+- Komponenty Accordion, ProgressBar a nové ikony z #1 (autor Cyril Janoško) dokončené a zlúčené v #3: výplň ProgressBar `brand-blue-ink` (tmavá téma 1,99 → 4,84 : 1), komponenty v zozname v brand booku a README.
+- Artefakt SFZ Design System aktualizovaný: Accordion, ProgressBar, bundle, typy, zdroje a brand book; zhoda s `main` overená porovnaním súborov.
+- Vydanie v1.6.0 cez GitHub Releases.
+
+**Čo treba vedieť**
+- Aplikácia Rozvoj klubu môže prejsť na balík `^1.6.0` a zrušiť vlastné kópie Accordion a ProgressBar.
+
 ## 2026-10-28 – Accordion, ProgressBar, nové ikony
 
 **Čo sa urobilo**

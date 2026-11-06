@@ -2,12 +2,15 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
-## [Unreleased]
+## [1.6.0] – 2026-11-06
 
 ### Pridané
 - `Accordion` a `AccordionItem`: zoskupené rozbaľovacie sekcie na natívnom `<details>` (bez JavaScriptu, prístupné), `defaultOpen`, podnadpis; dokumentácia, ukážka a testy.
-- `ProgressBar`: ukazovateľ postupu (`role="progressbar"`, percentá orezané na 0 – 100, `valueText` pre čítačku, tón `brand` / `success`); dokumentácia, ukážka a testy.
+- `ProgressBar`: ukazovateľ postupu (`role="progressbar"`, percentá orezané na 0 – 100, `valueText` pre čítačku, tón `brand` / `success`, výplň `brand-blue-ink` – v tmavej téme kontrast 4,84 : 1); dokumentácia, ukážka a testy.
 - Ikony `map`, `map-pin`, `compass`, `book-open`, `star` (Lucide) v `Icon` aj v `bundle.js`.
+
+### Zmenené
+- Brand book a README: `Accordion` a `ProgressBar` v zozname komponentov; brand book zjednotený s artefaktom SFZ Design System (odkaz na ukážky a GitHub Packages, názov repozitára pri generátore QR, spresnený riadok o kontraste).
 
 ## [1.5.1] – 2026-10-22
 
