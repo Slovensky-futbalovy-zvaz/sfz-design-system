@@ -45,8 +45,8 @@ Bundle `components/bundle.js` vystavuje `window.SFZ` (React 18, bez ďalších z
 
 - **Ovládacie prvky:** `Button`, `IconButton`
 - **Formuláre:** `Input`, `Textarea`, `Select`, `Checkbox`, `Toggle` (všetky s `label`, `hint`, `error`; obal `Field`)
-- **Obsah:** `Card`, `Badge`, `Chip`, `Avatar`, `Icon`
-- **Spätná väzba:** `Alert`, `Toast`, `Skeleton`, `EmptyState`
+- **Obsah:** `Card`, `Badge`, `Chip`, `Avatar`, `Accordion`, `Icon`
+- **Spätná väzba:** `Alert`, `Toast`, `Skeleton`, `EmptyState`, `ProgressBar`
 - **Navigácia:** `Tabs`, `NavBar` (desktop), `TabBar` (mobil), `Stepper`
 - **Prekrytia:** `Modal` (na mobile sheet zdola), `Drawer`
 - **Dáta:** `Table`, `DataTable` (hľadanie, filter, zoradenie, stránkovanie), `Calendar`
