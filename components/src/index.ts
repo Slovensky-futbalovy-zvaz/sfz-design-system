@@ -4,7 +4,7 @@ export { Button, IconButton, Field, Input, Textarea, Select, Checkbox, Toggle } 
 export type { ButtonProps, IconButtonProps, FieldProps, InputProps, TextareaProps, SelectProps, SelectOption, CheckboxProps, ToggleProps } from "./controls";
 export { Card, Badge, Chip, Alert, Toast, Avatar, Skeleton, EmptyState, Stepper, Accordion, AccordionItem, ProgressBar } from "./display";
 export type { CardProps, BadgeProps, ChipProps, AlertProps, ToastProps, ToastItem, AvatarProps, SkeletonProps, EmptyStateProps, StepperProps, Step, Tone, AccordionProps, AccordionItemProps, ProgressBarProps } from "./display";
-export { Tabs, NavBar, TabBar, Modal, Drawer } from "./navigation";
-export type { TabsProps, TabItem, NavBarProps, NavItem, TabBarProps, TabBarItem, ModalProps, DrawerProps } from "./navigation";
+export { Tabs, NavBar, TabBar, Modal, Drawer, MenuPanel, MenuSheet, BottomSheet, Breadcrumbs, SearchField, SearchResults } from "./navigation";
+export type { TabsProps, TabItem, NavBarProps, NavItem, TabBarProps, TabBarItem, ModalProps, DrawerProps, LinkComponent, MenuLink, MenuSection, MenuPanelProps, MenuSheetProps, BottomSheetProps, BreadcrumbItem, BreadcrumbsProps, SearchFieldProps, SearchHit, SearchResultsProps } from "./navigation";
 export { Table, DataTable, Calendar } from "./data";
 export type { TableProps, Column, DataTableProps, CalendarProps, CalendarEvent } from "./data";

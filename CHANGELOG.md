@@ -2,6 +2,16 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [Unreleased]
+
+### Pridané
+- `MenuSheet` a `MenuPanel`: celé menu aplikácie v plachte pod hlavičkou (desktop) – sekcie v stĺpcoch, aktívna položka, Esc / pozadie / výber zatvoria, fokus dnu a späť na tlačidlo; `MenuPanel columns="two"` pre mobil.
+- `BottomSheet`: spodná plachta na mobile nad TabBarom (TabBar ostáva ovládateľný), zatvorenie ×, pozadím, Esc a ťahom za úchyt.
+- `Breadcrumbs`: pás s cestou k stránke; na mobile len nadradená stránka so šípkou späť a aktuálna stránka.
+- `SearchField` a `SearchResults`: pole hľadania v tvare pilulky so skratkou (⌘K) a zoznam okamžitých výsledkov ako listbox pre combobox (`aria-activedescendant`), stavy idle / loading / done / error a odkaz na všetky výsledky. Načítanie výsledkov ostáva v aplikácii.
+- Prop `linkAs` (typ `LinkComponent`) pri nových navigačných komponentoch: odkaz routera (napr. `Link` z Next.js) bez závislosti od frameworku.
+- Dokumentácia, náhľady, ukážky a testy nových komponentov. Podnet: nová hlavička aplikácie Rozvoj klubu (ADR 0035 v jej repozitári), kde boli zložené z tokenov.
+
 ## [1.6.0] – 2026-11-06
 
 ### Pridané

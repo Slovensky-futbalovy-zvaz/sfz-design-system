@@ -47,8 +47,8 @@ Bundle `components/bundle.js` vystavuje `window.SFZ` (React 18, bez ďalších z
 - **Formuláre:** `Input`, `Textarea`, `Select`, `Checkbox`, `Toggle` (všetky s `label`, `hint`, `error`; obal `Field`)
 - **Obsah:** `Card`, `Badge`, `Chip`, `Avatar`, `Accordion`, `Icon`
 - **Spätná väzba:** `Alert`, `Toast`, `Skeleton`, `EmptyState`, `ProgressBar`
-- **Navigácia:** `Tabs`, `NavBar` (desktop), `TabBar` (mobil), `Stepper`
-- **Prekrytia:** `Modal` (na mobile sheet zdola), `Drawer`
+- **Navigácia:** `Tabs`, `NavBar` (desktop), `TabBar` (mobil), `Stepper`, `MenuSheet` / `MenuPanel` (celé menu), `Breadcrumbs`, `SearchField` a `SearchResults` (hľadanie v hlavičke)
+- **Prekrytia:** `Modal` (na mobile sheet zdola), `Drawer`, `BottomSheet` (mobil, nad TabBarom)
 - **Dáta:** `Table`, `DataTable` (hľadanie, filter, zoradenie, stránkovanie), `Calendar`
 
 Pravidlá: jedno `primary` tlačidlo na obrazovku; stav vždy slovom + farbou; popisok nad vstupom; chyby pri poli, nie v Toaste; `NavBar` + `TabBar` sú jedna navigácia v dvoch šírkach; tabuľky sa na mobile skladajú do kariet. Každý komponent má README s props a do/don't. Živé ukážky všetkých komponentov mimo artefaktu: `docs/ukazky/index.html` v repozitári; balík `@slovensky-futbalovy-zvaz/design-system` v GitHub Packages.

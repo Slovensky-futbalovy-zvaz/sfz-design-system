@@ -1,0 +1,11 @@
+<!-- @dsCard group="Navigácia" height=360 subtitle="Celé menu v plachte pod hlavičkou (desktop)" -->
+<style>body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.col{display:flex;flex-direction:column;gap:12px;max-width:480px}</style>
+<div id="root"></div>
+<script>
+const h=React.createElement, S=SFZ;
+const sections=[{id:"klub",title:"Klub",items:[{id:"p",label:"Prehľad",href:"#",icon:"home",active:true},{id:"o",label:"Oblasti rozvoja",href:"#",icon:"compass"}]},{id:"vzd",title:"Vzdelávanie",items:[{id:"k",label:"Kurzy",href:"#",icon:"book-open"},{id:"m",label:"Metodika",href:"#",icon:"map"}]},{id:"ucet",title:"Účet",items:[{id:"u",label:"Môj účet",href:"#",icon:"user"}]}];
+function App(){
+const [o,setO]=React.useState(true);
+return h("div",null,h(S.IconButton,{icon:"menu",label:"Celé menu","aria-expanded":o,"aria-controls":"menu-sheet",onClick:()=>setO(!o)}),h(S.MenuSheet,{open:o,onClose:()=>setO(false),title:"Celé menu",sections,id:"menu-sheet"}));}
+ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+</script>

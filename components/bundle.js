@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"SFZ","components":[{"name":"Button"},{"name":"IconButton"},{"name":"Input"},{"name":"Textarea"},{"name":"Select"},{"name":"Checkbox"},{"name":"Toggle"},{"name":"Card"},{"name":"Badge"},{"name":"Chip"},{"name":"Alert"},{"name":"Toast"},{"name":"Avatar"},{"name":"Skeleton"},{"name":"EmptyState"},{"name":"Stepper"},{"name":"Accordion"},{"name":"AccordionItem"},{"name":"ProgressBar"},{"name":"Tabs"},{"name":"NavBar"},{"name":"TabBar"},{"name":"Modal"},{"name":"Drawer"},{"name":"Table"},{"name":"DataTable"},{"name":"Calendar"},{"name":"Icon"}]} */
+/* @ds-bundle: {"format":4,"namespace":"SFZ","components":[{"name":"Button"},{"name":"IconButton"},{"name":"Input"},{"name":"Textarea"},{"name":"Select"},{"name":"Checkbox"},{"name":"Toggle"},{"name":"Card"},{"name":"Badge"},{"name":"Chip"},{"name":"Alert"},{"name":"Toast"},{"name":"Avatar"},{"name":"Skeleton"},{"name":"EmptyState"},{"name":"Stepper"},{"name":"Accordion"},{"name":"AccordionItem"},{"name":"ProgressBar"},{"name":"Tabs"},{"name":"NavBar"},{"name":"TabBar"},{"name":"Modal"},{"name":"Drawer"},{"name":"MenuPanel"},{"name":"MenuSheet"},{"name":"BottomSheet"},{"name":"Breadcrumbs"},{"name":"SearchField"},{"name":"SearchResults"},{"name":"Table"},{"name":"DataTable"},{"name":"Calendar"},{"name":"Icon"}]} */
 
 var SFZ = (() => {
   var __create = Object.create;
@@ -47,6 +47,8 @@ var SFZ = (() => {
     Alert: () => Alert,
     Avatar: () => Avatar,
     Badge: () => Badge,
+    BottomSheet: () => BottomSheet,
+    Breadcrumbs: () => Breadcrumbs,
     Button: () => Button,
     Calendar: () => Calendar,
     Card: () => Card,
@@ -60,9 +62,13 @@ var SFZ = (() => {
     Icon: () => Icon,
     IconButton: () => IconButton,
     Input: () => Input,
+    MenuPanel: () => MenuPanel,
+    MenuSheet: () => MenuSheet,
     Modal: () => Modal,
     NavBar: () => NavBar,
     ProgressBar: () => ProgressBar,
+    SearchField: () => SearchField,
+    SearchResults: () => SearchResults,
     Select: () => Select,
     Skeleton: () => Skeleton,
     Stepper: () => Stepper,
@@ -394,6 +400,100 @@ var SFZ = (() => {
     return /* @__PURE__ */ React4.createElement("div", { className: "sfz-overlay sfz-overlay--drawer", role: "presentation", onMouseDown: (e) => {
       if (e.target === e.currentTarget) onClose();
     } }, /* @__PURE__ */ React4.createElement("aside", { role: "dialog", "aria-modal": "true", "aria-label": title != null ? title : "Panel", className: cx3("sfz-drawer", `sfz-drawer--${side}`), style: { width: `min(85vw, ${width}px)` } }, /* @__PURE__ */ React4.createElement("header", { className: "sfz-drawer__head" }, title && /* @__PURE__ */ React4.createElement("h2", { className: "sfz-drawer__title" }, title), /* @__PURE__ */ React4.createElement("button", { type: "button", className: "sfz-modal__close", "aria-label": "Zavrie\u0165", onClick: onClose }, /* @__PURE__ */ React4.createElement(Icon, { name: "x", size: 20 }))), /* @__PURE__ */ React4.createElement("div", { className: "sfz-drawer__body" }, children)));
+  }
+
+  function useSheetFocus(open, panel, onClose, initialFocus) {
+    const close = React4.useRef(onClose);
+    React4.useEffect(() => {
+      close.current = onClose;
+    });
+    React4.useEffect(() => {
+      var _a;
+      if (!open) return;
+      const from = document.activeElement;
+      const node = panel.current;
+      (_a = node == null ? void 0 : node.querySelector(initialFocus)) == null ? void 0 : _a.focus();
+      const onKey = (e) => {
+        if (e.key === "Escape") close.current();
+      };
+      document.addEventListener("keydown", onKey);
+      return () => {
+        var _a2;
+        document.removeEventListener("keydown", onKey);
+        const now = document.activeElement;
+        if (!now || now === document.body || (node == null ? void 0 : node.contains(now))) (_a2 = from == null ? void 0 : from.focus) == null ? void 0 : _a2.call(from);
+      };
+    }, [open, panel, initialFocus]);
+  }
+  function MenuPanel({ sections, columns = "auto", onPick, linkAs: L = "a", className }) {
+    const uid = React4.useId();
+    return /* @__PURE__ */ React4.createElement("div", { className: cx3("sfz-menupanel", `sfz-menupanel--${columns}`, className) }, sections.map((s) => /* @__PURE__ */ React4.createElement("section", { key: s.id, className: "sfz-menupanel__section", "aria-labelledby": `${uid}-${s.id}` }, /* @__PURE__ */ React4.createElement("h3", { id: `${uid}-${s.id}`, className: "sfz-menupanel__title" }, s.title), /* @__PURE__ */ React4.createElement("ul", { className: "sfz-menupanel__list" }, s.items.map((it) => /* @__PURE__ */ React4.createElement("li", { key: it.id }, /* @__PURE__ */ React4.createElement(L, { href: it.href, onClick: onPick, "aria-current": it.active ? "page" : void 0, className: cx3("sfz-menupanel__link", it.active && "is-active") }, it.icon && /* @__PURE__ */ React4.createElement(Icon, { name: it.icon, size: 18 }), /* @__PURE__ */ React4.createElement("span", null, it.label))))))));
+  }
+  function MenuSheet({ open, onClose, title, sections, escHint = "zavrie", id, linkAs }) {
+    const panel = React4.useRef(null);
+    useSheetFocus(open, panel, onClose, "a[href]");
+    if (!open) return null;
+    return /* @__PURE__ */ React4.createElement(React4.Fragment, null, /* @__PURE__ */ React4.createElement("div", { className: "sfz-menusheet__scrim", "aria-hidden": "true", onClick: onClose }), /* @__PURE__ */ React4.createElement("div", { ref: panel, id, role: "dialog", "aria-label": title, className: "sfz-menusheet" }, /* @__PURE__ */ React4.createElement(MenuPanel, { sections, onPick: onClose, linkAs }), escHint !== null && /* @__PURE__ */ React4.createElement("p", { className: "sfz-menusheet__foot" }, /* @__PURE__ */ React4.createElement("kbd", { className: "sfz-kbd" }, "Esc"), escHint)));
+  }
+  const SHEET_CLOSE_DRAG = 80;
+  function BottomSheet({ open, onClose, title, children, closeLabel = "Zavrie\u0165", id, aboveTabBar = true }) {
+    const panel = React4.useRef(null);
+    const drag = React4.useRef(null);
+    const titleId = React4.useId();
+    useSheetFocus(open, panel, onClose, "button");
+    if (!open) return null;
+    const onPointerDown = (e) => {
+      var _a, _b;
+      if (e.target.closest("button")) return;
+      drag.current = { y: e.clientY, dy: 0 };
+      (_b = (_a = e.currentTarget).setPointerCapture) == null ? void 0 : _b.call(_a, e.pointerId);
+    };
+    const onPointerMove = (e) => {
+      if (!drag.current || !panel.current) return;
+      drag.current.dy = Math.max(0, e.clientY - drag.current.y);
+      panel.current.style.transform = `translateY(${drag.current.dy}px)`;
+    };
+    const onPointerUp = () => {
+      var _a, _b;
+      const moved = (_b = (_a = drag.current) == null ? void 0 : _a.dy) != null ? _b : 0;
+      drag.current = null;
+      if (panel.current) panel.current.style.transform = "";
+      if (moved > SHEET_CLOSE_DRAG) onClose();
+    };
+    return /* @__PURE__ */ React4.createElement(React4.Fragment, null, /* @__PURE__ */ React4.createElement("div", { className: cx3("sfz-bottomsheet__scrim", aboveTabBar && "is-above-tabbar"), "aria-hidden": "true", onClick: onClose }), /* @__PURE__ */ React4.createElement("div", { ref: panel, id, role: "dialog", "aria-modal": "true", "aria-labelledby": titleId, className: cx3("sfz-bottomsheet", aboveTabBar && "is-above-tabbar") }, /* @__PURE__ */ React4.createElement("div", { className: "sfz-bottomsheet__head", onPointerDown, onPointerMove, onPointerUp, onPointerCancel: onPointerUp }, /* @__PURE__ */ React4.createElement("span", { className: "sfz-bottomsheet__grip", "aria-hidden": "true" }), /* @__PURE__ */ React4.createElement("div", { className: "sfz-bottomsheet__bar" }, /* @__PURE__ */ React4.createElement("h2", { id: titleId, className: "sfz-bottomsheet__title" }, title), /* @__PURE__ */ React4.createElement(IconButton, { icon: "x", label: closeLabel, onClick: onClose }))), /* @__PURE__ */ React4.createElement("div", { className: "sfz-bottomsheet__body" }, children)));
+  }
+  function Breadcrumbs({ items, label = "Cesta k str\xE1nke", linkAs: L = "a", className }) {
+    if (items.length < 2) return null;
+    const parent = items.length - 2;
+    return /* @__PURE__ */ React4.createElement("nav", { "aria-label": label, className: cx3("sfz-breadcrumbs", className) }, /* @__PURE__ */ React4.createElement("ol", { className: "sfz-breadcrumbs__list" }, items.map((it, i) => {
+      const last = i === items.length - 1;
+      return /* @__PURE__ */ React4.createElement("li", { key: `${i}-${it.label}`, className: cx3("sfz-breadcrumbs__item", i < parent && "is-collapsed") }, i > 0 && /* @__PURE__ */ React4.createElement("span", { "aria-hidden": "true", className: "sfz-breadcrumbs__sep" }, /* @__PURE__ */ React4.createElement(Icon, { name: "chevron-right", size: 14 })), i === parent && /* @__PURE__ */ React4.createElement("span", { "aria-hidden": "true", className: "sfz-breadcrumbs__back" }, /* @__PURE__ */ React4.createElement(Icon, { name: "chevron-left", size: 14 })), last ? /* @__PURE__ */ React4.createElement("span", { "aria-current": "page", className: "sfz-breadcrumbs__current" }, it.label) : it.href ? /* @__PURE__ */ React4.createElement(L, { href: it.href, className: "sfz-breadcrumbs__link" }, it.label) : /* @__PURE__ */ React4.createElement("span", { className: "sfz-breadcrumbs__text" }, it.label));
+    })));
+  }
+  const SearchField = React4.forwardRef(function SearchField2({ label, shortcut, size = "md", className, id, placeholder, type = "search", autoComplete = "off", ...rest }, ref) {
+    const auto = React4.useId();
+    const fieldId = id != null ? id : auto;
+    return /* @__PURE__ */ React4.createElement("span", { className: cx3("sfz-search", `sfz-search--${size}`, shortcut && "has-shortcut", className) }, /* @__PURE__ */ React4.createElement("label", { htmlFor: fieldId, className: "sfz-visually-hidden" }, label), /* @__PURE__ */ React4.createElement("span", { className: "sfz-search__icon", "aria-hidden": "true" }, /* @__PURE__ */ React4.createElement(Icon, { name: "search", size: 18 })), /* @__PURE__ */ React4.createElement("input", { ref, id: fieldId, type, autoComplete, placeholder: placeholder != null ? placeholder : label, className: "sfz-search__input", ...rest }), shortcut && /* @__PURE__ */ React4.createElement("kbd", { className: "sfz-kbd sfz-search__kbd", "aria-hidden": "true" }, shortcut));
+  });
+  function SearchResults({
+    hits,
+    status,
+    listId,
+    activeIndex = -1,
+    onPick,
+    allLink,
+    label = "V\xFDsledky h\u013Eadania",
+    idleText,
+    emptyText = "Ni\u010D sa nena\u0161lo.",
+    errorText = "H\u013Eadanie zlyhalo. Sk\xFAste to znova.",
+    statusText,
+    linkAs: L = "a",
+    className
+  }) {
+    if (status === "idle") {
+      return /* @__PURE__ */ React4.createElement("div", { className: cx3("sfz-searchresults", className) }, idleText && /* @__PURE__ */ React4.createElement("p", { className: "sfz-searchresults__note" }, idleText));
+    }
+    return /* @__PURE__ */ React4.createElement("div", { className: cx3("sfz-searchresults", className) }, /* @__PURE__ */ React4.createElement("p", { className: "sfz-visually-hidden", role: "status" }, status === "done" ? statusText != null ? statusText : "" : ""), status === "error" && /* @__PURE__ */ React4.createElement("p", { className: "sfz-searchresults__note" }, errorText), status === "done" && hits.length === 0 && /* @__PURE__ */ React4.createElement("p", { className: "sfz-searchresults__note" }, emptyText), /* @__PURE__ */ React4.createElement("ul", { id: listId, role: "listbox", "aria-label": label, className: "sfz-searchresults__list" }, hits.map((hit, i) => /* @__PURE__ */ React4.createElement("li", { key: hit.id, role: "option", "aria-selected": i === activeIndex }, /* @__PURE__ */ React4.createElement(L, { id: `${listId}-${i}`, href: hit.href, onClick: onPick, tabIndex: -1, className: cx3("sfz-searchresults__hit", i === activeIndex && "is-active") }, hit.overline && /* @__PURE__ */ React4.createElement("span", { className: "sfz-searchresults__overline" }, hit.overline), /* @__PURE__ */ React4.createElement("span", { className: "sfz-searchresults__title" }, hit.title), hit.snippet && /* @__PURE__ */ React4.createElement("span", { className: "sfz-searchresults__snippet" }, hit.snippet))))), allLink && /* @__PURE__ */ React4.createElement(L, { id: `${listId}-${hits.length}`, href: allLink.href, onClick: onPick, tabIndex: -1, className: cx3("sfz-searchresults__all", activeIndex === hits.length && "is-active") }, /* @__PURE__ */ React4.createElement(Icon, { name: "search", size: 18 }), allLink.label));
   }
 
   // ../ds/project/components/src/data.tsx

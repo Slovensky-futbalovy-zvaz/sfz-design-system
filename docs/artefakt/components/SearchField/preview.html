@@ -1,0 +1,9 @@
+<!-- @dsCard group="Navigácia" height=150 subtitle="Pole hľadania v hlavičke (md) a na mobile (lg)" -->
+<style>body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.col{display:flex;flex-direction:column;gap:12px;max-width:480px}</style>
+<div id="root"></div>
+<script>
+const h=React.createElement, S=SFZ;
+function App(){
+return h("div",{className:"col"},h(S.SearchField,{label:"Hľadať v klube",shortcut:"⌘K",name:"q"}),h(S.SearchField,{label:"Hľadať v klube",size:"lg",name:"q"}));}
+ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+</script>
