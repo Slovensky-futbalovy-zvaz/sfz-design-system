@@ -280,6 +280,112 @@ export interface DrawerProps {
     width?: number;
 }
 export function Drawer({ open, onClose, title, side, children, width }: DrawerProps): React.JSX.Element | null;
+/**
+ * Komponent odkazu: predvolene `<a>`, v aplikácii s routerom napr. `Link` z Next.js.
+ * Dostane `href`, `className`, `onClick`, `aria-current`, `id`, `tabIndex` a `children`.
+ */
+export type LinkComponent = React.ElementType;
+export interface MenuLink {
+    id: string;
+    label: string;
+    href: string;
+    icon?: IconName | string;
+    active?: boolean;
+}
+export interface MenuSection {
+    id: string;
+    title: string;
+    items: MenuLink[];
+}
+export interface MenuPanelProps {
+    sections: MenuSection[];
+    /** auto = toľko stĺpcov, koľko sa zmestí (desktop); two = dva stĺpce (mobil v BottomSheet). */
+    columns?: "auto" | "two";
+    /** Volá sa po výbere položky (zatvorí plachtu). */
+    onPick?: () => void;
+    linkAs?: LinkComponent;
+    className?: string;
+}
+export function MenuPanel({ sections, columns, onPick, linkAs, className }: MenuPanelProps): React.JSX.Element;
+export interface MenuSheetProps {
+    open: boolean;
+    onClose: () => void;
+    /** Názov menu pre čítačku (napr. „Celé menu“). */
+    title: string;
+    sections: MenuSection[];
+    /** Text za klávesom Esc v päte; null pätu skryje. */
+    escHint?: string | null;
+    /** id plachty pre `aria-controls` tlačidla, ktoré ju otvára. */
+    id?: string;
+    linkAs?: LinkComponent;
+}
+export function MenuSheet({ open, onClose, title, sections, escHint, id, linkAs }: MenuSheetProps): React.JSX.Element | null;
+export interface BottomSheetProps {
+    open: boolean;
+    onClose: () => void;
+    title: string;
+    children: React.ReactNode;
+    closeLabel?: string;
+    id?: string;
+    /** Plachta sedí nad TabBarom, ktorý ostáva viditeľný (predvolené). */
+    aboveTabBar?: boolean;
+}
+export function BottomSheet({ open, onClose, title, children, closeLabel, id, aboveTabBar }: BottomSheetProps): React.JSX.Element | null;
+export interface BreadcrumbItem {
+    label: string;
+    /** Bez href je položka obyčajný text (sekcia bez vlastnej stránky). Posledná položka je vždy aktuálna stránka. */
+    href?: string | null;
+}
+export interface BreadcrumbsProps {
+    items: BreadcrumbItem[];
+    /** Názov navigácie pre čítačku. */
+    label?: string;
+    linkAs?: LinkComponent;
+    className?: string;
+}
+export function Breadcrumbs({ items, label, linkAs, className }: BreadcrumbsProps): React.JSX.Element | null;
+export interface SearchFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+    /** Popis poľa pre čítačku; bez placeholder aj zástupný text. */
+    label: string;
+    /** Skratka zobrazená v poli, napr. „⌘K“ (len desktop). */
+    shortcut?: string;
+    /** md = 40 px v hlavičke na desktope; lg = 44 px (mobil, celá obrazovka). */
+    size?: "md" | "lg";
+    className?: string;
+}
+export const SearchField: React.ForwardRefExoticComponent<SearchFieldProps & React.RefAttributes<HTMLInputElement>>;
+export interface SearchHit {
+    id: string;
+    href: string;
+    title: string;
+    /** Riadok nad názvom: druh a zaradenie výsledku. */
+    overline?: string;
+    snippet?: string;
+}
+export interface SearchResultsProps {
+    hits: SearchHit[];
+    /** idle = ešte sa nehľadá; loading drží staré výsledky, aby zoznam neblikal. */
+    status: "idle" | "loading" | "done" | "error";
+    /** id zoznamu (`aria-controls` poľa); možnosti majú id `${listId}-${index}`. */
+    listId: string;
+    /** Zvýraznená možnosť (šípky); index hits.length = odkaz „všetky výsledky“. */
+    activeIndex?: number;
+    onPick?: () => void;
+    /** Odkaz na stránku so všetkými výsledkami, posledný v zozname. */
+    allLink?: {
+        href: string;
+        label: string;
+    };
+    label?: string;
+    idleText?: string;
+    emptyText?: string;
+    errorText?: string;
+    /** Hlásenie pre čítačku po dokončení hľadania (napr. „3 výsledky pre …“). */
+    statusText?: string;
+    linkAs?: LinkComponent;
+    className?: string;
+}
+export function SearchResults({ hits, status, listId, activeIndex, onPick, allLink, label, idleText, emptyText, errorText, statusText, linkAs, className, }: SearchResultsProps): React.JSX.Element;
 
 // ---- data ----
 export interface Column<T> {

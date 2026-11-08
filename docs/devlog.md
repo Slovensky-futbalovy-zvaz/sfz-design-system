@@ -2,6 +2,17 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-07 – navigácia: plachty, cesta, hľadanie
+
+**Čo sa urobilo**
+- Pridané `MenuSheet` / `MenuPanel`, `BottomSheet`, `Breadcrumbs`, `SearchField` a `SearchResults` – v `components/src/navigation.tsx`, `index.d.ts`, `bundle.js` aj `bundle.css`; dokumentácia, náhľady, pregenerované ukážky a testy (vrátane fokusu, Esc a ťahu za úchyt).
+
+**Čo treba vedieť**
+- Podnet: hlavička aplikácie Rozvoj klubu podľa contineo.app (jej ADR 0035, PR cyriljanosko/RozvojKlubu#162) – komponenty tam vznikli dočasne z tokenov; po vydaní verzie ich prevezme z balíka.
+- Komponenty nezávisia od Next.js: odkaz routera sa podáva cez `linkAs`. Texty sú props so slovenskými predvolenými hodnotami.
+- `SearchResults` je len vzhľad zoznamu; načítanie (fetch, oneskorenie), klávesnicu combobox a skratku ⌘K rieši aplikácia (postup v `components/docs/SearchField.md`).
+- `bundle.js` stále ručne – nové funkcie preložené esbuildom z `node_modules` (závislosť vitestu) a vložené, overené vykreslením cez `window.SFZ`.
+
 ## 2026-11-06 – v1.6.0
 
 **Čo sa urobilo**

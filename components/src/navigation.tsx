@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Icon, IconName } from "./icons";
+import { IconButton } from "./controls";
 
 const cx = (...a: Array<string | false | null | undefined>) => a.filter(Boolean).join(" ");
 
@@ -201,6 +202,286 @@ export function Drawer({ open, onClose, title, side = "left", children, width = 
         </header>
         <div className="sfz-drawer__body">{children}</div>
       </aside>
+    </div>
+  );
+}
+
+/* ---------- Spoločné pre odkazy a plachty ---------- */
+/**
+ * Komponent odkazu: predvolene `<a>`, v aplikácii s routerom napr. `Link` z Next.js.
+ * Dostane `href`, `className`, `onClick`, `aria-current`, `id`, `tabIndex` a `children`.
+ */
+export type LinkComponent = React.ElementType;
+
+/** Esc zatvorí plachtu; fokus pri otvorení vojde dnu a pri zatvorení sa vráti tam, odkiaľ prišiel. */
+function useSheetFocus(open: boolean, panel: React.RefObject<HTMLElement | null>, onClose: () => void, initialFocus: string) {
+  const close = React.useRef(onClose);
+  React.useEffect(() => { close.current = onClose; });
+  React.useEffect(() => {
+    if (!open) return;
+    const from = document.activeElement as HTMLElement | null;
+    const node = panel.current;
+    node?.querySelector<HTMLElement>(initialFocus)?.focus();
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") close.current(); };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      // fokus sa vráti, len ak ostal v plachte – kto klikol inam, ten ho tam má
+      const now = document.activeElement;
+      if (!now || now === document.body || node?.contains(now)) from?.focus?.();
+    };
+  }, [open, panel, initialFocus]);
+}
+
+/* ---------- MenuPanel a MenuSheet (celé menu pod hlavičkou) ---------- */
+export interface MenuLink { id: string; label: string; href: string; icon?: IconName | string; active?: boolean }
+export interface MenuSection { id: string; title: string; items: MenuLink[] }
+export interface MenuPanelProps {
+  sections: MenuSection[];
+  /** auto = toľko stĺpcov, koľko sa zmestí (desktop); two = dva stĺpce (mobil v BottomSheet). */
+  columns?: "auto" | "two";
+  /** Volá sa po výbere položky (zatvorí plachtu). */
+  onPick?: () => void;
+  linkAs?: LinkComponent;
+  className?: string;
+}
+
+export function MenuPanel({ sections, columns = "auto", onPick, linkAs: L = "a", className }: MenuPanelProps) {
+  const uid = React.useId();
+  return (
+    <div className={cx("sfz-menupanel", `sfz-menupanel--${columns}`, className)}>
+      {sections.map((s) => (
+        <section key={s.id} className="sfz-menupanel__section" aria-labelledby={`${uid}-${s.id}`}>
+          <h3 id={`${uid}-${s.id}`} className="sfz-menupanel__title">{s.title}</h3>
+          <ul className="sfz-menupanel__list">
+            {s.items.map((it) => (
+              <li key={it.id}>
+                <L href={it.href} onClick={onPick} aria-current={it.active ? "page" : undefined} className={cx("sfz-menupanel__link", it.active && "is-active")}>
+                  {it.icon && <Icon name={it.icon} size={18} />}
+                  <span>{it.label}</span>
+                </L>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+export interface MenuSheetProps {
+  open: boolean;
+  onClose: () => void;
+  /** Názov menu pre čítačku (napr. „Celé menu“). */
+  title: string;
+  sections: MenuSection[];
+  /** Text za klávesom Esc v päte; null pätu skryje. */
+  escHint?: string | null;
+  /** id plachty pre `aria-controls` tlačidla, ktoré ju otvára. */
+  id?: string;
+  linkAs?: LinkComponent;
+}
+
+export function MenuSheet({ open, onClose, title, sections, escHint = "zavrie", id, linkAs }: MenuSheetProps) {
+  const panel = React.useRef<HTMLDivElement>(null);
+  useSheetFocus(open, panel, onClose, "a[href]");
+  if (!open) return null;
+  return (
+    <>
+      <div className="sfz-menusheet__scrim" aria-hidden="true" onClick={onClose} />
+      <div ref={panel} id={id} role="dialog" aria-label={title} className="sfz-menusheet">
+        <MenuPanel sections={sections} onPick={onClose} linkAs={linkAs} />
+        {escHint !== null && (
+          <p className="sfz-menusheet__foot"><kbd className="sfz-kbd">Esc</kbd>{escHint}</p>
+        )}
+      </div>
+    </>
+  );
+}
+
+/* ---------- BottomSheet (mobil, nad TabBarom) ---------- */
+export interface BottomSheetProps {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  children: React.ReactNode;
+  closeLabel?: string;
+  id?: string;
+  /** Plachta sedí nad TabBarom, ktorý ostáva viditeľný (predvolené). */
+  aboveTabBar?: boolean;
+}
+
+/** Ťah za úchyt nadol o viac než toľko px plachtu zatvorí. */
+const SHEET_CLOSE_DRAG = 80;
+
+export function BottomSheet({ open, onClose, title, children, closeLabel = "Zavrieť", id, aboveTabBar = true }: BottomSheetProps) {
+  const panel = React.useRef<HTMLDivElement>(null);
+  const drag = React.useRef<{ y: number; dy: number } | null>(null);
+  const titleId = React.useId();
+  useSheetFocus(open, panel, onClose, "button");
+  if (!open) return null;
+
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    // tlačidlo Zavrieť si nechá klik
+    if ((e.target as HTMLElement).closest("button")) return;
+    drag.current = { y: e.clientY, dy: 0 };
+    e.currentTarget.setPointerCapture?.(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!drag.current || !panel.current) return;
+    drag.current.dy = Math.max(0, e.clientY - drag.current.y);
+    panel.current.style.transform = `translateY(${drag.current.dy}px)`;
+  };
+  const onPointerUp = () => {
+    const moved = drag.current?.dy ?? 0;
+    drag.current = null;
+    if (panel.current) panel.current.style.transform = "";
+    if (moved > SHEET_CLOSE_DRAG) onClose();
+  };
+
+  return (
+    <>
+      <div className={cx("sfz-bottomsheet__scrim", aboveTabBar && "is-above-tabbar")} aria-hidden="true" onClick={onClose} />
+      <div ref={panel} id={id} role="dialog" aria-modal="true" aria-labelledby={titleId} className={cx("sfz-bottomsheet", aboveTabBar && "is-above-tabbar")}>
+        <div className="sfz-bottomsheet__head" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={onPointerUp} onPointerCancel={onPointerUp}>
+          <span className="sfz-bottomsheet__grip" aria-hidden="true" />
+          <div className="sfz-bottomsheet__bar">
+            <h2 id={titleId} className="sfz-bottomsheet__title">{title}</h2>
+            <IconButton icon="x" label={closeLabel} onClick={onClose} />
+          </div>
+        </div>
+        <div className="sfz-bottomsheet__body">{children}</div>
+      </div>
+    </>
+  );
+}
+
+/* ---------- Breadcrumbs (cesta pod hlavičkou) ---------- */
+export interface BreadcrumbItem {
+  label: string;
+  /** Bez href je položka obyčajný text (sekcia bez vlastnej stránky). Posledná položka je vždy aktuálna stránka. */
+  href?: string | null;
+}
+export interface BreadcrumbsProps {
+  items: BreadcrumbItem[];
+  /** Názov navigácie pre čítačku. */
+  label?: string;
+  linkAs?: LinkComponent;
+  className?: string;
+}
+
+export function Breadcrumbs({ items, label = "Cesta k stránke", linkAs: L = "a", className }: BreadcrumbsProps) {
+  if (items.length < 2) return null;
+  const parent = items.length - 2;
+  return (
+    <nav aria-label={label} className={cx("sfz-breadcrumbs", className)}>
+      <ol className="sfz-breadcrumbs__list">
+        {items.map((it, i) => {
+          const last = i === items.length - 1;
+          return (
+            <li key={`${i}-${it.label}`} className={cx("sfz-breadcrumbs__item", i < parent && "is-collapsed")}>
+              {i > 0 && <span aria-hidden="true" className="sfz-breadcrumbs__sep"><Icon name="chevron-right" size={14} /></span>}
+              {i === parent && <span aria-hidden="true" className="sfz-breadcrumbs__back"><Icon name="chevron-left" size={14} /></span>}
+              {last ? (
+                <span aria-current="page" className="sfz-breadcrumbs__current">{it.label}</span>
+              ) : it.href ? (
+                <L href={it.href} className="sfz-breadcrumbs__link">{it.label}</L>
+              ) : (
+                <span className="sfz-breadcrumbs__text">{it.label}</span>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+}
+
+/* ---------- SearchField a SearchResults (hľadanie v hlavičke) ---------- */
+export interface SearchFieldProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> {
+  /** Popis poľa pre čítačku; bez placeholder aj zástupný text. */
+  label: string;
+  /** Skratka zobrazená v poli, napr. „⌘K“ (len desktop). */
+  shortcut?: string;
+  /** md = 40 px v hlavičke na desktope; lg = 44 px (mobil, celá obrazovka). */
+  size?: "md" | "lg";
+  className?: string;
+}
+
+export const SearchField = React.forwardRef<HTMLInputElement, SearchFieldProps>(function SearchField(
+  { label, shortcut, size = "md", className, id, placeholder, type = "search", autoComplete = "off", ...rest },
+  ref
+) {
+  const auto = React.useId();
+  const fieldId = id ?? auto;
+  return (
+    <span className={cx("sfz-search", `sfz-search--${size}`, shortcut && "has-shortcut", className)}>
+      <label htmlFor={fieldId} className="sfz-visually-hidden">{label}</label>
+      <span className="sfz-search__icon" aria-hidden="true"><Icon name="search" size={18} /></span>
+      <input ref={ref} id={fieldId} type={type} autoComplete={autoComplete} placeholder={placeholder ?? label} className="sfz-search__input" {...rest} />
+      {shortcut && <kbd className="sfz-kbd sfz-search__kbd" aria-hidden="true">{shortcut}</kbd>}
+    </span>
+  );
+});
+
+export interface SearchHit {
+  id: string;
+  href: string;
+  title: string;
+  /** Riadok nad názvom: druh a zaradenie výsledku. */
+  overline?: string;
+  snippet?: string;
+}
+export interface SearchResultsProps {
+  hits: SearchHit[];
+  /** idle = ešte sa nehľadá; loading drží staré výsledky, aby zoznam neblikal. */
+  status: "idle" | "loading" | "done" | "error";
+  /** id zoznamu (`aria-controls` poľa); možnosti majú id `${listId}-${index}`. */
+  listId: string;
+  /** Zvýraznená možnosť (šípky); index hits.length = odkaz „všetky výsledky“. */
+  activeIndex?: number;
+  onPick?: () => void;
+  /** Odkaz na stránku so všetkými výsledkami, posledný v zozname. */
+  allLink?: { href: string; label: string };
+  label?: string;
+  idleText?: string;
+  emptyText?: string;
+  errorText?: string;
+  /** Hlásenie pre čítačku po dokončení hľadania (napr. „3 výsledky pre …“). */
+  statusText?: string;
+  linkAs?: LinkComponent;
+  className?: string;
+}
+
+export function SearchResults({
+  hits, status, listId, activeIndex = -1, onPick, allLink, label = "Výsledky hľadania", idleText,
+  emptyText = "Nič sa nenašlo.", errorText = "Hľadanie zlyhalo. Skúste to znova.", statusText, linkAs: L = "a", className,
+}: SearchResultsProps) {
+  if (status === "idle") {
+    return <div className={cx("sfz-searchresults", className)}>{idleText && <p className="sfz-searchresults__note">{idleText}</p>}</div>;
+  }
+  return (
+    <div className={cx("sfz-searchresults", className)}>
+      <p className="sfz-visually-hidden" role="status">{status === "done" ? statusText ?? "" : ""}</p>
+      {status === "error" && <p className="sfz-searchresults__note">{errorText}</p>}
+      {status === "done" && hits.length === 0 && <p className="sfz-searchresults__note">{emptyText}</p>}
+      <ul id={listId} role="listbox" aria-label={label} className="sfz-searchresults__list">
+        {hits.map((hit, i) => (
+          <li key={hit.id} role="option" aria-selected={i === activeIndex}>
+            <L id={`${listId}-${i}`} href={hit.href} onClick={onPick} tabIndex={-1} className={cx("sfz-searchresults__hit", i === activeIndex && "is-active")}>
+              {hit.overline && <span className="sfz-searchresults__overline">{hit.overline}</span>}
+              <span className="sfz-searchresults__title">{hit.title}</span>
+              {hit.snippet && <span className="sfz-searchresults__snippet">{hit.snippet}</span>}
+            </L>
+          </li>
+        ))}
+      </ul>
+      {allLink && (
+        <L id={`${listId}-${hits.length}`} href={allLink.href} onClick={onPick} tabIndex={-1} className={cx("sfz-searchresults__all", activeIndex === hits.length && "is-active")}>
+          <Icon name="search" size={18} />
+          {allLink.label}
+        </L>
+      )}
     </div>
   );
 }

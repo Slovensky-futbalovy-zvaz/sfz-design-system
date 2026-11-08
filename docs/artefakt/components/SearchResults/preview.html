@@ -1,0 +1,11 @@
+<!-- @dsCard group="Navigácia" height=330 subtitle="Okamžité výsledky pod poľom hľadania" -->
+<style>body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.col{display:flex;flex-direction:column;gap:12px;max-width:480px}</style>
+<div id="root"></div>
+<script>
+const h=React.createElement, S=SFZ;
+function App(){
+const [q,setQ]=React.useState("tréner"), [i,setI]=React.useState(0);
+const hits=[{id:"1",href:"#",title:"Tréneri mládeže",overline:"Oblasť · 3 Mládež",snippet:"Každé družstvo potrebuje trénera s licenciou."},{id:"2",href:"#",title:"Licencie trénerov",overline:"Metodika",snippet:"Grassroots C, UEFA C a vyššie."}];
+return h("div",{className:"col"},h(S.SearchField,{label:"Hľadať v klube",value:q,onChange:(e)=>setQ(e.target.value),role:"combobox","aria-expanded":true,"aria-controls":"vysledky","aria-autocomplete":"list","aria-activedescendant":"vysledky-"+i,onKeyDown:(e)=>{if(e.key==="ArrowDown"){e.preventDefault();setI((i+1)%3);}if(e.key==="ArrowUp"){e.preventDefault();setI((i+2)%3);}}}),h("div",{style:{background:"var(--surface)",borderRadius:"var(--radius-md)",boxShadow:"var(--shadow-modal)",overflow:"hidden"}},h(S.SearchResults,{listId:"vysledky",status:q.trim().length<2?"idle":"done",hits:q.trim().length<2?[]:hits,activeIndex:i,idleText:"Píšte aspoň dve písmená.",statusText:"2 výsledky",allLink:{href:"#",label:"Všetky výsledky pre „"+q+"“"}})));}
+ReactDOM.createRoot(document.getElementById("root")).render(h(App));
+</script>
