@@ -2,7 +2,7 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
-## [Unreleased]
+## [1.7.0] – 2026-11-08
 
 ### Pridané
 - `MenuSheet` a `MenuPanel`: celé menu aplikácie v plachte pod hlavičkou (desktop) – sekcie v stĺpcoch, aktívna položka, Esc / pozadie / výber zatvoria, fokus dnu a späť na tlačidlo; `MenuPanel columns="two"` pre mobil.
