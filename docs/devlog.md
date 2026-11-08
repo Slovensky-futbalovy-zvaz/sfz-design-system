@@ -2,6 +2,15 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-08 – v1.7.0
+
+**Čo sa urobilo**
+- Navigačné komponenty MenuSheet, MenuPanel, BottomSheet, Breadcrumbs, SearchField a SearchResults zlúčené v #5 (podnet: hlavička aplikácie Rozvoj klubu, ADR 0035 v jej repozitári).
+- Vydanie v1.7.0 cez GitHub Releases.
+
+**Čo treba vedieť**
+- Aplikácia Rozvoj klubu môže prejsť na balík `^1.7.0` a zrušiť vlastné kópie týchto komponentov.
+
 ## 2026-11-07 – navigácia: plachty, cesta, hľadanie
 
 **Čo sa urobilo**
