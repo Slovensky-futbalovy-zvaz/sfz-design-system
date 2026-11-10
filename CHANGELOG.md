@@ -2,6 +2,11 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [1.7.1] – 2026-11-11
+
+### Opravené
+- `Avatar`: fotka na výšku (napr. 28 × 37 px pri `sm`) už avatar nenatiahne do oválu – `.sfz-avatar` má pevnú bunku mriežky (`grid-template: 100% / 100%`), fotka sa oreže do kruhu. Náhľad a ukážky s fotkou na výšku, test pravidla v `bundle.css`. Podnet: fotka používateľa v hlavičke aplikácie Rozvoj klubu.
+
 ## [1.7.0] – 2026-11-08
 
 ### Pridané
