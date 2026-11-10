@@ -121,7 +121,7 @@
 .sfz-toast__close:hover,.sfz-toast__action:hover{opacity:1;background:rgba(255,255,255,0.1)}
 
 /* ---------- Avatar / Skeleton / EmptyState ---------- */
-.sfz-avatar{position:relative;display:inline-grid;place-items:center;flex:none;border-radius:50%;background:var(--brand-blue-tint);color:var(--brand-blue-ink);font-family:var(--font-sans);font-weight:600;overflow:visible}
+.sfz-avatar{position:relative;display:inline-grid;grid-template:100%/100%;place-items:center;flex:none;border-radius:50%;background:var(--brand-blue-tint);color:var(--brand-blue-ink);font-family:var(--font-sans);font-weight:600;overflow:visible}
 .sfz-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 .sfz-avatar--sm{width:28px;height:28px;font-size:11px}
 .sfz-avatar--md{width:40px;height:40px;font-size:14px}
