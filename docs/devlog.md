@@ -2,6 +2,16 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-11 – v1.7.1: Avatar ako kruh aj pri fotke na výšku
+
+**Čo sa urobilo**
+- Oprava `Avatar`: `.sfz-avatar` (inline-grid) mal automatický riadok, fotka na výšku ho natiahla a avatar bol ovál (28 × 37 px namiesto 28 × 28 pri `sm`). Pevná bunka `grid-template: 100% / 100%` – overené v Chromium na ukážkach (fotka 3 : 4 v `sm` aj `lg`: 28 × 28 a 56 × 56 px, bez opravy 28 × 37 a 56 × 75).
+- Náhľad Avatar s fotkou na výšku, pregenerované ukážky, test pravidla v `bundle.css`.
+
+**Čo treba vedieť**
+- Podnet: fotka používateľa v hlavičke aplikácie Rozvoj klubu; tá má dočasnú obchádzku v `globals.css`, ktorú po prechode na `^1.7.1` odstráni.
+- `npm run build:ukazky` nič nezapíše, keď cesta k repozitáru obsahuje medzeru (`import.meta.url` je URL-kódovaná, `process.argv[1]` nie) – ukážky boli pregenerované priamym volaním `vytvorStranku(nacitajUkazky())`.
+
 ## 2026-11-08 – v1.7.0
 
 **Čo sa urobilo**
