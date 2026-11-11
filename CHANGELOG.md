@@ -12,6 +12,7 @@ Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie 
 - Časť Grafy v brand booku, ADR 0004 (farby grafov podľa úlohy), testy kontrastu a poradia farieb grafov.
 
 ### Zmenené
+- Brand book: päta slajdu nesie autora a dátum verzie (RRRR-MM) – pravidlo, ktoré bolo dosiaľ len v artefakte.
 - **Poradie farieb grafov:** `chart-2` je svetlejšia modrá (`#6189ee`, predtým červená), `chart-3` červená SFZ (predtým sivá), `chart-4` sivá pre kontext – priemer, „Ostatné“ (predtým svetlomodrá). Kto používal `chart-2` ako červenú, prepne na `chart-3`.
 - `chart-1` v tmavej téme `#3a66e3` (predtým `brand-blue`, kontrast 2,66 : 1 na karte); všetky série majú teraz ≥ 3 : 1 na `surface` aj `surface-raised` v oboch témach.
 
