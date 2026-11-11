@@ -2,7 +2,7 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
-## [Unreleased]
+## [1.9.0] – 2026-11-11
 
 ### Pridané
 - Vzory grafov v `docs/grafy/`: `BarChart`, `LineChart`, `StackedBarChart`, `DonutChart`, `RadarChart`, `Heatmap`, `DivergingBarChart`, `KpiCard`, `ScatterChart`, `SankeyChart` – pravidlá, náhľady v artefakte a v ukážkach (skupina Grafy), príklad témy pre ECharts z CSS premenných.

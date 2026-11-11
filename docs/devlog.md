@@ -2,6 +2,20 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-11 – v1.9.0: grafy, mapy a päta slajdu
+
+**Čo sa urobilo**
+- Vzory grafov (10) a máp (4) v `docs/grafy/` s náhľadmi v artefakte a v ukážkach (skupiny Grafy a Mapy); podnet: interný Katalóg vizualizácií (170 typov grafov).
+- Farby grafov podľa úlohy (ADR 0004): séria `chart-1`–`chart-3`, kontext `chart-4`, sekvenčná `chart-seq-*`, rozbiehavá `chart-div-*`, mapový podklad `map-*`. Palety overené na kontrast ≥ 3 : 1 a rozlíšenie pri poruchách farbocitu; testy v `tests/tokens.test.ts`.
+- Päta slajdu s autorom a dátumom verzie (RRRR-MM) v brand booku, šablónach `templates/prezentacie/` a náhľadoch slajdov – pravidlo bolo predtým len v artefakte.
+- Oprava `npm run build:ukazky` pri ceste s medzerou.
+
+**Čo treba vedieť**
+- `chart-2` už nie je červená a `chart-3` už nie je sivá. Komponenty systému `chart-*` nepoužívajú; aplikácie, ktoré ich používajú, treba skontrolovať. Vydané ako 1.9.0, nie 2.0.0 – názvy tokenov ostali.
+- Štýl mapového podkladu pre MapLibre v `docs/grafy/README.md` nebol spustený nad reálnymi dlaždicami.
+- `npm run qr` má rovnakú chybu s medzerou v ceste ako mal `build:ukazky`.
+- Riadky s inštaláciou v README boli pri v1.8.0 vynechané (ostali na 1.7.1); teraz ukazujú 1.9.0.
+
 ## 2026-11-11 – v1.8.0: ikony míľnikov
 
 **Čo sa urobilo**

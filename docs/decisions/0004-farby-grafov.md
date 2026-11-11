@@ -1,6 +1,6 @@
 # ADR 0004 – Farby grafov podľa úlohy
 
-- **Stav:** navrhnuté
+- **Stav:** prijaté (v1.9.0)
 - **Dátum:** 2026-11-11
 - **Rozhodol:** Ján Letko
 
