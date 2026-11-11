@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { readFileSync } from "node:fs";
+import { cpSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { execFileSync } from "node:child_process";
 // @ts-expect-error – .mjs skript bez typov
 import { nacitajSfzQr } from "../scripts/qr.mjs";
 
@@ -38,5 +40,18 @@ describe("QR kód SFZ", () => {
   it("vzorový súbor pre šablónu záveru je aktuálny", () => {
     const f = readFileSync(join(root, "tools/qr/priklad-futbalsfz-sk.svg"), "utf8");
     expect(f).toBe(qr.svg("https://futbalsfz.sk", {}));
+  });
+
+  it("npm run qr funguje aj v ceste s medzerou", () => {
+    // CI beží v ceste bez medzery – skript preto skopírujeme do priečinka s medzerou.
+    const dir = mkdtempSync(join(tmpdir(), "sfz qr "));
+    try {
+      cpSync(join(root, "scripts/qr.mjs"), join(dir, "qr.mjs"));
+      const out = join(dir, "kod.svg");
+      execFileSync(process.execPath, [join(dir, "qr.mjs"), "https://futbalsfz.sk", "-o", out], { cwd: root });
+      expect(readFileSync(out, "utf8")).toBe(qr.svg("https://futbalsfz.sk", {}));
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });

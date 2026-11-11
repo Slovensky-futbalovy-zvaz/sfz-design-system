@@ -5,7 +5,7 @@
 //   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { … } }
 //   :root { spacing, radius, breakpoint, zIndex, duration…, --font-* }
 //   .<štýl> { typografické triedy }
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
 
@@ -62,7 +62,7 @@ export function buildCss(tokens) {
   return out.join("\n\n") + "\n";
 }
 
-if (import.meta.url.startsWith("file:") && process.argv[1] === fileURLToPath(import.meta.url)) {
+if (import.meta.url.startsWith("file:") && process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const root = join(dirname(fileURLToPath(import.meta.url)), "..");
   const tokens = JSON.parse(readFileSync(join(root, "tokens/tokens.json"), "utf8"));
   writeFileSync(join(root, "tokens/tokens.css"), buildCss(tokens));

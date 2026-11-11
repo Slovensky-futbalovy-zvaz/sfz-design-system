@@ -2,6 +2,11 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [Unreleased]
+
+### Opravené
+- `npm run qr` nič nevygeneroval, keď cesta k repozitáru obsahuje medzeru (rovnaká chyba ako pri `build:ukazky` v 1.9.0). Skripty `qr`, `build:ukazky` a `build:tokens` teraz porovnávajú skutočnú cestu (`realpathSync`), takže fungujú aj cez symbolický odkaz. Test spúšťa `qr.mjs` z priečinka s medzerou.
+
 ## [1.9.0] – 2026-11-11
 
 ### Pridané
