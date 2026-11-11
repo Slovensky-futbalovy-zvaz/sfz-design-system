@@ -1,7 +1,8 @@
 // QR kód SFZ z príkazového riadka (od v1.4.0).
 // Použitie: npm run qr -- "https://www.linkedin.com/in/meno/" [--tvar kruh|stvorec] [--farba modra|cierna] [--bez-loga] [-o subor.svg]
-import { readFileSync, writeFileSync } from "node:fs";
+import { readFileSync, realpathSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 
 /** Načíta knižnicu qrcode-generator, logo a renderer do izolovaného kontextu a vráti SFZQR. */
@@ -36,4 +37,5 @@ function main(argv) {
   console.log(`${file} vygenerovaný (${text})`);
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) main(process.argv.slice(2));
+// import.meta.url je URL-kódovaná (medzera = %20) a so skutočnou cestou (bez symlinkov), process.argv[1] je cesta tak, ako bola zadaná.
+if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) main(process.argv.slice(2));

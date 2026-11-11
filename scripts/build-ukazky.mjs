@@ -1,7 +1,7 @@
 // Vygeneruje docs/ukazky/index.html – ukážky všetkých webových komponentov v repozitári (bez artefaktu).
 // Zdroj: náhľady docs/artefakt/components/<Komponent>/preview.html (okrem slajdov a obálky).
 // Spustenie: npm run build:ukazky
-import { readFileSync, readdirSync, writeFileSync, existsSync } from "node:fs";
+import { readFileSync, readdirSync, writeFileSync, existsSync, realpathSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -118,7 +118,8 @@ export function vytvorStranku(ukazky) {
 `;
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+// import.meta.url je URL-kódovaná (medzera = %20) a so skutočnou cestou (bez symlinkov), process.argv[1] je cesta tak, ako bola zadaná.
+if (process.argv[1] && realpathSync(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const out = join(root, "docs/ukazky/index.html");
   writeFileSync(out, vytvorStranku(nacitajUkazky()));
   console.log("docs/ukazky/index.html vygenerovaný");
