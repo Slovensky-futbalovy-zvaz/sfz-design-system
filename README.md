@@ -37,7 +37,7 @@ Prehliadateľná verzia (brand book so živými náhľadmi): artefakt **SFZ Desi
 - **Formuláre:** `Input`, `Textarea`, `Select`, `Checkbox`, `Toggle`, obal `Field`
 - **Obsah:** `Card`, `Badge`, `Chip`, `Avatar`, `Accordion`, `Icon` (Lucide)
 - **Spätná väzba:** `Alert`, `Toast`, `Skeleton`, `EmptyState`, `ProgressBar`
-- **Navigácia:** `Tabs`, `NavBar` (desktop), `TabBar` (mobil), `Stepper`, `MenuSheet` / `MenuPanel` (celé menu), `Breadcrumbs`, `SearchField` a `SearchResults` (hľadanie v hlavičke)
+- **Navigácia:** `Tabs`, `SectionTabs` (podstránky sekcie ako kapsule), `NavBar` (desktop), `TabBar` (mobil), `Stepper`, `MenuSheet` / `MenuPanel` (celé menu), `Breadcrumbs`, `SearchField` a `SearchResults` (hľadanie v hlavičke)
 - **Prekrytia:** `Modal` (na mobile sheet zdola), `Drawer`, `BottomSheet` (mobil, nad TabBarom)
 - **Dáta:** `Table`, `DataTable` (hľadanie, filtre, zoradenie, stránkovanie), `Calendar`
 

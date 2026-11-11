@@ -54,6 +54,44 @@ export function Tabs({ items, value, onChange, variant = "underline", className,
   );
 }
 
+/* ---------- SectionTabs (záložky sekcie ako odkazy) ---------- */
+export interface SectionTab { id: string; label: string; href: string; icon?: IconName | string; active?: boolean }
+export interface SectionTabsProps {
+  items: SectionTab[];
+  /** Názov navigácie pre čítačku (napr. „Správa“). */
+  "aria-label": string;
+  linkAs?: LinkComponent;
+  className?: string;
+}
+
+/**
+ * Podstránky jednej sekcie ako kapsule na spoločnom podklade (štýl Apple). Sú to odkazy na stránky
+ * (`nav` + `aria-current`), nie `tablist`. Na úzkej obrazovke sa pás posúva a aktívna záložka
+ * sa posunie do pohľadu.
+ */
+export function SectionTabs({ items, linkAs: L = "a", className, ...rest }: SectionTabsProps) {
+  const row = React.useRef<HTMLDivElement>(null);
+  const active = items.find((it) => it.active)?.id;
+  React.useEffect(() => {
+    const el = row.current?.querySelector<HTMLElement>('[aria-current="page"]');
+    el?.scrollIntoView?.({ block: "nearest", inline: "center" });
+  }, [active]);
+  return (
+    <nav aria-label={rest["aria-label"]} className={cx("sfz-sectiontabs", className)}>
+      <div ref={row} className="sfz-sectiontabs__scroll">
+        <div className="sfz-sectiontabs__track">
+          {items.map((it) => (
+            <L key={it.id} href={it.href} aria-current={it.active ? "page" : undefined} className={cx("sfz-sectiontab", it.active && "is-active")}>
+              {it.icon && <Icon name={it.icon} size={18} />}
+              <span>{it.label}</span>
+            </L>
+          ))}
+        </div>
+      </div>
+    </nav>
+  );
+}
+
 /* ---------- NavBar (desktop, ≥768 px) ---------- */
 export interface NavItem { id: string; label: string; href?: string; icon?: IconName | string; active?: boolean; onClick?: () => void }
 export interface NavBarProps {
@@ -238,8 +276,11 @@ export interface MenuLink { id: string; label: string; href: string; icon?: Icon
 export interface MenuSection { id: string; title: string; items: MenuLink[] }
 export interface MenuPanelProps {
   sections: MenuSection[];
-  /** auto = toľko stĺpcov, koľko sa zmestí (desktop); two = dva stĺpce (mobil v BottomSheet). */
-  columns?: "auto" | "two";
+  /**
+   * auto = toľko stĺpcov, koľko sa zmestí (desktop); list = jeden stĺpec zoskupených riadkov ako
+   * Nastavenia v iOS (mobil v BottomSheet); two = dva stĺpce (staršie, na mobile neprehľadné).
+   */
+  columns?: "auto" | "two" | "list";
   /** Volá sa po výbere položky (zatvorí plachtu). */
   onPick?: () => void;
   linkAs?: LinkComponent;
@@ -257,8 +298,9 @@ export function MenuPanel({ sections, columns = "auto", onPick, linkAs: L = "a",
             {s.items.map((it) => (
               <li key={it.id}>
                 <L href={it.href} onClick={onPick} aria-current={it.active ? "page" : undefined} className={cx("sfz-menupanel__link", it.active && "is-active")}>
-                  {it.icon && <Icon name={it.icon} size={18} />}
+                  {it.icon && <Icon name={it.icon} size={columns === "list" ? 20 : 18} />}
                   <span>{it.label}</span>
+                  {columns === "list" && <Icon name="chevron-right" size={18} className="sfz-menupanel__chevron" />}
                 </L>
               </li>
             ))}

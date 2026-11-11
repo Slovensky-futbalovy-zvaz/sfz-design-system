@@ -56,6 +56,7 @@ describe("komponenty sa vyrenderujú", () => {
     ["EmptyState", () => <SFZ.EmptyState title="Žiadne podania" description="Keď klub odošle podanie, zobrazí sa tu." />],
     ["Stepper", () => <SFZ.Stepper steps={[{ label: "Údaje" }, { label: "Klub" }, { label: "Platba" }]} current={1} />],
     ["Tabs", () => <SFZ.Tabs items={[{ id: "a", label: "Zápasy" }, { id: "b", label: "Tabuľka" }]} value="a" onChange={() => {}} />],
+    ["SectionTabs", () => <SFZ.SectionTabs aria-label="Správa" items={[{ id: "a", label: "Kluby", href: "/kluby", icon: "trophy", active: true }, { id: "b", label: "Obsah", href: "/obsah" }]} />],
     ["NavBar", () => <SFZ.NavBar brand="SFZ" items={[{ id: "a", label: "Prehľad", active: true }]} />],
     ["TabBar", () => <SFZ.TabBar items={[{ id: "a", label: "Prehľad", icon: "home" }]} value="a" />],
     ["Modal", () => <SFZ.Modal open title="Potvrdiť" onClose={() => {}}>Naozaj?</SFZ.Modal>],
@@ -186,6 +187,37 @@ describe("správanie", () => {
     );
     render(<SFZ.MenuPanel sections={sections} columns="two" linkAs={RouterLink} />);
     expect(screen.getByRole("link", { name: "Môj účet" }).hasAttribute("data-router")).toBe(true);
+  });
+
+  it("SectionTabs: navigácia z odkazov, aktívna záložka má aria-current, žiadny tablist", () => {
+    const RouterLink = ({ href, children, ...rest }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+      <a href={href} data-router="" {...rest}>{children}</a>
+    );
+    render(
+      <SFZ.SectionTabs
+        aria-label="Správa"
+        linkAs={RouterLink}
+        items={[
+          { id: "k", label: "Kluby", href: "/kluby", icon: "trophy", active: true },
+          { id: "o", label: "Obsah", href: "/obsah", icon: "edit" },
+        ]}
+      />,
+    );
+    expect(screen.getByRole("navigation", { name: "Správa" })).toBeTruthy();
+    expect(screen.queryByRole("tablist")).toBeNull();
+    const active = screen.getByRole("link", { name: "Kluby" });
+    expect(active.getAttribute("aria-current")).toBe("page");
+    expect(active.classList.contains("is-active")).toBe(true);
+    expect(active.hasAttribute("data-router")).toBe(true);
+    expect(screen.getByRole("link", { name: "Obsah" }).hasAttribute("aria-current")).toBe(false);
+  });
+
+  it("MenuPanel columns=\"list\": jeden stĺpec, riadok so šípkou, aktívny s aria-current", () => {
+    const { container } = render(<SFZ.MenuPanel sections={sections} columns="list" />);
+    expect(container.querySelector(".sfz-menupanel--list")).toBeTruthy();
+    const links = screen.getAllByRole("link");
+    for (const link of links) expect(link.querySelector(".sfz-menupanel__chevron")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Prehľad" }).getAttribute("aria-current")).toBe("page");
   });
 
   it("BottomSheet: modálny dialóg s názvom, × a ťah za úchyt zatvoria, krátky ťah nie", () => {

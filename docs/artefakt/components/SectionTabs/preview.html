@@ -1,0 +1,8 @@
+<!-- @dsCard group="Navigácia" height=200 subtitle="Záložky sekcie ako odkazy – kapsule (štýl Apple)" -->
+<style>body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}.col{display:flex;flex-direction:column;gap:16px}.narrow{max-width:358px}</style>
+<div id="root"></div>
+<script>
+const h=React.createElement, S=SFZ;
+const items=[{id:"p",label:"Prehľad",href:"#",icon:"home"},{id:"k",label:"Kluby",href:"#",icon:"trophy",active:true},{id:"o",label:"Osoby a roly",href:"#",icon:"users"},{id:"c",label:"Číselníky",href:"#",icon:"file-text"},{id:"b",label:"Obsah",href:"#",icon:"edit"},{id:"n",label:"Novinky",href:"#",icon:"bell"}];
+ReactDOM.createRoot(document.getElementById("root")).render(h("div",{className:"col"},h(S.SectionTabs,{"aria-label":"Správa",items}),h("div",{className:"narrow"},h(S.SectionTabs,{"aria-label":"Správa (mobil)",items}))));
+</script>

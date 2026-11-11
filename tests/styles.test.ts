@@ -18,4 +18,16 @@ describe("štýly komponentov (bundle.css)", () => {
     expect(pravidlo(".sfz-avatar")).toMatch(/grid-template:\s*100%\s*\/\s*100%/);
     expect(pravidlo(".sfz-avatar img")).toMatch(/width:100%;height:100%/);
   });
+
+  it("SectionTabs: kapsule s dotykovou plochou, pás sa posúva bez posuvníka", () => {
+    expect(pravidlo(".sfz-sectiontab")).toMatch(/min-height:var\(--touch-target\)/);
+    expect(pravidlo(".sfz-sectiontab")).toMatch(/border-radius:var\(--radius-pill\)/);
+    expect(pravidlo(".sfz-sectiontabs__scroll")).toMatch(/overflow-x:auto/);
+    expect(pravidlo(".sfz-sectiontab.is-active")).toMatch(/color:var\(--brand-blue-ink\)/);
+  });
+
+  it("MenuPanel list: jeden stĺpec a riadky aspoň 48 px", () => {
+    expect(pravidlo(".sfz-menupanel--list")).toMatch(/grid-template-columns:minmax\(0,1fr\)/);
+    expect(pravidlo(".sfz-menupanel--list .sfz-menupanel__link")).toMatch(/min-height:48px/);
+  });
 });

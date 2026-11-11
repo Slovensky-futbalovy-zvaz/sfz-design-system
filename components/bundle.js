@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"SFZ","components":[{"name":"Button"},{"name":"IconButton"},{"name":"Input"},{"name":"Textarea"},{"name":"Select"},{"name":"Checkbox"},{"name":"Toggle"},{"name":"Card"},{"name":"Badge"},{"name":"Chip"},{"name":"Alert"},{"name":"Toast"},{"name":"Avatar"},{"name":"Skeleton"},{"name":"EmptyState"},{"name":"Stepper"},{"name":"Accordion"},{"name":"AccordionItem"},{"name":"ProgressBar"},{"name":"Tabs"},{"name":"NavBar"},{"name":"TabBar"},{"name":"Modal"},{"name":"Drawer"},{"name":"MenuPanel"},{"name":"MenuSheet"},{"name":"BottomSheet"},{"name":"Breadcrumbs"},{"name":"SearchField"},{"name":"SearchResults"},{"name":"Table"},{"name":"DataTable"},{"name":"Calendar"},{"name":"Icon"}]} */
+/* @ds-bundle: {"format":4,"namespace":"SFZ","components":[{"name":"Button"},{"name":"IconButton"},{"name":"Input"},{"name":"Textarea"},{"name":"Select"},{"name":"Checkbox"},{"name":"Toggle"},{"name":"Card"},{"name":"Badge"},{"name":"Chip"},{"name":"Alert"},{"name":"Toast"},{"name":"Avatar"},{"name":"Skeleton"},{"name":"EmptyState"},{"name":"Stepper"},{"name":"Accordion"},{"name":"AccordionItem"},{"name":"ProgressBar"},{"name":"Tabs"},{"name":"SectionTabs"},{"name":"NavBar"},{"name":"TabBar"},{"name":"Modal"},{"name":"Drawer"},{"name":"MenuPanel"},{"name":"MenuSheet"},{"name":"BottomSheet"},{"name":"Breadcrumbs"},{"name":"SearchField"},{"name":"SearchResults"},{"name":"Table"},{"name":"DataTable"},{"name":"Calendar"},{"name":"Icon"}]} */
 
 var SFZ = (() => {
   var __create = Object.create;
@@ -63,6 +63,7 @@ var SFZ = (() => {
     IconButton: () => IconButton,
     Input: () => Input,
     MenuPanel: () => MenuPanel,
+    SectionTabs: () => SectionTabs,
     MenuSheet: () => MenuSheet,
     Modal: () => Modal,
     NavBar: () => NavBar,
@@ -334,6 +335,17 @@ var SFZ = (() => {
       typeof it.count === "number" && /* @__PURE__ */ React4.createElement("span", { className: "sfz-tab__count" }, it.count)
     )));
   }
+  function SectionTabs({ items, linkAs: L = "a", className, ...rest }) {
+    var _a;
+    const row = React4.useRef(null);
+    const active = (_a = items.find((it) => it.active)) == null ? void 0 : _a.id;
+    React4.useEffect(() => {
+      var _a2, _b;
+      const el = (_a2 = row.current) == null ? void 0 : _a2.querySelector('[aria-current="page"]');
+      (_b = el == null ? void 0 : el.scrollIntoView) == null ? void 0 : _b.call(el, { block: "nearest", inline: "center" });
+    }, [active]);
+    return /* @__PURE__ */ React4.createElement("nav", { "aria-label": rest["aria-label"], className: cx3("sfz-sectiontabs", className) }, /* @__PURE__ */ React4.createElement("div", { ref: row, className: "sfz-sectiontabs__scroll" }, /* @__PURE__ */ React4.createElement("div", { className: "sfz-sectiontabs__track" }, items.map((it) => /* @__PURE__ */ React4.createElement(L, { key: it.id, href: it.href, "aria-current": it.active ? "page" : void 0, className: cx3("sfz-sectiontab", it.active && "is-active") }, it.icon && /* @__PURE__ */ React4.createElement(Icon, { name: it.icon, size: 18 }), /* @__PURE__ */ React4.createElement("span", null, it.label))))));
+  }
   function NavBar({ brand, brandHref = "/", items, actions, tone = "light", onMenu, className }) {
     return /* @__PURE__ */ React4.createElement("header", { className: cx3("sfz-navbar", `sfz-navbar--${tone}`, className) }, /* @__PURE__ */ React4.createElement("div", { className: "sfz-navbar__inner" }, onMenu && /* @__PURE__ */ React4.createElement("button", { type: "button", className: "sfz-navbar__menu", "aria-label": "Menu", onClick: onMenu }, /* @__PURE__ */ React4.createElement(Icon, { name: "menu", size: 22 })), /* @__PURE__ */ React4.createElement("a", { className: "sfz-navbar__brand", href: brandHref }, brand), /* @__PURE__ */ React4.createElement("nav", { className: "sfz-navbar__nav", "aria-label": "Hlavn\xE1 navig\xE1cia" }, items.map((it) => {
       var _a;
@@ -431,7 +443,7 @@ var SFZ = (() => {
   }
   function MenuPanel({ sections, columns = "auto", onPick, linkAs: L = "a", className }) {
     const uid = React4.useId();
-    return /* @__PURE__ */ React4.createElement("div", { className: cx3("sfz-menupanel", `sfz-menupanel--${columns}`, className) }, sections.map((s) => /* @__PURE__ */ React4.createElement("section", { key: s.id, className: "sfz-menupanel__section", "aria-labelledby": `${uid}-${s.id}` }, /* @__PURE__ */ React4.createElement("h3", { id: `${uid}-${s.id}`, className: "sfz-menupanel__title" }, s.title), /* @__PURE__ */ React4.createElement("ul", { className: "sfz-menupanel__list" }, s.items.map((it) => /* @__PURE__ */ React4.createElement("li", { key: it.id }, /* @__PURE__ */ React4.createElement(L, { href: it.href, onClick: onPick, "aria-current": it.active ? "page" : void 0, className: cx3("sfz-menupanel__link", it.active && "is-active") }, it.icon && /* @__PURE__ */ React4.createElement(Icon, { name: it.icon, size: 18 }), /* @__PURE__ */ React4.createElement("span", null, it.label))))))));
+    return /* @__PURE__ */ React4.createElement("div", { className: cx3("sfz-menupanel", `sfz-menupanel--${columns}`, className) }, sections.map((s) => /* @__PURE__ */ React4.createElement("section", { key: s.id, className: "sfz-menupanel__section", "aria-labelledby": `${uid}-${s.id}` }, /* @__PURE__ */ React4.createElement("h3", { id: `${uid}-${s.id}`, className: "sfz-menupanel__title" }, s.title), /* @__PURE__ */ React4.createElement("ul", { className: "sfz-menupanel__list" }, s.items.map((it) => /* @__PURE__ */ React4.createElement("li", { key: it.id }, /* @__PURE__ */ React4.createElement(L, { href: it.href, onClick: onPick, "aria-current": it.active ? "page" : void 0, className: cx3("sfz-menupanel__link", it.active && "is-active") }, it.icon && /* @__PURE__ */ React4.createElement(Icon, { name: it.icon, size: columns === "list" ? 20 : 18 }), /* @__PURE__ */ React4.createElement("span", null, it.label), columns === "list" && /* @__PURE__ */ React4.createElement(Icon, { name: "chevron-right", size: 18, className: "sfz-menupanel__chevron" }))))))));
   }
   function MenuSheet({ open, onClose, title, sections, escHint = "zavrie", id, linkAs }) {
     const panel = React4.useRef(null);
