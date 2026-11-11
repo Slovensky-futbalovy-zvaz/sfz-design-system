@@ -37,7 +37,7 @@ Design systém Slovenského futbalového zväzu pre prezentácie, dokumenty a we
 - Dotykové ciele min. `touch-target` 44 px. Zoskupené zoznamy ako iOS Settings: `surface-raised`, `radius-md`, riadky oddelené `hairline`.
 - Rádiusy: `radius-xs` 6 (checkbox), `radius-sm` 8 (chip), `radius-md` 14 (tlačidlá, vstupy), `radius-lg` 24 (karty), `radius-xl` 40 (veľké panely), `radius-pill`.
 - Tiene takmer nepoužívame; hierarchiu robí `surface-raised`. `shadow-float` pre plávajúce prvky, `shadow-modal` pre dialógy.
-- Slajd: okraje 128 px zľava/sprava, päta 64 px od spodku, logo D v päte 56 px. Obsahový slajd má hore modrý pás `slide-band-height` (104 px) s textom `slide-band`; obsah začína 80 px pod ním.
+- Slajd: okraje 128 px zľava/sprava, päta 64 px od spodku, logo D v päte 56 px. Každý slajd má v päte autora a dátum verzie v tvare RRRR-MM: obsahový slajd druhým riadkom „Autor: Ján Letko, 2026-11“, titul a záver za menom autora („Ján Letko · 2026-11“). Dátum verzie je mesiac poslednej úpravy prezentácie, nie „stav k“ dát. Obsahový slajd má hore modrý pás `slide-band-height` (104 px) s textom `slide-band`; obsah začína 80 px pod ním.
 
 ## Komponenty pre web (React)
 
