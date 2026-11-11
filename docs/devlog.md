@@ -2,6 +2,14 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-11 – v1.8.0: ikony míľnikov
+
+**Čo sa urobilo**
+- Ikony `flag`, `handshake`, `clipboard-list`, `file-check` z Lucide 1.70 v `components/src/icons.tsx` aj `bundle.js`. Prvky ikony (obdĺžnik, viac ciest) sú zlúčené do jednej cesty; počiatočné relatívne `m` je prevedené na absolútne `M` s relatívnym `l`, aby sa časti neposunuli.
+
+**Čo treba vedieť**
+- Podnet: míľniky sezóny vo Vizitke aplikácie Rozvoj klubu (dovtedy z lucide-react).
+
 ## 2026-11-11 – v1.7.1: Avatar ako kruh aj pri fotke na výšku
 
 **Čo sa urobilo**
