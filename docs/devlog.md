@@ -2,6 +2,15 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-11 – v1.9.1: skripty v ceste s medzerou
+
+**Čo sa urobilo**
+- `npm run qr` potichu nič nevygeneroval v ceste s medzerou (`…/SFZ Design system`). Skripty `qr`, `build:ukazky` a `build:tokens` teraz porovnávajú `realpathSync(process.argv[1])` s `fileURLToPath(import.meta.url)`.
+- Regresný test v `tests/qr.test.ts` spúšťa `qr.mjs` z dočasného priečinka s medzerou.
+
+**Čo treba vedieť**
+- Test odhalil aj symlinky: Node dáva do `import.meta.url` skutočnú cestu (na macOS `/var` → `/private/var`), `process.argv[1]` nie. Oprava `build:ukazky` z 1.9.0 (len `fileURLToPath`) by pri spustení cez symlink zlyhala.
+
 ## 2026-11-11 – v1.9.0: grafy, mapy a päta slajdu
 
 **Čo sa urobilo**
