@@ -1,0 +1,51 @@
+<!-- @dsCard group="Grafy" height=460 subtitle="Bodový graf: vzťah dvoch veličín, jedna séria + zvýraznenie" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+#g{display:block;width:100%;height:auto;overflow:visible}
+.ax{fill:var(--ink-muted);font-size:12px;font-variant-numeric:tabular-nums}.at{fill:var(--ink-muted);font-size:12px;font-weight:600}
+.gr{stroke:var(--hairline)}.bl{stroke:var(--border-strong)}
+.avg{stroke:var(--chart-4);stroke-dasharray:4 4}
+.p{fill:var(--chart-1);fill-opacity:.75;stroke:var(--surface-raised);stroke-width:1.5}.p:hover{fill-opacity:1;stroke:var(--ink)}
+.hl{fill:var(--chart-3);stroke:var(--surface-raised);stroke-width:2}
+.dl{fill:var(--ink);font-size:12px;font-weight:600}
+.lg{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px 0 0;padding:0;list-style:none;color:var(--ink-muted)}
+.lg li{display:inline-flex;align-items:center;gap:6px}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:1;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap;font-variant-numeric:tabular-nums}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Odohrané minúty a góly</h3>
+  <p class="sub footnote">Útočníci 3. ligy · sezóna 2025/26 · čiarkovane priemer</p>
+  <svg id="g" role="img" aria-labelledby="t12"><title id="t12">Bodový graf: odohrané minúty a strelené góly 40 útočníkov, zvýraznený hráč s 18 gólmi</title></svg>
+  <ul class="lg footnote">
+    <li><svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="5" style="fill:var(--chart-1)"/></svg>Hráč</li>
+    <li><svg width="12" height="12" aria-hidden="true"><circle cx="6" cy="6" r="5" style="fill:var(--chart-3)"/></svg>Vybraný hráč</li>
+    <li><svg width="22" height="8" aria-hidden="true"><line x1="1" y1="4" x2="21" y2="4" style="stroke:var(--chart-4);stroke-dasharray:4 4"/></svg>Priemer</li>
+  </ul>
+  <p class="src caption-1">Ilustračné údaje</p>
+</figure>
+<script>
+(()=>{
+// deterministické pseudonáhodné body
+let seed=7;const rnd=()=>(seed=(seed*16807)%2147483647)/2147483647;
+const P=[];for(let i=0;i<40;i++){const m=Math.round(300+rnd()*2400);const g=Math.max(0,Math.round(m/2700*12+(rnd()-.5)*7));P.push([m,g,`Hráč ${i+1}`]);}
+const HL=[2310,18,"Vybraný hráč"];
+const f=n=>n.toLocaleString("sk-SK"),W=600,L=44,R=16,T=26,B=44,H=320,mx=3000,my=20;
+const x=v=>L+(W-L-R)*v/mx,y=v=>T+(H-T-B)*(1-v/my);
+let s="";
+for(let v=0;v<=mx;v+=500)s+=`<line class="gr" x1="${x(v)}" x2="${x(v)}" y1="${T}" y2="${y(0)}"/><text class="ax" x="${x(v)}" y="${y(0)+18}" text-anchor="middle">${v?f(v):"0"}</text>`;
+for(let v=0;v<=my;v+=5)s+=`<line class="gr" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${L-8}" y="${y(v)+4}" text-anchor="end">${v}</text>`;
+const am=P.reduce((a,p)=>a+p[0],0)/P.length,ag=P.reduce((a,p)=>a+p[1],0)/P.length;
+s+=`<line class="avg" x1="${x(am)}" x2="${x(am)}" y1="${T}" y2="${y(0)}"/><line class="avg" x1="${L}" x2="${W-R}" y1="${y(ag)}" y2="${y(ag)}"/>`;
+s+=`<line class="bl" x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}"/><line class="bl" x1="${L}" x2="${L}" y1="${T}" y2="${y(0)}"/>`;
+s+=`<text class="at" x="${W-R}" y="${H-4}" text-anchor="end">Odohrané minúty →</text><text class="at" x="${L}" y="${T-12}">Góly ↑</text>`;
+P.forEach(([m,g,n])=>{s+=`<circle class="p" cx="${x(m)}" cy="${y(g)}" r="5" data-t="<b>${n}</b><br>${f(m)} min · ${g} gólov"/>`});
+s+=`<circle class="hl" cx="${x(HL[0])}" cy="${y(HL[1])}" r="6" data-t="<b>${HL[2]}</b><br>${f(HL[0])} min · ${HL[1]} gólov"/><text class="dl" x="${x(HL[0])-10}" y="${y(HL[1])+4}" text-anchor="end">Vybraný hráč</text>`;
+const g=document.getElementById("g");g.setAttribute("viewBox",`0 0 ${W} ${H}`);g.insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+ch.addEventListener("pointermove",e=>{const m=e.target.closest("[data-t]");if(!m){t.hidden=true;return}t.innerHTML=m.dataset.t;t.hidden=false;const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+ch.addEventListener("pointerleave",()=>t.hidden=true);
+})();
+</script>

@@ -3,11 +3,12 @@
 // Spustenie: npm run build:ukazky
 import { readFileSync, readdirSync, writeFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const root = process.cwd();
 const src = join(root, "docs/artefakt/components");
 const VYNECHAT_SKUPINY = new Set(["Slajdy"]);
-const PORADIE = ["Ovládacie prvky", "Formuláre", "Obsah", "Spätná väzba", "Navigácia", "Prekrytia", "Dáta", "Logá"];
+const PORADIE = ["Ovládacie prvky", "Formuláre", "Obsah", "Spätná väzba", "Navigácia", "Prekrytia", "Dáta", "Grafy", "Mapy", "Logá"];
 
 export function nacitajUkazky() {
   const out = [];
@@ -117,7 +118,7 @@ export function vytvorStranku(ukazky) {
 `;
 }
 
-if (import.meta.url === `file://${process.argv[1]}`) {
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const out = join(root, "docs/ukazky/index.html");
   writeFileSync(out, vytvorStranku(nacitajUkazky()));
   console.log("docs/ukazky/index.html vygenerovaný");

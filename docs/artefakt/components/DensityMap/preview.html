@@ -1,0 +1,43 @@
+<!-- @dsCard group="Mapy" height=420 subtitle="Hustota na mapovom podklade: kde je veľa hráčov alebo zápasov" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.map{position:relative;border-radius:var(--radius-md);overflow:hidden;box-shadow:inset 0 0 0 1px var(--hairline)}
+.map svg{display:block;width:100%;height:auto}
+.land{fill:var(--map-land)}.water{fill:none;stroke:var(--map-water);stroke-width:12;stroke-linecap:round}.lake{fill:var(--map-water)}
+.rc{fill:none;stroke:var(--hairline);stroke-linecap:round}.r{fill:none;stroke:var(--map-road);stroke-linecap:round}
+.bd{fill:none;stroke:var(--map-boundary);stroke-dasharray:4 4}
+.pl{fill:var(--ink);font-size:11px;font-weight:600;stroke:var(--map-land);stroke-width:3;paint-order:stroke;stroke-linejoin:round}
+.zoom{position:absolute;top:8px;right:8px;display:grid;background:var(--surface);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);overflow:hidden}
+.zoom button{width:36px;height:36px;border:0;background:none;color:var(--ink);font:600 18px var(--font-sans);cursor:pointer}
+.zoom button+button{border-top:1px solid var(--hairline)}
+.attr{position:absolute;right:6px;bottom:4px;padding:1px 6px;border-radius:4px;background:color-mix(in srgb,var(--surface) 80%,transparent);color:var(--ink-muted)}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.sc{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 0;color:var(--ink-muted)}
+.grad{width:160px;height:10px;border-radius:3px;background:linear-gradient(90deg,var(--chart-seq-2),var(--chart-seq-3),var(--chart-seq-4),var(--chart-seq-5))}
+.d3{fill:var(--chart-seq-3)}.d4{fill:var(--chart-seq-4)}.d5{fill:var(--chart-seq-5)}
+</style>
+<figure class="ch" style="margin:0">
+  <h3 class="headline">Kde bývajú mládežníci</h3>
+  <p class="sub footnote">Hustota podľa adresy hráča · pri priblížení sa zmení na body klubov</p>
+  <div class="map">
+    <svg id="g" viewBox="0 0 600 360" role="img" aria-labelledby="t11"><title id="t11">Mapa hustoty: najviac mládežníkov okolo Hornej Vsi a Nového Poľa</title>
+      <defs><filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter></defs>
+    </svg>
+    <div class="zoom"><button type="button" aria-label="Priblížiť">+</button><button type="button" aria-label="Oddialiť">−</button></div>
+    <span class="attr caption-2">Schematický podklad</span>
+  </div>
+  <div class="sc footnote"><span>menej</span><span class="grad"></span><span>viac hráčov</span></div>
+  <p class="src caption-1">Ilustračné údaje · bez presných adries – hustota chráni súkromie hráčov</p>
+</figure>
+<script>
+(()=>{
+const PODKLAD=`<rect class="land" width="600" height="360"/><path class="water" d="M-10 252C80 232 140 282 230 252S380 192 460 222 560 262 610 242"/><ellipse class="lake" cx="520" cy="86" rx="40" ry="20"/><path class="rc" stroke-width="5" d="M90 -5L118 365M-5 300L605 322M452 -5C430 120 482 240 470 365"/><path class="r" stroke-width="3" d="M90 -5L118 365M-5 300L605 322M452 -5C430 120 482 240 470 365"/><path class="rc" stroke-width="9" d="M-5 120C120 130 200 100 300 110S480 140 605 120M300 -5C290 90 320 180 300 365"/><path class="r" stroke-width="7" d="M-5 120C120 130 200 100 300 110S480 140 605 120M300 -5C290 90 320 180 300 365"/><path class="bd" d="M210 0L190 90L220 170L240 260L200 360M220 170L380 160L470 170L600 190"/>`;
+const B=[[310,115,70,3],[310,112,44,4],[312,110,22,5],[480,165,58,3],[482,165,32,4],[484,163,14,5],[120,285,42,3],[122,286,20,4],[40,195,30,3],[230,300,26,3]];
+let s=PODKLAD+`<g filter="url(#blur)" opacity=".85">`;
+B.forEach(([x,y,r,c])=>{s+=`<circle class="d${c}" cx="${x}" cy="${y}" r="${r}"/>`});
+s+=`</g><text class="pl" x="312" y="152">Horná Ves</text><text class="pl" x="128" y="320">Dolany</text><text class="pl" x="486" y="208">Nové Pole</text><text class="pl" x="20" y="232">Lúky</text>`;
+document.getElementById("g").insertAdjacentHTML("beforeend",s);
+})();
+</script>

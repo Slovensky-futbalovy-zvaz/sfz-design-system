@@ -1,0 +1,43 @@
+<!-- @dsCard group="Grafy" height=360 subtitle="Skladaný 100 % graf: podiely, rozbiehavé farby výhra – remíza – prehra" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.ch svg{display:block;width:100%;height:auto;overflow:visible}
+.ax{fill:var(--ink-muted);font-size:12px;font-variant-numeric:tabular-nums}.nm{fill:var(--ink);font-size:13px;font-variant-numeric:tabular-nums}
+.vl{fill:var(--ink);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.w{fill:var(--chart-div-pos-2)}.d{fill:var(--chart-div-mid)}.l{fill:var(--chart-div-neg-2)}
+.seg{stroke:var(--surface-raised);stroke-width:2}.seg:hover{opacity:.8}
+.lg{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px 0 0;padding:0;list-style:none;color:var(--ink-muted)}
+.lg li{display:inline-flex;align-items:center;gap:6px}.sw{width:10px;height:10px;border-radius:3px}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:1;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Výsledky domácich tímov podľa sezóny</h3>
+  <p class="sub footnote">Podiel zápasov · 1. liga</p>
+  <svg id="g" role="img" aria-labelledby="t3"><title id="t3">Skladaný graf: podiel výhier, remíz a prehier domácich tímov v piatich sezónach</title></svg>
+  <ul class="lg footnote">
+    <li><span class="sw" style="background:var(--chart-div-pos-2)"></span>Výhra</li>
+    <li><span class="sw" style="background:var(--chart-div-mid);box-shadow:inset 0 0 0 1px var(--border-strong)"></span>Remíza</li>
+    <li><span class="sw" style="background:var(--chart-div-neg-2)"></span>Prehra</li>
+  </ul>
+  <p class="src caption-1">Ilustračné údaje</p>
+</figure>
+<script>
+(()=>{
+const D=[["2021/22",44,27,29],["2022/23",47,24,29],["2023/24",42,29,29],["2024/25",49,23,28],["2025/26",51,22,27]];
+const W=600,L=72,R=96,row=40,bh=24,top=4,H=top+D.length*row+4,sc=(W-L-R)/100;
+const rr=(x,y,w,h,a,b)=>`M${x+a} ${y}h${w-a-b}${b?`a${b} ${b} 0 0 1 ${b} ${b}v${h-2*b}a${b} ${b} 0 0 1 -${b} ${b}`:`v${h}`}h-${w-a-b}${a?`a${a} ${a} 0 0 1 -${a} -${a}v-${h-2*a}a${a} ${a} 0 0 1 ${a} -${a}`:`v-${h}`}z`;
+let s="";
+D.forEach(([n,w,d,l],i)=>{const y=top+i*row+(row-bh)/2;let x0=L;
+ s+=`<text class="nm" x="${L-10}" y="${y+bh/2+4}" text-anchor="end">${n}</text>`;
+ [["w",w,"Výhry"],["d",d,"Remízy"],["l",l,"Prehry"]].forEach(([c,v,k],j)=>{const wd=v*sc;
+  s+=`<path class="seg ${c}" d="${rr(x0,y,wd,bh,j===0?4:0,j===2?4:0)}" data-t="<b>${n}</b><br>${k}: ${v} %"/>`;x0+=wd;});
+ s+=`<text class="vl" x="${W-R+10}" y="${y+bh/2+4}">${w} % výhier</text>`;});
+const g=document.getElementById("g");g.setAttribute("viewBox",`0 0 ${W} ${H}`);g.insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+ch.addEventListener("pointermove",e=>{const m=e.target.closest("[data-t]");if(!m){t.hidden=true;return}t.innerHTML=m.dataset.t;t.hidden=false;const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+ch.addEventListener("pointerleave",()=>t.hidden=true);
+})();
+</script>

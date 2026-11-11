@@ -1,0 +1,41 @@
+<!-- @dsCard group="Grafy" height=470 subtitle="Radarový graf: profil hráča, max. 2 hráči, percentily" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.ch svg{display:block;width:100%;max-width:420px;height:auto;margin:0 auto;overflow:visible}
+.ax{fill:var(--ink-muted);font-size:12px}.gr{fill:none;stroke:var(--hairline)}.sp{stroke:var(--hairline)}
+.a1{fill:var(--chart-1);fill-opacity:.18;stroke:var(--chart-1);stroke-width:2;stroke-linejoin:round}
+.a2{fill:var(--chart-2);fill-opacity:.18;stroke:var(--chart-2);stroke-width:2;stroke-linejoin:round}
+.pt{stroke:var(--surface-raised);stroke-width:2}.pt:hover{r:7}
+.lg{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 16px;margin:12px 0 0;padding:0;list-style:none;color:var(--ink-muted)}
+.lg li{display:inline-flex;align-items:center;gap:6px}.sw{width:10px;height:10px;border-radius:3px}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:1;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Profil hráča</h3>
+  <p class="sub footnote">Percentil medzi strednými záložníkmi ligy · 100 = najlepší</p>
+  <svg id="g" role="img" aria-labelledby="t5"><title id="t5">Radarový graf: porovnanie dvoch hráčov v šiestich ukazovateľoch</title></svg>
+  <ul class="lg footnote">
+    <li><span class="sw" style="background:var(--chart-1)"></span>Hráč A</li>
+    <li><span class="sw" style="background:var(--chart-2)"></span>Hráč B</li>
+  </ul>
+  <p class="src caption-1">Ilustračné údaje</p>
+</figure>
+<script>
+(()=>{
+const K=["Góly","Asistencie","Prihrávky","Súboje","Driblingy","Zisky lopty"];
+const P=[{k:"Hráč A",c:"a1",col:"--chart-1",v:[72,88,91,54,67,48]},{k:"Hráč B",c:"a2",col:"--chart-2",v:[45,61,78,83,39,86]}];
+const cx=210,cy=170,R=130,n=K.length,pt=(i,v)=>{const a=-Math.PI/2+2*Math.PI*i/n;return[cx+R*v/100*Math.cos(a),cy+R*v/100*Math.sin(a)]};
+let s="";
+[25,50,75,100].forEach(r=>{s+=`<polygon class="gr" points="${K.map((_,i)=>pt(i,r).join(",")).join(" ")}"/>`});
+K.forEach((k,i)=>{const[x,y]=pt(i,100),[lx,ly]=pt(i,116);s+=`<line class="sp" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/><text class="ax" x="${lx}" y="${ly+4}" text-anchor="${Math.abs(lx-cx)<4?"middle":lx>cx?"start":"end"}">${k}</text>`});
+P.forEach(p=>{s+=`<polygon class="${p.c}" points="${p.v.map((v,i)=>pt(i,v).join(",")).join(" ")}"/>`});
+P.forEach(p=>p.v.forEach((v,i)=>{const[x,y]=pt(i,v);s+=`<circle class="pt" cx="${x}" cy="${y}" r="4" style="fill:var(${p.col})" data-t="<b>${p.k}</b><br>${K[i]}: ${v}. percentil"/>`}));
+const g=document.getElementById("g");g.setAttribute("viewBox","0 0 420 340");g.insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+ch.addEventListener("pointermove",e=>{const m=e.target.closest("[data-t]");if(!m){t.hidden=true;return}t.innerHTML=m.dataset.t;t.hidden=false;const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+ch.addEventListener("pointerleave",()=>t.hidden=true);
+})();
+</script>

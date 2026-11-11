@@ -1,0 +1,37 @@
+<!-- @dsCard group="Grafy" height=380 subtitle="Heatmapa: sekvenčná modrá škála v 5 krokoch" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.ch svg{display:block;width:100%;height:auto;overflow:visible}
+.ax{fill:var(--ink-muted);font-size:12px}.nm{fill:var(--ink);font-size:13px}
+.c1{fill:var(--chart-seq-1)}.c2{fill:var(--chart-seq-2)}.c3{fill:var(--chart-seq-3)}.c4{fill:var(--chart-seq-4)}.c5{fill:var(--chart-seq-5)}
+.cell:hover{stroke:var(--ink);stroke-width:2}
+.sc{display:flex;align-items:center;gap:8px;margin:12px 0 0;color:var(--ink-muted)}
+.sc .bar{display:flex;gap:2px}.sc .bar span{width:32px;height:10px;border-radius:3px}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:1;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Dochádzka na tréningy</h3>
+  <p class="sub footnote">Mládežnícke kategórie · priemer za mesiac v %</p>
+  <svg id="g" role="img" aria-labelledby="t6"><title id="t6">Heatmapa: priemerná dochádzka na tréningy podľa kategórie a mesiaca</title></svg>
+  <div class="sc footnote"><span>menej ako 60 %</span><span class="bar"><span style="background:var(--chart-seq-1);box-shadow:inset 0 0 0 1px var(--hairline)"></span><span style="background:var(--chart-seq-2)"></span><span style="background:var(--chart-seq-3)"></span><span style="background:var(--chart-seq-4)"></span><span style="background:var(--chart-seq-5)"></span></span><span>90 % a viac</span></div>
+  <p class="src caption-1">Ilustračné údaje</p>
+</figure>
+<script>
+(()=>{
+const M=["sep","okt","nov","dec","jan","feb","mar","apr","máj","jún"],K=["U9","U11","U13","U15","U17","U19"];
+const V=[[92,90,86,71,58,74,88,91,93,89],[90,88,84,69,62,77,86,90,92,85],[87,85,80,66,64,79,84,88,90,82],[84,82,77,63,67,81,83,86,87,78],[80,78,73,61,69,83,82,84,83,72],[76,74,70,57,71,84,80,81,79,66]];
+const bin=v=>v<60?1:v<70?2:v<80?3:v<90?4:5;
+const W=600,L=48,T=4,cw=(W-L)/M.length,chh=34,H=T+K.length*chh+22;
+let s="";
+K.forEach((k,r)=>{s+=`<text class="nm" x="${L-10}" y="${T+r*chh+chh/2+4}" text-anchor="end">${k}</text>`;
+ M.forEach((m,c)=>{const v=V[r][c];s+=`<rect class="cell c${bin(v)}" x="${L+c*cw+1}" y="${T+r*chh+1}" width="${cw-2}" height="${chh-2}" rx="4" data-t="<b>${k} · ${m}</b><br>Dochádzka ${v} %"/>`;});});
+M.forEach((m,c)=>{s+=`<text class="ax" x="${L+c*cw+cw/2}" y="${H-6}" text-anchor="middle">${m}</text>`});
+const g=document.getElementById("g");g.setAttribute("viewBox",`0 0 ${W} ${H}`);g.insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+ch.addEventListener("pointermove",e=>{const m=e.target.closest("[data-t]");if(!m){t.hidden=true;return}t.innerHTML=m.dataset.t;t.hidden=false;const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+ch.addEventListener("pointerleave",()=>t.hidden=true);
+})();
+</script>

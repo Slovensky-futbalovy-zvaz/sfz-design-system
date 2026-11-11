@@ -1,0 +1,59 @@
+<!-- @dsCard group="Mapy" height=520 subtitle="Trasa na mapovom podklade: cesta na zápas, delegácia" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.map{position:relative;border-radius:var(--radius-md);overflow:hidden;box-shadow:inset 0 0 0 1px var(--hairline)}
+.map svg{display:block;width:100%;height:auto}
+.land{fill:var(--map-land)}.water{fill:none;stroke:var(--map-water);stroke-width:12;stroke-linecap:round}.lake{fill:var(--map-water)}
+.rc{fill:none;stroke:var(--hairline);stroke-linecap:round}.r{fill:none;stroke:var(--map-road);stroke-linecap:round}
+.bd{fill:none;stroke:var(--map-boundary);stroke-dasharray:4 4}
+.pl{fill:var(--ink-muted);font-size:11px;font-weight:500;stroke:var(--map-land);stroke-width:3;paint-order:stroke;stroke-linejoin:round}
+.zoom{position:absolute;top:8px;right:8px;display:grid;background:var(--surface);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);overflow:hidden}
+.zoom button{width:36px;height:36px;border:0;background:none;color:var(--ink);font:600 18px var(--font-sans);cursor:pointer}
+.zoom button+button{border-top:1px solid var(--hairline)}
+.attr{position:absolute;right:6px;bottom:4px;padding:1px 6px;border-radius:4px;background:color-mix(in srgb,var(--surface) 80%,transparent);color:var(--ink-muted)}
+.lg{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px 0 0;padding:0;list-style:none;color:var(--ink-muted)}
+.lg li{display:inline-flex;align-items:center;gap:6px}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.rcase{fill:none;stroke:var(--surface);stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+.rt{fill:none;stroke:var(--chart-1);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.alt{fill:none;stroke:var(--chart-4);stroke-width:3;stroke-dasharray:6 5;stroke-linecap:round;stroke-linejoin:round}
+.st{fill:var(--surface);stroke:var(--chart-1);stroke-width:3}.en{fill:var(--chart-1);stroke:var(--surface);stroke-width:3}
+.pill rect{fill:var(--surface)}.pill text{fill:var(--ink);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+dl{margin:12px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+dl div{padding:10px 12px;background:var(--surface);border-radius:var(--radius-md)}
+dt{color:var(--ink-muted)}dd{margin:2px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+</style>
+<figure class="ch" style="margin:0">
+  <h3 class="headline">Cesta na zápas</h3>
+  <p class="sub footnote">Delegácia rozhodcu · Lúky → Nové Pole, sobota 15.00</p>
+  <div class="map">
+    <svg id="g" viewBox="0 0 600 360" role="img" aria-labelledby="t10"><title id="t10">Mapa trasy z Lúk do Nového Poľa, 48 km, a dlhšej náhradnej trasy</title></svg>
+    <div class="zoom"><button type="button" aria-label="Priblížiť">+</button><button type="button" aria-label="Oddialiť">−</button></div>
+    <span class="attr caption-2">Schematický podklad</span>
+  </div>
+  <ul class="lg footnote">
+    <li><svg width="22" height="8" aria-hidden="true"><line x1="2" y1="4" x2="20" y2="4" style="stroke:var(--chart-1);stroke-width:4;stroke-linecap:round"/></svg>Odporúčaná trasa</li>
+    <li><svg width="22" height="8" aria-hidden="true"><line x1="2" y1="4" x2="20" y2="4" style="stroke:var(--chart-4);stroke-width:3;stroke-dasharray:6 5"/></svg>Náhradná trasa (56 km)</li>
+  </ul>
+  <dl class="footnote">
+    <div><dt>Vzdialenosť</dt><dd class="headline">48 km</dd></div>
+    <div><dt>Čas jazdy</dt><dd class="headline">41 min</dd></div>
+    <div><dt>Cestovné</dt><dd class="headline">12,00 €</dd></div>
+  </dl>
+  <p class="src caption-1">Ilustračné údaje · cestovné 0,25 € / km</p>
+</figure>
+<script>
+(()=>{
+const PODKLAD=`<rect class="land" width="600" height="360"/><path class="water" d="M-10 252C80 232 140 282 230 252S380 192 460 222 560 262 610 242"/><ellipse class="lake" cx="520" cy="86" rx="40" ry="20"/><path class="rc" stroke-width="5" d="M90 -5L118 365M-5 300L605 322M452 -5C430 120 482 240 470 365"/><path class="r" stroke-width="3" d="M90 -5L118 365M-5 300L605 322M452 -5C430 120 482 240 470 365"/><path class="rc" stroke-width="9" d="M-5 120C120 130 200 100 300 110S480 140 605 120M300 -5C290 90 320 180 300 365"/><path class="r" stroke-width="7" d="M-5 120C120 130 200 100 300 110S480 140 605 120M300 -5C290 90 320 180 300 365"/><path class="bd" d="M210 0L190 90L220 170L240 260L200 360M220 170L380 160L470 170L600 190"/><text class="pl" x="312" y="100">Horná Ves</text><text class="pl" x="128" y="290">Dolany</text><text class="pl" x="486" y="160">Nové Pole</text><text class="pl" x="20" y="200">Lúky</text>`;
+const route="M60 180C80 150 85 128 104 124C160 128 220 104 300 110C380 114 440 134 458 140C468 170 470 180 472 190";
+const alt="M60 180C80 220 105 280 114 300C250 310 400 316 470 318C474 270 474 220 472 190";
+let s=PODKLAD;
+s+=`<path class="rcase" d="${alt}"/><path class="alt" d="${alt}"/>`;
+s+=`<path class="rcase" d="${route}"/><path class="rt" d="${route}"/>`;
+s+=`<circle class="st" cx="60" cy="180" r="8"/><circle class="en" cx="472" cy="190" r="9"/>`;
+s+=`<g class="pill" transform="translate(196 136)"><rect width="110" height="26" rx="13" style="filter:drop-shadow(0 2px 6px rgba(12,15,22,.18))"/><text x="55" y="17" text-anchor="middle">48 km · 41 min</text></g>`;
+document.getElementById("g").insertAdjacentHTML("beforeend",s);
+})();
+</script>

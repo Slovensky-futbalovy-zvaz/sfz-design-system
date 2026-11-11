@@ -9,7 +9,9 @@ describe("zdroje artefaktu", () => {
   it("obsahujú náhľad každého komponentu z components/docs a docs/prezentacie", () => {
     const web = readdirSync(join(process.cwd(), "components/docs")).map((f) => f.replace(/\.md$/, ""));
     const slides = readdirSync(join(process.cwd(), "docs/prezentacie")).filter((f) => f !== "README.md").map((f) => f.replace(/\.md$/, ""));
-    for (const c of [...web, ...slides, "Cover"]) expect(comps, c).toContain(c);
+    const charts = readdirSync(join(process.cwd(), "docs/grafy")).filter((f) => f !== "README.md").map((f) => f.replace(/\.md$/, ""));
+    expect(charts.length).toBeGreaterThan(0);
+    for (const c of [...web, ...slides, ...charts, "Cover"]) expect(comps, c).toContain(c);
   });
   for (const c of comps) {
     it(`${c}: náhľad nemá odkazy na úložisko artefaktu a jeho logá existujú`, () => {

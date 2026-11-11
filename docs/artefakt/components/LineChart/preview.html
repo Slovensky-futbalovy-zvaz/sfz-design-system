@@ -1,0 +1,60 @@
+<!-- @dsCard group="Grafy" height=430 subtitle="Čiarový graf: vývoj v čase, max. 3 série + priemer" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.ch svg{display:block;width:100%;height:auto;overflow:visible;touch-action:pan-y}
+.ax{fill:var(--ink-muted);font-size:12px;font-variant-numeric:tabular-nums}
+.dl{font-size:12px;font-weight:600;fill:var(--ink)}
+.gr{stroke:var(--hairline)}.bl{stroke:var(--border-strong)}
+.s{fill:none;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.s1{stroke:var(--chart-1)}.s2{stroke:var(--chart-2)}.s4{stroke:var(--chart-4);stroke-dasharray:4 4}
+.dot{stroke:var(--surface-raised);stroke-width:2}
+.x{stroke:var(--border-strong);stroke-width:1}
+.lg{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px 0 0;padding:0;list-style:none;color:var(--ink-muted)}
+.lg li{display:inline-flex;align-items:center;gap:6px}.sw{width:16px;height:0;border-top:2px solid}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:1;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap;font-variant-numeric:tabular-nums}
+.tip i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Odohraté zápasy podľa mesiaca</h3>
+  <p class="sub footnote">Všetky súťaže SFZ a regiónov · aktuálna sezóna do novembra</p>
+  <svg id="g" role="img" aria-labelledby="t2"><title id="t2">Čiarový graf: odohraté zápasy po mesiacoch v sezónach 2024/25 a 2025/26 a priemer piatich sezón</title></svg>
+  <ul class="lg footnote">
+    <li><span class="sw" style="border-color:var(--chart-1)"></span>2025/26</li>
+    <li><span class="sw" style="border-color:var(--chart-2)"></span>2024/25</li>
+    <li><span class="sw" style="border-color:var(--chart-4);border-top-style:dashed"></span>Priemer 5 sezón</li>
+  </ul>
+  <p class="src caption-1">Ilustračné údaje</p>
+</figure>
+<script>
+(()=>{
+const M=["aug","sep","okt","nov","dec","jan","feb","mar","apr","máj","jún"];
+const S=[
+ {k:"2025/26",c:"s1",v:[8240,9610,9380,6950]},
+ {k:"2024/25",c:"s2",v:[7180,8640,8390,5870,640,310,1250,6980,8820,9140,5210]},
+ {k:"Priemer 5 sezón",c:"s4",v:[6200,7400,7300,5000,820,420,1500,5900,7500,7800,4400]}];
+const f=n=>n.toLocaleString("sk-SK"),W=600,L=48,R=64,T=8,B=28,H=280,max=10000;
+const x=i=>L+(W-L-R)*i/(M.length-1),y=v=>T+(H-T-B)*(1-v/max);
+let s="";
+for(let v=0;v<=max;v+=2500)s+=`<line class="gr" x1="${L}" x2="${W-R}" y1="${y(v)}" y2="${y(v)}"/><text class="ax" x="${L-8}" y="${y(v)+4}" text-anchor="end">${v?f(v):"0"}</text>`;
+M.forEach((m,i)=>{s+=`<text class="ax" x="${x(i)}" y="${H-8}" text-anchor="middle">${m}</text>`});
+s+=`<line class="bl" x1="${L}" x2="${W-R}" y1="${y(0)}" y2="${y(0)}"/>`;
+[...S].reverse().forEach(o=>{s+=`<path class="s ${o.c}" d="${o.v.map((v,i)=>(i?"L":"M")+x(i)+" "+y(v)).join("")}"/>`});
+const cur=S[0],li=cur.v.length-1;
+s+=`<circle class="dot" cx="${x(li)}" cy="${y(cur.v[li])}" r="5" style="fill:var(--chart-1)"/>`;
+s+=`<text class="dl" x="${x(li)+10}" y="${y(cur.v[li])+4}">2025/26</text>`;
+s+=`<line id="xh" class="x" y1="${T}" y2="${H-B}" visibility="hidden"/><rect id="hit" x="${L}" y="${T}" width="${W-L-R}" height="${H-T-B}" fill="transparent"/>`;
+const g=document.getElementById("g");g.setAttribute("viewBox",`0 0 ${W} ${H}`);g.insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+const xh=document.getElementById("xh"),hit=document.getElementById("hit");
+const col={s1:"--chart-1",s2:"--chart-2",s4:"--chart-4"};
+hit.addEventListener("pointermove",e=>{const p=g.createSVGPoint();p.x=e.clientX;p.y=e.clientY;const q=p.matrixTransform(g.getScreenCTM().inverse());
+ const i=Math.max(0,Math.min(M.length-1,Math.round((q.x-L)/((W-L-R)/(M.length-1)))));
+ xh.setAttribute("x1",x(i));xh.setAttribute("x2",x(i));xh.setAttribute("visibility","visible");
+ t.innerHTML=`<b>${M[i]}</b><br>`+S.filter(o=>o.v[i]!=null).map(o=>`<i style="background:var(${col[o.c]})"></i>${o.k}: ${f(o.v[i])}`).join("<br>");t.hidden=false;
+ const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+hit.addEventListener("pointerleave",()=>{t.hidden=true;xh.setAttribute("visibility","hidden")});
+})();
+</script>
