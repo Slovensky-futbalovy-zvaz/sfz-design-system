@@ -18,6 +18,11 @@ Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie 
 ### Opravené
 - `npm run build:ukazky` nič nezapísal, keď cesta k repozitáru obsahuje medzeru (porovnanie `file://` adresy so skriptom).
 
+## [1.8.0] – 2026-11-11
+
+### Pridané
+- Ikony `flag`, `handshake`, `clipboard-list` a `file-check` (Lucide, ISC) – míľniky sezóny klubu: cieľ, návšteva mentora, plán a licenčné hodnotenie. Podnet: aplikácia Rozvoj klubu ich mala ešte z balíka lucide.
+
 ## [1.7.1] – 2026-11-11
 
 ### Opravené
