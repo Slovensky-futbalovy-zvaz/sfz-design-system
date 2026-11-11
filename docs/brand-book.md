@@ -17,7 +17,7 @@ Design systém Slovenského futbalového zväzu pre prezentácie, dokumenty a we
 - Modré plochy: `surface-brand` + `on-brand` / `on-brand-muted`, logo biely variant.
 - Linky a okraje: `hairline` / `border` 1 px pre deliace čiary a karty; okraj nesúci význam `border-strong` (≥ 3:1) – vstupné polia, checkbox, krokovač.
 - Stavy: `success`, `warning`, `danger`, `info` s podkladmi `*-tint` a textom `*-ink`. Plné červené plochy s bielym textom (tlačidlo `danger`, odznak) používajú `danger-solid` (#dc1a21, 4,98 : 1); `brand-red` (#ec1c24) s bielym textom len pri veľkom alebo tučnom písme. Stav vždy pomenujte slovom alebo ikonou; `success` a `danger` sa líšia svetlosťou aj odtieňom.
-- Grafy: `chart-1` až `chart-4`; série sa líšia svetlosťou (`chart-1` vs `chart-4`), nie odtieňom.
+- Grafy: série `chart-1` (modrá), `chart-2` (svetlejšia modrá) a `chart-3` (červená, najviac jedna), kontext `chart-4` (sivá: priemer, „Ostatné“); množstvo sekvenčná škála `chart-seq-1`–`5`, odchýlka rozbiehavá `chart-div-*` (červená pod, modrá nad). Podrobne v časti Grafy.
 - Farby programov (`gold`, `program-green`, `program-sky`, `program-yellow`, `program-cyan`) patria len k logám daných programov (Futbalista roka, Sieň slávy, Regionálny turnaj…), nie do UI.
 - Kontrast: `ink`/`surface` 18:1, `ink-muted` 5.6:1 a viac, `on-brand`/`brand-blue` 6.5:1, `on-brand`/`brand-red` 4.4:1 (len veľký alebo tučný text ≥ 19 px), `on-brand`/`danger-solid` 4.98:1 (plné červené tlačidlo a odznak), `brand-blue-ink` 5.6–7.2:1 na všetkých povrchoch a na `brand-blue-tint`, `border-strong` 3.3–4.0:1, všetky `*-ink`/`*-tint` ≥ 7:1, v oboch témach. Nedeľa v kalendári `danger-ink`.
 
@@ -60,6 +60,17 @@ Pravidlá: jedno `primary` tlačidlo na obrazovku; stav vždy slovom + farbou; p
 3. Logá: stiahnite SVG z assetov do `public/brand/` a vkladajte cez `next/image` alebo `<img>`; biele varianty na modrej, farebné na bielej.
 4. Ikony: `Icon` z bundla; chýbajúcu ikonu doplňte z lucide.dev do `icons.tsx`.
 5. Layout: `NavBar` + `TabBar` v `layout.tsx`, obsah s `padding-bottom` pre TabBar; `Toast` región raz v layoute s kontextom.
+
+## Grafy
+
+Vzory (nie React komponenty, platia pre ECharts, Recharts aj vlastné SVG): `BarChart` (poradie, Top N), `LineChart` (vývoj v čase), `StackedBarChart` (podiely), `DonutChart` (jeden podiel), `RadarChart` (profil hráča), `Heatmap` (mriežka hodnôt), `DivergingBarChart` (odchýlka od priemeru), `KpiCard` (číslo, zmena, minigraf), `ScatterChart` (vzťah dvoch veličín), `SankeyChart` (toky, prestupy). Mapy: `MapMarkers` (kluby, ihriská, zhluky), `ChoroplethMap` (regióny podľa hodnoty, vždy prepočítanej na obyvateľa), `RouteMap` (cesta na zápas), `DensityMap` (hustota bez osobných údajov).
+
+- Farba podľa úlohy: identita série `chart-1` → `chart-2` → `chart-3` v tomto poradí, najviac 3 série, viac = „Ostatné“ v `chart-4` alebo malé grafy vedľa seba. Farba patrí entite, nie poradiu.
+- Jedna os y, nikdy dve. Tenké značky: pruh 20 px, čiara 2 px, bod ≥ 8 px; zaoblený len koniec s hodnotou (4 px); 2 px medzera medzi plochami.
+- Graf v karte `surface-raised` s nadpisom `headline`, podnadpisom (čo, kde, kedy, jednotka) a zdrojom. Mriežka `hairline`, os `border-strong`, popisy `caption-1` v `ink-muted`; text nikdy vo farbe série.
+- Legenda pri 2 a viac sériách vždy, priame popisy výberovo; pri prejdení myšou bublina s presnou hodnotou; `<svg role="img">` s `<title>` a tabuľka pre presné hodnoty.
+- Mapový podklad je tlmený: pevnina `map-land`, voda `map-water`, cesty `map-road`, hranice `map-boundary` čiarkovane, názvy `ink-muted`; tmavá téma má vlastný tmavý podklad. Údaje nad ním vo farbách `chart-*`, ovládanie priblíženia vpravo hore, atribúcia vpravo dole, vždy aj zoznam bez mapy.
+- Knižnice čítajú tokeny z CSS premenných (`getComputedStyle`), aby graf menil farby s témou; príklad témy pre ECharts a štýlu mapy pre MapLibre je v `docs/grafy/README.md` v repozitári.
 
 ## Prístupnosť
 

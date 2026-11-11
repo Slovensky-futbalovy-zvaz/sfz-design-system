@@ -10,7 +10,7 @@ Tento priečinok spolu so zvyškom repozitára obsahuje všetko, čo treba na vy
 | `tokens.json` | `tokens/tokens.json` |
 | `components/bundle.js`, `bundle.css`, `index.d.ts` | `components/` |
 | `components/src/*` | `components/src/*` |
-| `components/<Komponent>/README.md` | `components/docs/<Komponent>.md`, pre slajdy `docs/prezentacie/<Vzor>.md` |
+| `components/<Komponent>/README.md` | `components/docs/<Komponent>.md`, pre slajdy `docs/prezentacie/<Vzor>.md`, pre grafy `docs/grafy/<Vzor>.md` |
 | `components/<Komponent>/preview.html` | `docs/artefakt/components/<Komponent>/preview.html` |
 | `components/Cover/preview.html` | `docs/artefakt/components/Cover/preview.html` |
 | `assets/<Skupina>/*` (logá ako uploady) + `README.md` | `brand/logos/<Skupina>/*` |

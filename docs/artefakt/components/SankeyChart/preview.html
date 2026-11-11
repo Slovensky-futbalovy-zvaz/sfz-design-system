@@ -1,0 +1,49 @@
+<!-- @dsCard group="Grafy" height=470 subtitle="Tok (Sankey): prestupy hráčov medzi úrovňami súťaží" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.ch svg{display:block;width:100%;height:auto;overflow:visible}
+.nd{fill:var(--border-strong)}
+.nm{fill:var(--ink);font-size:13px}.nv{fill:var(--ink-muted);font-size:12px;font-variant-numeric:tabular-nums}
+.hd{fill:var(--ink-muted);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.lk{fill-opacity:.42}.lk:hover{fill-opacity:.8}
+.up{fill:var(--chart-1)}.same{fill:var(--chart-4)}.down{fill:var(--chart-2)}
+.lg{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px 0 0;padding:0;list-style:none;color:var(--ink-muted)}
+.lg li{display:inline-flex;align-items:center;gap:6px}.sw{width:10px;height:10px;border-radius:3px}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:1;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap;font-variant-numeric:tabular-nums}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Prestupy hráčov podľa úrovne súťaže</h3>
+  <p class="sub footnote">Dospelí · letné a zimné prestupové obdobie 2025/26</p>
+  <svg id="g" role="img" aria-labelledby="t13"><title id="t13">Tokový graf: 1 690 prestupov z regionálnych súťaží, 3. a 2. ligy do súťaží rovnakej, vyššej alebo nižšej úrovne</title></svg>
+  <ul class="lg footnote">
+    <li><span class="sw" style="background:var(--chart-1)"></span>Do vyššej súťaže alebo do zahraničia</li>
+    <li><span class="sw" style="background:var(--chart-4)"></span>Na rovnakú úroveň</li>
+    <li><span class="sw" style="background:var(--chart-2)"></span>Do nižšej súťaže</li>
+  </ul>
+  <p class="src caption-1">Ilustračné údaje</p>
+</figure>
+<script>
+(()=>{
+const SRC=[["Regionálne súťaže",0],["3. liga",1],["2. liga",2]];
+const DST=[["Regionálne súťaže",0],["3. liga",1],["2. liga",2],["Niké liga",3],["Zahraničie",9]];
+const F=[[0,0,900],[0,1,260],[0,2,50],[0,4,30],[1,0,60],[1,1,120],[1,2,110],[1,3,15],[1,4,5],[2,0,20],[2,2,50],[2,3,55],[2,4,15]];
+const f=n=>n.toLocaleString("sk-SK"),W=600,T=22,H=300,gap=12,nw=10,xl=150,xr=W-150-nw;
+const tot=F.reduce((a,l)=>a+l[2],0),k=(H-T-gap*(DST.length-1))/tot;
+const sum=(i,side)=>F.filter(l=>l[side]===i).reduce((a,l)=>a+l[2],0);
+const lay=(N,side)=>{const hs=N.map((_,i)=>sum(i,side)*k),used=hs.reduce((a,b)=>a+b,0)+gap*(N.length-1);let y=T+(H-T-used)/2;return hs.map(h=>{const o={y,h};y+=h+gap;return o})};
+const Ls=lay(SRC,0),Ld=lay(DST,1),os=Ls.map(n=>n.y),od=Ld.map(n=>n.y);
+let s=`<text class="hd" x="${xl+nw}" y="10" text-anchor="end">Odkiaľ</text><text class="hd" x="${xr}" y="10">Kam</text>`;
+F.forEach(([a,b,v])=>{const w=v*k,y0=os[a],y1=od[b];os[a]+=w;od[b]+=w;const xm=(xl+nw+xr)/2;
+ const dir=DST[b][1]>SRC[a][1]?"up":DST[b][1]===SRC[a][1]?"same":"down";
+ s+=`<path class="lk ${dir}" d="M${xl+nw} ${y0}C${xm} ${y0} ${xm} ${y1} ${xr} ${y1}V${y1+w}C${xm} ${y1+w} ${xm} ${y0+w} ${xl+nw} ${y0+w}Z" data-t="<b>${SRC[a][0]} → ${DST[b][0]}</b><br>${f(v)} hráčov"/>`;});
+SRC.forEach(([n],i)=>{const{y,h}=Ls[i];s+=`<rect class="nd" x="${xl}" y="${y}" width="${nw}" height="${h}" rx="2"/><text class="nm" x="${xl-8}" y="${y+h/2}" text-anchor="end">${n}</text><text class="nv" x="${xl-8}" y="${y+h/2+15}" text-anchor="end">${f(sum(i,0))}</text>`});
+DST.forEach(([n],i)=>{const{y,h}=Ld[i];s+=`<rect class="nd" x="${xr}" y="${y}" width="${nw}" height="${h}" rx="2"/><text class="nm" x="${xr+nw+8}" y="${y+h/2+4}">${n} <tspan class="nv">${f(sum(i,1))}</tspan></text>`});
+const g=document.getElementById("g");g.setAttribute("viewBox",`0 0 ${W} ${H+4}`);g.insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+ch.addEventListener("pointermove",e=>{const m=e.target.closest("[data-t]");if(!m){t.hidden=true;return}t.innerHTML=m.dataset.t;t.hidden=false;const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+ch.addEventListener("pointerleave",()=>t.hidden=true);
+})();
+</script>

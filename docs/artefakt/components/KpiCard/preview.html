@@ -1,0 +1,32 @@
+<!-- @dsCard group="Grafy" height=600 subtitle="Karty ukazovateľov s minigrafom a zmenou" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.grid{display:grid;gap:12px;grid-template-columns:1fr;max-width:880px}
+@media (min-width:640px){.grid{grid-template-columns:repeat(3,1fr)}}
+.k{padding:16px;background:var(--surface-raised);border-radius:var(--radius-lg);display:grid;gap:4px;min-width:0}
+.k .lbl{color:var(--ink-muted)}
+.k .num{font-variant-numeric:tabular-nums}
+.d{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-variant-numeric:tabular-nums}
+.d svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.up-good{color:var(--success-ink)}.down-bad{color:var(--danger-ink)}.down-good{color:var(--success-ink)}
+.d small{font-weight:400;color:var(--ink-muted)}
+.sp{display:block;width:100%;height:40px;margin-top:8px;overflow:visible}
+.sp .l{fill:none;stroke:var(--chart-1);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.sp .a{fill:var(--chart-1);fill-opacity:.12}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+</style>
+<div class="grid" id="g"></div>
+<p class="src caption-1">Ilustračné údaje · minigraf = posledných 12 mesiacov</p>
+<script>
+(()=>{
+const up='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 13V3M3.5 7.5 8 3l4.5 4.5"/></svg>',dn='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3.5 8.5 8 13l4.5-4.5"/></svg>';
+const K=[
+ {l:"Registrovaní hráči",n:"100 412",d:"+3,2 %",c:"up-good",i:up,w:"rast",v:[94,95,95,96,96,97,97,98,98,99,100,100.4]},
+ {l:"Odohraté zápasy",n:"41 870",d:"−1,1 %",c:"down-bad",i:dn,w:"pokles",v:[44,43,43.5,42,42.8,42,41.5,42.2,41.9,41.6,42,41.9]},
+ {l:"Neuhradené faktúry",n:"1 204",d:"−8 %",c:"down-good",i:dn,w:"pokles, zlepšenie",v:[1.6,1.55,1.5,1.52,1.46,1.42,1.38,1.36,1.31,1.28,1.25,1.2]}];
+const spark=v=>{const W=200,H=40,mn=Math.min(...v),mx=Math.max(...v),x=i=>i*W/(v.length-1),y=a=>H-4-(H-8)*(a-mn)/(mx-mn||1);
+ const p=v.map((a,i)=>(i?"L":"M")+x(i).toFixed(1)+" "+y(a).toFixed(1)).join("");const li=v.length-1;
+ return `<svg class="sp" viewBox="0 0 200 40" preserveAspectRatio="none" aria-hidden="true"><path class="a" d="${p}L${W} ${H}L0 ${H}Z"/><path class="l" d="${p}" vector-effect="non-scaling-stroke"/></svg>`};
+document.getElementById("g").innerHTML=K.map(k=>`<section class="k"><span class="footnote lbl">${k.l}</span><span class="title-1 num">${k.n}</span><span class="d footnote ${k.c}">${k.i}${k.d}<small>&nbsp;oproti minulej sezóne</small><span class="vh" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">(${k.w})</span></span>${spark(k.v)}</section>`).join("");
+})();
+</script>

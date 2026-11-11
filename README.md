@@ -21,6 +21,7 @@ Prehliadateľná verzia (brand book so živými náhľadmi): artefakt **SFZ Desi
 | `components/docs/` | Pravidlá použitia každého komponentu (props, kedy použiť, do/don't) |
 | `brand/logos/` | 16 značiek SFZ × farebná/čierna/biela, SVG + PNG; README každej skupiny má ochranné zóny |
 | `docs/brand-book.md` | Pravidlá farieb, typografie, rozloženia, prístupnosti a tónu textu |
+| `docs/grafy/` | Vzory grafov (pruhový, čiarový, podiely, heatmapa, odchýlka, bodový, tok, karty ukazovateľov) a máp (body, kartogram, trasa, hustota), farby podľa úlohy, téma pre ECharts a štýl pre MapLibre |
 | `docs/prezentacie/` | Pravidlá pre slajdy 1920×1080 (titul, predel, obsah, čísla, časová os, logá) |
 | `templates/prezentacie/` | 9 hotových HTML šablón slajdov s logami SFZ, prehľad `index.html` |
 | `tools/qr/` | Generátor QR kódu SFZ (okrúhle body, logo v strede, kruh alebo štvorec) – `index.html` v prehliadači alebo `npm run qr` |

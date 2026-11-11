@@ -2,6 +2,22 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [Unreleased]
+
+### Pridané
+- Vzory grafov v `docs/grafy/`: `BarChart`, `LineChart`, `StackedBarChart`, `DonutChart`, `RadarChart`, `Heatmap`, `DivergingBarChart`, `KpiCard`, `ScatterChart`, `SankeyChart` – pravidlá, náhľady v artefakte a v ukážkach (skupina Grafy), príklad témy pre ECharts z CSS premenných.
+- Vzory máp v `docs/grafy/`: `MapMarkers` (kluby, ihriská, zhluky, detail), `ChoroplethMap` (kartogram), `RouteMap` (trasa), `DensityMap` (hustota) – skupina Mapy, príklad štýlu podkladu pre MapLibre GL.
+- Tokeny mapového podkladu `map-land`, `map-water`, `map-road`, `map-boundary` (svetlá aj tmavá téma). Podnet: interný Katalóg vizualizácií (170 typov grafov).
+- Tokeny sekvenčnej škály `chart-seq-1` až `chart-seq-5` (heatmapy, kartogramy) a rozbiehavej škály `chart-div-neg-2`, `chart-div-neg-1`, `chart-div-mid`, `chart-div-pos-1`, `chart-div-pos-2` (odchýlka od priemeru).
+- Časť Grafy v brand booku, ADR 0004 (farby grafov podľa úlohy), testy kontrastu a poradia farieb grafov.
+
+### Zmenené
+- **Poradie farieb grafov:** `chart-2` je svetlejšia modrá (`#6189ee`, predtým červená), `chart-3` červená SFZ (predtým sivá), `chart-4` sivá pre kontext – priemer, „Ostatné“ (predtým svetlomodrá). Kto používal `chart-2` ako červenú, prepne na `chart-3`.
+- `chart-1` v tmavej téme `#3a66e3` (predtým `brand-blue`, kontrast 2,66 : 1 na karte); všetky série majú teraz ≥ 3 : 1 na `surface` aj `surface-raised` v oboch témach.
+
+### Opravené
+- `npm run build:ukazky` nič nezapísal, keď cesta k repozitáru obsahuje medzeru (porovnanie `file://` adresy so skriptom).
+
 ## [1.8.0] – 2026-11-11
 
 ### Pridané

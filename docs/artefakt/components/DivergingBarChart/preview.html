@@ -1,0 +1,44 @@
+<!-- @dsCard group="Grafy" height=420 subtitle="Rozbiehavý pruhový graf: odchýlka od priemeru" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.ch svg{display:block;width:100%;height:auto;overflow:visible}
+.ax{fill:var(--ink-muted);font-size:12px;font-variant-numeric:tabular-nums}.nm{fill:var(--ink);font-size:13px}
+.vl{fill:var(--ink);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.gr{stroke:var(--hairline)}.zero{stroke:var(--border-strong);stroke-width:1.5}
+.p{fill:var(--chart-div-pos-2)}.n{fill:var(--chart-div-neg-2)}.p:hover,.n:hover{opacity:.8}
+.lg{display:flex;flex-wrap:wrap;gap:4px 16px;margin:12px 0 0;padding:0;list-style:none;color:var(--ink-muted)}
+.lg li{display:inline-flex;align-items:center;gap:6px}.sw{width:10px;height:10px;border-radius:3px}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:1;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Návštevnosť oproti priemeru Slovenska</h3>
+  <p class="sub footnote">Priemerný počet divákov na zápas · priemer SR = 0 %</p>
+  <svg id="g" role="img" aria-labelledby="t7"><title id="t7">Rozbiehavý graf: odchýlka návštevnosti krajov od slovenského priemeru</title></svg>
+  <ul class="lg footnote">
+    <li><span class="sw" style="background:var(--chart-div-pos-2)"></span>Nad priemerom</li>
+    <li><span class="sw" style="background:var(--chart-div-neg-2)"></span>Pod priemerom</li>
+  </ul>
+  <p class="src caption-1">Ilustračné údaje</p>
+</figure>
+<script>
+(()=>{
+const D=[["Trnavský",18],["Žilinský",12],["Bratislavský",9],["Nitriansky",4],["Košický",-2],["Prešovský",-6],["Trenčiansky",-11],["Banskobystrický",-15]];
+const pct=v=>(v>0?"+":v<0?"−":"")+Math.abs(v)+" %";
+const W=600,L=120,R=52,row=34,bh=20,top=4,H=top+D.length*row+24,lim=20,z=L+(W-L-R)/2,sc=(W-L-R)/2/lim,X=v=>z+v*sc;
+const bar=(x0,y,w,h,r,dir)=>dir>0?`M${x0} ${y}h${w-r}a${r} ${r} 0 0 1 ${r} ${r}v${h-2*r}a${r} ${r} 0 0 1 -${r} ${r}h-${w-r}z`:`M${x0} ${y}h-${w-r}a${r} ${r} 0 0 0 -${r} ${r}v${h-2*r}a${r} ${r} 0 0 0 ${r} ${r}h${w-r}z`;
+let s="";
+for(let v=-lim;v<=lim;v+=10)s+=`<line class="gr" x1="${X(v)}" x2="${X(v)}" y1="${top}" y2="${H-24}"/><text class="ax" x="${X(v)}" y="${H-6}" text-anchor="middle">${pct(v)}</text>`;
+D.forEach(([n,v],i)=>{const y=top+i*row+(row-bh)/2,w=Math.abs(v)*sc;
+ s+=`<text class="nm" x="${L-10}" y="${y+bh/2+4}" text-anchor="end">${n}</text>`;
+ s+=`<path class="${v>=0?"p":"n"}" d="${bar(z,y,w,bh,Math.min(4,w/2),v>=0?1:-1)}" data-t="<b>${n} kraj</b><br>${pct(v)} oproti priemeru"/>`;
+ s+=`<text class="vl" x="${v>=0?X(v)+6:X(v)-6}" y="${y+bh/2+4}" text-anchor="${v>=0?"start":"end"}">${pct(v)}</text>`;});
+s+=`<line class="zero" x1="${z}" x2="${z}" y1="${top}" y2="${H-24}"/>`;
+const g=document.getElementById("g");g.setAttribute("viewBox",`0 0 ${W} ${H}`);g.insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+ch.addEventListener("pointermove",e=>{const m=e.target.closest("[data-t]");if(!m){t.hidden=true;return}t.innerHTML=m.dataset.t;t.hidden=false;const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+ch.addEventListener("pointerleave",()=>t.hidden=true);
+})();
+</script>

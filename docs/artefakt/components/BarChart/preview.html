@@ -1,0 +1,38 @@
+<!-- @dsCard group="Grafy" height=420 subtitle="Pruhový graf: poradie, Top N, jedna séria" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.ch svg{display:block;width:100%;height:auto;overflow:visible}
+.ax{fill:var(--ink-muted);font-size:12px}.nm{fill:var(--ink);font-size:13px}
+.vl{fill:var(--ink);font-size:12px;font-weight:600;font-variant-numeric:tabular-nums}
+.gr{stroke:var(--hairline)}.bl{stroke:var(--border-strong)}
+.m{fill:var(--chart-1)}.m.hl{fill:var(--chart-3)}.m:hover{opacity:.8}
+.src{margin:12px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:1;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Registrovaní hráči podľa kraja</h3>
+  <p class="sub footnote">Sezóna 2025/26 · zvýraznený je váš kraj</p>
+  <svg id="g" role="img" aria-labelledby="t1"><title id="t1">Pruhový graf: registrovaní hráči v ôsmich krajoch, najviac Bratislavský kraj</title></svg>
+  <p class="src caption-1">Ilustračné údaje</p>
+</figure>
+<script>
+(()=>{
+const D=[["Bratislavský",18420],["Žilinský",16880],["Prešovský",15730],["Nitriansky",14210],["Košický",13470],["Trnavský",12960],["Banskobystrický",12150],["Trenčiansky",11340]];
+const MOJ="Žilinský", f=n=>n.toLocaleString("sk-SK");
+const W=600,L=120,R=56,row=34,bh=20,top=4,max=20000,H=top+D.length*row+24,x=v=>L+(W-L-R)*v/max;
+const bar=(x0,y,w,h,r)=>`M${x0} ${y}h${w-r}a${r} ${r} 0 0 1 ${r} ${r}v${h-2*r}a${r} ${r} 0 0 1 -${r} ${r}h-${w-r}z`;
+let s="";
+for(let v=0;v<=max;v+=5000)s+=`<line class="gr" x1="${x(v)}" x2="${x(v)}" y1="${top}" y2="${H-24}"/><text class="ax" x="${x(v)}" y="${H-6}" text-anchor="middle">${v?f(v):"0"}</text>`;
+D.forEach(([n,v],i)=>{const y=top+i*row+(row-bh)/2;
+ s+=`<text class="nm" x="${L-10}" y="${y+bh/2+4}" text-anchor="end">${n}</text>`;
+ s+=`<path class="m${n===MOJ?" hl":""}" d="${bar(L,y,x(v)-L,bh,4)}" data-t="<b>${n} kraj</b><br>${f(v)} hráčov"/>`;
+ s+=`<text class="vl" x="${x(v)+6}" y="${y+bh/2+4}">${f(v)}</text>`;});
+s+=`<line class="bl" x1="${L}" x2="${L}" y1="${top}" y2="${H-24}"/>`;
+const g=document.getElementById("g");g.setAttribute("viewBox",`0 0 ${W} ${H}`);g.insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+ch.addEventListener("pointermove",e=>{const m=e.target.closest("[data-t]");if(!m){t.hidden=true;return}t.innerHTML=m.dataset.t;t.hidden=false;const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+ch.addEventListener("pointerleave",()=>t.hidden=true);
+})();
+</script>

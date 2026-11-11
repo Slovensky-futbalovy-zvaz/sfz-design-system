@@ -1,0 +1,48 @@
+<!-- @dsCard group="Mapy" height=440 subtitle="Kartogram: regióny vyfarbené sekvenčnou škálou" -->
+<style>
+body{margin:0;padding:16px;background:var(--surface);color:var(--ink);font-family:var(--font-sans)}
+.ch{position:relative;max-width:640px;padding:20px;background:var(--surface-raised);border-radius:var(--radius-lg)}
+.ch h3{margin:0}.ch .sub{margin:2px 0 12px;color:var(--ink-muted)}
+.map{position:relative;border-radius:var(--radius-md);overflow:hidden;box-shadow:inset 0 0 0 1px var(--hairline)}
+.map svg{display:block;width:100%;height:auto}
+.land{fill:var(--map-land)}.water{fill:none;stroke:var(--map-water);stroke-width:12;stroke-linecap:round}.lake{fill:var(--map-water)}
+.pl{fill:var(--ink);font-size:12px;font-weight:600;stroke:var(--surface);stroke-width:3;paint-order:stroke;stroke-linejoin:round;font-variant-numeric:tabular-nums}
+.attr{position:absolute;right:6px;bottom:4px;padding:1px 6px;border-radius:4px;background:color-mix(in srgb,var(--surface) 80%,transparent);color:var(--ink-muted)}
+.src{margin:8px 0 0;color:var(--ink-muted)}
+.tip{position:absolute;z-index:2;pointer-events:none;padding:8px 10px;background:var(--surface);color:var(--ink);border-radius:var(--radius-sm);box-shadow:var(--shadow-float);white-space:nowrap}
+.rg{stroke:var(--surface);stroke-width:1.5;stroke-linejoin:round}.rg:hover{stroke:var(--ink);stroke-width:2.5}
+.c1{fill:var(--chart-seq-1)}.c2{fill:var(--chart-seq-2)}.c3{fill:var(--chart-seq-3)}.c4{fill:var(--chart-seq-4)}.c5{fill:var(--chart-seq-5)}
+.wt{fill:none;stroke:var(--map-water);stroke-width:6;stroke-linecap:round;opacity:.9;pointer-events:none}
+.sc{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0 0;color:var(--ink-muted)}
+.sc .bar{display:flex;gap:2px}.sc .bar span{width:32px;height:10px;border-radius:3px}
+</style>
+<figure class="ch" id="ch" style="margin:0">
+  <h3 class="headline">Registrovaní hráči na 1 000 obyvateľov</h3>
+  <p class="sub footnote">Podľa okresu · sezóna 2025/26</p>
+  <div class="map">
+    <svg id="g" viewBox="0 0 600 360" role="img" aria-labelledby="t9"><title id="t9">Kartogram šiestich okresov podľa počtu hráčov na 1 000 obyvateľov</title></svg>
+    <span class="attr caption-2">Schematický podklad</span>
+  </div>
+  <div class="sc footnote"><span>menej ako 10</span><span class="bar"><span style="background:var(--chart-seq-1);box-shadow:inset 0 0 0 1px var(--hairline)"></span><span style="background:var(--chart-seq-2)"></span><span style="background:var(--chart-seq-3)"></span><span style="background:var(--chart-seq-4)"></span><span style="background:var(--chart-seq-5)"></span></span><span>40 a viac</span></div>
+  <p class="src caption-1">Ilustračné údaje · prepočet na obyvateľov, aby veľké okresy neprevážili</p>
+</figure>
+<script>
+(()=>{
+const R=[
+ ["Okres Lúky",14.2,"0,0 210,0 190,90 220,170 0,180",80,90],
+ ["Okres Horná Ves",38.6,"210,0 400,0 420,80 380,160 220,170 190,90",300,80],
+ ["Okres Nové Pole",27.1,"400,0 600,0 600,190 470,170 380,160 420,80",500,110],
+ ["Okres Dolany",8.4,"0,180 220,170 240,260 200,360 0,360",100,290],
+ ["Okres Breziny",44.9,"220,170 380,160 470,170 430,270 400,360 200,360 240,260",330,230],
+ ["Okres Pod lesom",21.7,"470,170 600,190 600,360 400,360 430,270",520,300]];
+const bin=v=>v<10?1:v<20?2:v<30?3:v<40?4:5,f=v=>v.toLocaleString("sk-SK",{minimumFractionDigits:1});
+let s=`<rect class="land" width="600" height="360"/>`;
+R.forEach(([n,v,p])=>{s+=`<polygon class="rg c${bin(v)}" points="${p}" data-t="<b>${n}</b><br>${f(v)} hráča na 1 000 obyvateľov"/>`});
+s+=`<path class="wt" d="M-10 252C80 232 140 282 230 252S380 192 460 222 560 262 610 242"/>`;
+R.forEach(([n,v,,x,y])=>{s+=`<text class="pl" x="${x}" y="${y}" text-anchor="middle" pointer-events="none">${f(v)}</text>`});
+document.getElementById("g").insertAdjacentHTML("beforeend",s);
+const ch=document.getElementById("ch"),t=document.createElement("div");t.className="tip footnote";t.hidden=true;ch.append(t);
+ch.addEventListener("pointermove",e=>{const m=e.target.closest("[data-t]");if(!m){t.hidden=true;return}t.innerHTML=m.dataset.t;t.hidden=false;const r=ch.getBoundingClientRect();let px=e.clientX-r.left+12;if(px+t.offsetWidth>r.width)px-=t.offsetWidth+24;t.style.left=px+"px";t.style.top=(e.clientY-r.top+12)+"px"});
+ch.addEventListener("pointerleave",()=>t.hidden=true);
+})();
+</script>

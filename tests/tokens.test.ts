@@ -66,6 +66,20 @@ describe("tokens.json", () => {
     ["border-strong", "surface", 3],
     ["border-strong", "surface-raised", 3],
     ["focus", "surface", 3],
+    // Grafy: série a póly rozbiehavej škály sú grafické objekty (WCAG 1.4.11) ≥ 3:1 na ploche aj karte.
+    ...["chart-1", "chart-2", "chart-3", "chart-4", "chart-div-neg-2", "chart-div-pos-2"].flatMap(
+      (c): Array<[string, string, number]> => [
+        [c, "surface", 3],
+        [c, "surface-raised", 3],
+      ],
+    ),
+    // Mapy: značky a trasy v sériových farbách musia byť viditeľné na pevnine aj vode podkladu.
+    ...["chart-1", "chart-3"].flatMap((c): Array<[string, string, number]> => [
+      [c, "map-land", 3],
+      [c, "map-water", 3],
+    ]),
+    // Popisy miest na podklade.
+    ["ink-muted", "map-land", 4.5],
   ];
   for (const th of ["light", "dark"]) {
     for (const [fg, bg, min] of pairs) {
@@ -74,6 +88,31 @@ describe("tokens.json", () => {
       });
     }
   }
+});
+
+describe("farby grafov", () => {
+  const seq = [1, 2, 3, 4, 5].map((n) => `chart-seq-${n}`);
+  it("sekvenčná škála tmavne vo svetlej téme a svetlie v tmavej (viac = výraznejšie)", () => {
+    const light = seq.map((c) => luminance(resolve(c, "light")));
+    const dark = seq.map((c) => luminance(resolve(c, "dark")));
+    for (let i = 1; i < seq.length; i++) {
+      expect(light[i]).toBeLessThan(light[i - 1]);
+      expect(dark[i]).toBeGreaterThan(dark[i - 1]);
+    }
+  });
+  it("rozbiehavá škála: ramená sú výraznejšie ďalej od stredu", () => {
+    for (const th of themes) {
+      const mid = resolve("chart-div-mid", th);
+      for (const side of ["neg", "pos"]) {
+        const c1 = contrast(resolve(`chart-div-${side}-1`, th), mid);
+        const c2 = contrast(resolve(`chart-div-${side}-2`, th), mid);
+        expect(c2, `${side} ${th}`).toBeGreaterThan(c1);
+      }
+    }
+  });
+  it("prvé dve série sa dajú rozlíšiť svetlosťou (≥ 1,4 : 1 medzi sebou)", () => {
+    for (const th of themes) expect(contrast(resolve("chart-1", th), resolve("chart-2", th))).toBeGreaterThanOrEqual(1.4);
+  });
 });
 
 describe("build-tokens", () => {
