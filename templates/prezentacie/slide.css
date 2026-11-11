@@ -30,12 +30,15 @@ body {
 .tn { font-variant-numeric: tabular-nums; }
 h1, h2, h3 { text-wrap: balance; }
 
-/* Päta: názov prezentácie + číslo vľavo, logo D vpravo (56 px) */
+/* Päta vľavo, logo D vpravo (56 px). Obsahový slajd a predel: 1. riadok názov prezentácie + číslo,
+   2. riadok „Autor: [Meno], RRRR-MM“ (.foot-meta). Titul a záver: jeden riadok „[Meno] · RRRR-MM“.
+   RRRR-MM = mesiac poslednej úpravy prezentácie, nie „stav k“ dát. */
 .foot {
   position: absolute; left: var(--space-9); right: var(--space-9); bottom: 48px;
   display: flex; justify-content: space-between; align-items: center;
 }
 .foot img { height: 56px; width: auto; }
+.foot-meta { display: flex; flex-direction: column; gap: var(--space-1); }
 
 /* Mriežky 7+5 a 4+4+4 */
 .grid-7-5 { display: grid; grid-template-columns: 7fr 5fr; gap: var(--space-7); }

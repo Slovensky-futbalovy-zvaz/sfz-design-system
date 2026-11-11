@@ -13,6 +13,7 @@ Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie 
 
 ### Zmenené
 - Brand book: päta slajdu nesie autora a dátum verzie (RRRR-MM) – pravidlo, ktoré bolo dosiaľ len v artefakte.
+- Päty slajdov podľa brand booku: šablóny `templates/prezentacie/` 02 až 06, 08 a 09 majú druhý riadok „Autor: [Autor], [RRRR-MM]“ (nová trieda `.foot-meta` v `slide.css`), titul a záver „[Autor] · [RRRR-MM]“ (predtým „[Meno] · Slovenský futbalový zväz“, resp. názov prezentácie). Rovnako náhľady `SlideTitle`, `SlideSection`, `SlideContent` (Ján Letko, 2026-11), ich popisy v `docs/prezentacie/` a obrázky v `templates/prezentacie/nahlady/`.
 - **Poradie farieb grafov:** `chart-2` je svetlejšia modrá (`#6189ee`, predtým červená), `chart-3` červená SFZ (predtým sivá), `chart-4` sivá pre kontext – priemer, „Ostatné“ (predtým svetlomodrá). Kto používal `chart-2` ako červenú, prepne na `chart-3`.
 - `chart-1` v tmavej téme `#3a66e3` (predtým `brand-blue`, kontrast 2,66 : 1 na karte); všetky série majú teraz ≥ 3 : 1 na `surface` aj `surface-raised` v oboch témach.
 
