@@ -221,6 +221,22 @@ export interface TabsProps {
     "aria-label"?: string;
 }
 export function Tabs({ items, value, onChange, variant, className, ...rest }: TabsProps): React.JSX.Element;
+export interface SectionTab {
+    id: string;
+    label: string;
+    href: string;
+    icon?: IconName | string;
+    active?: boolean;
+}
+export interface SectionTabsProps {
+    items: SectionTab[];
+    /** Názov navigácie pre čítačku (napr. „Správa“). */
+    "aria-label": string;
+    linkAs?: LinkComponent;
+    className?: string;
+}
+/** Podstránky sekcie ako kapsule (štýl Apple) – odkazy s aria-current, nie tablist. */
+export function SectionTabs({ items, linkAs, className, ...rest }: SectionTabsProps): React.JSX.Element;
 export interface NavItem {
     id: string;
     label: string;
@@ -299,8 +315,8 @@ export interface MenuSection {
 }
 export interface MenuPanelProps {
     sections: MenuSection[];
-    /** auto = toľko stĺpcov, koľko sa zmestí (desktop); two = dva stĺpce (mobil v BottomSheet). */
-    columns?: "auto" | "two";
+    /** auto = toľko stĺpcov, koľko sa zmestí (desktop); list = jeden stĺpec zoskupených riadkov ako Nastavenia v iOS (mobil v BottomSheet); two = dva stĺpce. */
+    columns?: "auto" | "two" | "list";
     /** Volá sa po výbere položky (zatvorí plachtu). */
     onPick?: () => void;
     linkAs?: LinkComponent;

@@ -2,6 +2,16 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-12 – SectionTabs a MenuPanel ako zoznam
+
+**Čo sa urobilo**
+- `SectionTabs` a `MenuPanel columns="list"` z aplikácie Rozvoj klubu (tam dočasne zložené z tokenov, `CapsuleTabs` a `MenuList`) – v `components/src/navigation.tsx`, `index.d.ts`, `bundle.js` aj `bundle.css`; dokumentácia, náhľad, pregenerované ukážky a testy (správanie aj pravidlá v `bundle.css`).
+- `BottomSheet` a `MenuSheet` v dokumentácii a náhľade odporúčajú na mobile `columns="list"`.
+
+**Čo treba vedieť**
+- `bundle.js` stále ručne – nové funkcie dopísané podľa výstupu esbuildu a overené parsovaním.
+- Náhľady neboli vizuálne skontrolované v prehliadači; vzhľad zodpovedá overenej verzii v aplikácii (375 px aj desktop, obe témy). Overí sa znovu, keď aplikácia prejde na komponenty z balíka.
+
 ## 2026-11-11 – v1.9.1: skripty v ceste s medzerou
 
 **Čo sa urobilo**

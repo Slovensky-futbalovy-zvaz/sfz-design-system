@@ -2,6 +2,12 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [Unreleased]
+
+### Pridané
+- `SectionTabs`: podstránky sekcie ako kapsule s ikonou na spoločnom podklade (štýl Apple) – odkazy s `aria-current`, nie `tablist`; na úzkej obrazovke sa pás posúva a aktívna sa posunie do pohľadu. Podnet: záložky Správy v aplikácii Rozvoj klubu namiesto bočného menu (jej ADR 0043).
+- `MenuPanel columns="list"`: jeden stĺpec zoskupených riadkov ako Nastavenia v iOS (nadpis skupiny, riadky 48 px s ikonou a šípkou, oddelené `hairline`) – celé menu v `BottomSheet` na mobile. Dva stĺpce boli pri šiestich sekciách neprehľadné.
+
 ## [1.9.1] – 2026-11-11
 
 ### Opravené
