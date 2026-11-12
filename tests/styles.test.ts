@@ -30,4 +30,25 @@ describe("štýly komponentov (bundle.css)", () => {
     expect(pravidlo(".sfz-menupanel--list")).toMatch(/grid-template-columns:minmax\(0,1fr\)/);
     expect(pravidlo(".sfz-menupanel--list .sfz-menupanel__link")).toMatch(/min-height:48px/);
   });
+
+  it("Button sm a Chip: na dotyku plocha 44 px, vzhľad ostáva 36 px", () => {
+    // Vzhľad sa nemení – výška 36 px platí pre myš aj dotyk.
+    expect(pravidlo(".sfz-btn--sm")).toMatch(/min-height:36px/);
+    expect(pravidlo(".sfz-btn--icon.sfz-btn--sm")).toMatch(/width:36px/);
+    expect(pravidlo(".sfz-chip")).toMatch(/height:36px/);
+    // Neviditeľná plocha len pod pointer:coarse.
+    const dotyk = [...css.matchAll(/@media \(pointer:coarse\)\{(.*)\}\n/g)].map((m) => m[1]!).join("");
+    for (const sel of [".sfz-btn--sm::after", ".sfz-chip::after"]) {
+      expect(dotyk).toContain(`${sel}{`);
+      const telo = dotyk.split(`${sel}{`)[1]!.split("}")[0]!;
+      expect(telo).toMatch(/position:absolute/);
+      expect(telo).toMatch(/min-width:var\(--touch-target\);min-height:var\(--touch-target\)/);
+    }
+    expect(dotyk).toMatch(/\.sfz-btn--sm\{position:relative\}/);
+    expect(dotyk).toMatch(/\.sfz-chip\{position:relative\}/);
+    // Krížik v chipe musí ostať nad plochou, inak by ťuknutie naň zachytil chip.
+    expect(dotyk).toMatch(/\.sfz-chip__remove\{position:relative;z-index:1\}/);
+    // Mimo pointer:coarse žiadny pseudo-element – myš sa správa ako doteraz.
+    expect(css.replace(/@media \(pointer:coarse\)\{.*\}\n/g, "")).not.toMatch(/sfz-(btn|chip)[^{]*::after/);
+  });
 });

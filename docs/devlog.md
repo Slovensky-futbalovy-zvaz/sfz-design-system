@@ -2,6 +2,17 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-12 – dotyková plocha 44 px pre `sm` a `Chip`
+
+**Čo sa urobilo**
+- `Button`/`IconButton` `size="sm"` a `Chip` dostali pod `@media (pointer:coarse)` neviditeľný `::after` (centrovaný, `min-width`/`min-height: var(--touch-target)`), rodič `position:relative`. Vzhľad ostáva 36 px. Podnet: G5 v Rozvoji klubu (≥ 44 px na dotyk) – oprava centrálne namiesto prepínania na `md` v 14 miestach aplikácie.
+- Krížik `sfz-chip__remove` má pod `pointer:coarse` `position:relative; z-index:1`, inak by ho prekryl `::after` chipu a ťuknutie by zachytil chip.
+- Test pravidiel v `tests/styles.test.ts`.
+
+**Čo treba vedieť**
+- WCAG 2.5.8 (AA, 24 px) spĺňa už 36 px; 44 px zodpovedá Apple HIG a WCAG 2.5.5 (AAA).
+- Pri medzere menšej ako 8 px sa plochy susedných `sm` prekrývajú (o rozdiel do 44 px); ťuknutie do prekryvu dostane neskorší prvok. Rodič s `overflow:hidden` plochu oreže.
+
 ## 2026-11-12 – v1.10.0: SectionTabs a MenuPanel ako zoznam
 
 **Čo sa urobilo**

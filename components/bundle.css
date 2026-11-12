@@ -17,6 +17,8 @@
 .sfz-btn--icon{width:var(--touch-target);padding:0}
 .sfz-btn--icon.sfz-btn--sm{width:36px}
 .sfz-btn--icon.sfz-btn--lg{width:52px}
+/* Dotyková plocha 44 px pre sm na dotykovom zariadení – neviditeľný ::after, vzhľad ostáva 36 px. */
+@media (pointer:coarse){.sfz-btn--sm{position:relative}.sfz-btn--sm::after{content:"";position:absolute;top:50%;left:50%;width:100%;height:100%;min-width:var(--touch-target);min-height:var(--touch-target);transform:translate(-50%,-50%)}}
 .sfz-btn--primary{background:var(--brand-blue);color:var(--on-brand)}
 .sfz-btn--primary:hover{background:var(--brand-blue-deep)}
 .sfz-btn--secondary{background:var(--brand-blue-tint);color:var(--brand-blue-ink)}
@@ -92,6 +94,8 @@
 .sfz-chip:focus-visible{outline:none;box-shadow:var(--shadow-focus)}
 .sfz-chip__remove{display:inline-grid;place-items:center;width:20px;height:20px;margin-right:-6px;border-radius:50%;color:var(--ink-muted)}
 .sfz-chip__remove:hover{background:var(--surface-raised);color:var(--ink)}
+/* Dotyková plocha 44 px na dotykovom zariadení – neviditeľný ::after, vzhľad ostáva 36 px; krížik ostáva nad ním. */
+@media (pointer:coarse){.sfz-chip{position:relative}.sfz-chip::after{content:"";position:absolute;top:50%;left:50%;width:100%;height:100%;min-width:var(--touch-target);min-height:var(--touch-target);transform:translate(-50%,-50%)}.sfz-chip__remove{position:relative;z-index:1}}
 
 /* ---------- Alert / Toast ---------- */
 .sfz-alert{display:flex;gap:12px;padding:14px 16px;border-radius:var(--radius-md);font-family:var(--font-sans)}
