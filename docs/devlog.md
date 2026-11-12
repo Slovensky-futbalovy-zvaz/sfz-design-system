@@ -2,7 +2,7 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
-## 2026-11-12 – SectionTabs a MenuPanel ako zoznam
+## 2026-11-12 – v1.10.0: SectionTabs a MenuPanel ako zoznam
 
 **Čo sa urobilo**
 - `SectionTabs` a `MenuPanel columns="list"` z aplikácie Rozvoj klubu (tam dočasne zložené z tokenov, `CapsuleTabs` a `MenuList`) – v `components/src/navigation.tsx`, `index.d.ts`, `bundle.js` aj `bundle.css`; dokumentácia, náhľad, pregenerované ukážky a testy (správanie aj pravidlá v `bundle.css`).
