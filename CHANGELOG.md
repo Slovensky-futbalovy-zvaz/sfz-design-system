@@ -2,7 +2,7 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
-## [Unreleased]
+## [1.10.0] – 2026-11-12
 
 ### Pridané
 - `SectionTabs`: podstránky sekcie ako kapsule s ikonou na spoločnom podklade (štýl Apple) – odkazy s `aria-current`, nie `tablist`; na úzkej obrazovke sa pás posúva a aktívna sa posunie do pohľadu. Podnet: záložky Správy v aplikácii Rozvoj klubu namiesto bočného menu (jej ADR 0043).
