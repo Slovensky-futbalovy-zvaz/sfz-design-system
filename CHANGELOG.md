@@ -2,7 +2,7 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
-## [Unreleased]
+## [1.10.1] – 2026-11-12
 
 ### Opravené
 - `Button size="sm"`, `IconButton size="sm"` a `Chip` majú na dotykovom zariadení (`pointer: coarse`) dotykovú plochu 44 × 44 px (`--touch-target`) – neviditeľný `::after` okolo prvku. Vzhľad (36 px), rozmery v layoute aj správanie myšou sú bez zmeny; krížik v `Chip` ostáva klikateľný. Podnet: audit stavov obrazoviek (G5) v aplikácii Rozvoj klubu, ktorý žiada aspoň 44 px na dotyk; admin tam používa `sm` 14-krát.

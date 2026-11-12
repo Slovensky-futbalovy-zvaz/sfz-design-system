@@ -2,7 +2,7 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
-## 2026-11-12 – dotyková plocha 44 px pre `sm` a `Chip`
+## 2026-11-12 – v1.10.1: dotyková plocha 44 px pre `sm` a `Chip`
 
 **Čo sa urobilo**
 - `Button`/`IconButton` `size="sm"` a `Chip` dostali pod `@media (pointer:coarse)` neviditeľný `::after` (centrovaný, `min-width`/`min-height: var(--touch-target)`), rodič `position:relative`. Vzhľad ostáva 36 px. Podnet: G5 v Rozvoji klubu (≥ 44 px na dotyk) – oprava centrálne namiesto prepínania na `md` v 14 miestach aplikácie.
