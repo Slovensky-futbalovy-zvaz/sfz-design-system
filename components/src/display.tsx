@@ -31,6 +31,18 @@ export function Card({ title, action, variant = "raised", footer, flush, classNa
   );
 }
 
+/* ---------- Frame ---------- */
+/** Rám okolo jedného bloku obsahu (skupina otázok, stĺpec formulára) – bez nadpisu a vlastného rozloženia. */
+export type FrameProps = React.HTMLAttributes<HTMLDivElement>;
+
+export function Frame({ className, children, ...rest }: FrameProps) {
+  return (
+    <div className={cx("sfz-frame", className)} {...rest}>
+      {children}
+    </div>
+  );
+}
+
 /* ---------- Badge ---------- */
 export type Tone = "neutral" | "info" | "success" | "warning" | "danger" | "brand";
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {

@@ -2,6 +2,13 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [Unreleased]
+
+### Pridané
+- `Button variant="outline"` (aj `IconButton`): modrý tint ako `secondary` s okrajom 1 px `border-strong` – cesta späť na zoznam alebo prehľad („Späť na …“ s `chevron-left`). Okraj nezväčší výšku (`box-sizing: border-box`); pre odkaz `<a className="sfz-btn sfz-btn--outline sfz-btn--sm">`.
+- `Frame`: rám okolo jedného bloku obsahu – okraj `border`, rádius `radius-md`, pozadie `surface`, odstup `space-4`, bez nadpisu a rozloženia (na rozdiel od `Card`). Dokumentácia, náhľad, ukážky a testy.
+- Podnet oboch: aplikácia Rozvoj klubu, jej ADR 0046 (cesta späť je tlačidlo s rámom, každý blok obsahu má vlastný rám); dovtedy ich skladala z tokenov (`BackButton`, `ContentFrame`).
+
 ## [1.10.1] – 2026-11-12
 
 ### Opravené

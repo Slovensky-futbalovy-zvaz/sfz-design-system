@@ -17,8 +17,8 @@ export function Icon({ name, size, label, className, ...rest }: IconProps): Reac
 
 // ---- controls ----
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-    /** primary = plná modrá; secondary = modrý tint; tertiary = len text; danger = červená. */
-    variant?: "primary" | "secondary" | "tertiary" | "danger";
+    /** primary = plná modrá; secondary = modrý tint; outline = modrý tint s okrajom (cesta späť); tertiary = len text; danger = červená. */
+    variant?: "primary" | "secondary" | "outline" | "tertiary" | "danger";
     /** md = 44 px (dotyk), sm = 36 px, lg = 52 px. */
     size?: "sm" | "md" | "lg";
     /** Ikona pred textom. */
@@ -33,7 +33,7 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
     icon: IconName | string;
     /** Povinný popis pre čítačku a tooltip. */
     label: string;
-    variant?: "primary" | "secondary" | "tertiary" | "danger";
+    variant?: "primary" | "secondary" | "outline" | "tertiary" | "danger";
     size?: "sm" | "md" | "lg";
 }
 export const IconButton: React.ForwardRefExoticComponent<IconButtonProps & React.RefAttributes<HTMLButtonElement>>;
@@ -101,6 +101,8 @@ export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "t
     flush?: boolean;
 }
 export function Card({ title, action, variant, footer, flush, className, children, ...rest }: CardProps): React.JSX.Element;
+export type FrameProps = React.HTMLAttributes<HTMLDivElement>;
+export function Frame({ className, children, ...rest }: FrameProps): React.JSX.Element;
 export type Tone = "neutral" | "info" | "success" | "warning" | "danger" | "brand";
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
     tone?: Tone;

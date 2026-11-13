@@ -5,7 +5,7 @@
 const h=React.createElement, S=SFZ;
 function App(){
 return h("div",{className:"col"},
- h("div",{className:"row"},h(S.Button,{variant:"primary"},"Uložiť"),h(S.Button,{variant:"secondary"},"Zrušiť"),h(S.Button,{variant:"tertiary"},"Viac"),h(S.Button,{variant:"danger",icon:"trash"},"Zmazať")),
+ h("div",{className:"row"},h(S.Button,{variant:"primary"},"Uložiť"),h(S.Button,{variant:"secondary"},"Zrušiť"),h(S.Button,{variant:"outline",icon:"chevron-left"},"Späť"),h(S.Button,{variant:"tertiary"},"Viac"),h(S.Button,{variant:"danger",icon:"trash"},"Zmazať")),
  h("div",{className:"row"},h(S.Button,{size:"sm",icon:"plus"},"Nový zápas"),h(S.Button,{size:"lg"},"Prihlásiť sa"),h(S.Button,{loading:true},"Ukladám"),h(S.Button,{disabled:true},"Neaktívne")));}
 ReactDOM.createRoot(document.getElementById("root")).render(h(App));
 </script>
