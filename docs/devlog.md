@@ -2,7 +2,7 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
-## 2026-11-13 – Button outline a Frame
+## 2026-11-13 – v1.11.0: Button outline a Frame
 
 **Čo sa urobilo**
 - `Button` / `IconButton variant="outline"` a nový komponent `Frame` z aplikácie Rozvoj klubu (jej ADR 0046, tam dočasne `BackButton` a `ContentFrame` v `src/components/sfz/frames.tsx`) – v `components/src`, `index.d.ts`, `bundle.js` aj `bundle.css`; dokumentácia (`Frame.md`, doplnené `Button.md`, `IconButton.md`, `Card.md`), náhľady, pregenerované ukážky a testy.

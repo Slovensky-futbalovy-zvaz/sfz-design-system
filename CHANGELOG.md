@@ -2,7 +2,7 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
-## [Unreleased]
+## [1.11.0] – 2026-11-13
 
 ### Pridané
 - `Button variant="outline"` (aj `IconButton`): modrý tint ako `secondary` s okrajom 1 px `border-strong` – cesta späť na zoznam alebo prehľad („Späť na …“ s `chevron-left`). Okraj nezväčší výšku (`box-sizing: border-box`); pre odkaz `<a className="sfz-btn sfz-btn--outline sfz-btn--sm">`.
