@@ -2,6 +2,17 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-13 – Button outline a Frame
+
+**Čo sa urobilo**
+- `Button` / `IconButton variant="outline"` a nový komponent `Frame` z aplikácie Rozvoj klubu (jej ADR 0046, tam dočasne `BackButton` a `ContentFrame` v `src/components/sfz/frames.tsx`) – v `components/src`, `index.d.ts`, `bundle.js` aj `bundle.css`; dokumentácia (`Frame.md`, doplnené `Button.md`, `IconButton.md`, `Card.md`), náhľady, pregenerované ukážky a testy.
+- Variant namiesto propu: `Button` už má varianty ako triedu `sfz-btn--<variant>` a `Card` má `outline` v rovnakom význame (okraj); samostatný prop by sa kombinoval aj s variantmi, kde nedáva zmysel (`primary`, `danger`).
+
+**Čo treba vedieť**
+- `.sfz-btn` je `content-box`, preto má `outline` vlastné `box-sizing: border-box` – inak by okraj zväčšil tlačidlo zo 44 na 46 px.
+- `bundle.js` stále ručne – `Frame` dopísaný podľa tvaru výstupu esbuildu.
+- Náhľady neboli vizuálne skontrolované v prehliadači (potrebujú rámec artefaktu); vzhľad zodpovedá overenej verzii v aplikácii.
+
 ## 2026-11-12 – v1.10.1: dotyková plocha 44 px pre `sm` a `Chip`
 
 **Čo sa urobilo**

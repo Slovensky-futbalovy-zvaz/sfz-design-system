@@ -47,6 +47,7 @@ describe("komponenty sa vyrenderujú", () => {
     ["Checkbox", () => <SFZ.Checkbox label="Súhlasím" />],
     ["Toggle", () => <SFZ.Toggle label="Notifikácie" />],
     ["Card", () => <SFZ.Card title="Zberná faktúra">1 240,50 €</SFZ.Card>],
+    ["Frame", () => <SFZ.Frame>Odpovede sa ukladajú priebežne.</SFZ.Frame>],
     ["Badge", () => <SFZ.Badge tone="success" dot>Uhradené</SFZ.Badge>],
     ["Chip", () => <SFZ.Chip selected>Muži</SFZ.Chip>],
     ["Alert", () => <SFZ.Alert tone="warning" title="Blíži sa termín">Faktúra je splatná o 3 dni.</SFZ.Alert>],
@@ -97,6 +98,20 @@ describe("správanie", () => {
   it("Button v stave loading je neaktívny", () => {
     render(<SFZ.Button loading>Ukladám</SFZ.Button>);
     expect((screen.getByRole("button") as HTMLButtonElement).disabled).toBe(true);
+  });
+
+  it("Button a IconButton variant outline dostanú triedu sfz-btn--outline", () => {
+    render(<><SFZ.Button variant="outline" icon="chevron-left">Späť na oblasti</SFZ.Button><SFZ.IconButton variant="outline" icon="chevron-left" label="Späť" /></>);
+    expect(screen.getByRole("button", { name: "Späť na oblasti" }).className).toContain("sfz-btn--outline");
+    expect(screen.getByRole("button", { name: "Späť" }).className).toContain("sfz-btn--outline");
+  });
+
+  it("Frame: div s triedou sfz-frame, bez nadpisu, pridá vlastnú triedu a atribúty", () => {
+    const { container } = render(<SFZ.Frame className="vlastna" data-testid="ram"><p>Obsah</p></SFZ.Frame>);
+    const ram = screen.getByTestId("ram");
+    expect(ram.tagName).toBe("DIV");
+    expect(ram.className).toBe("sfz-frame vlastna");
+    expect(container.querySelector("h3, header")).toBeNull();
   });
 
   it("DataTable filtruje podľa hľadania", () => {

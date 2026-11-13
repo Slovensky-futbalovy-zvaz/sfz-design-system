@@ -31,6 +31,24 @@ describe("štýly komponentov (bundle.css)", () => {
     expect(pravidlo(".sfz-menupanel--list .sfz-menupanel__link")).toMatch(/min-height:48px/);
   });
 
+  it("Button outline: modrý tint s okrajom border-strong, výška sa okrajom nezväčší", () => {
+    const r = pravidlo(".sfz-btn--outline");
+    expect(r).toMatch(/border:1px solid var\(--border-strong\)/);
+    expect(r).toMatch(/background:var\(--brand-blue-tint\)/);
+    expect(r).toMatch(/color:var\(--brand-blue-ink\)/);
+    // .sfz-btn je content-box – bez border-box by okraj pridal 2 px k 44 px
+    expect(r).toMatch(/box-sizing:border-box/);
+  });
+
+  it("Frame: okraj border, rádius radius-md, pozadie surface, odstup space-4", () => {
+    const r = pravidlo(".sfz-frame");
+    expect(r).toMatch(/border:1px solid var\(--border\)/);
+    expect(r).toMatch(/border-radius:var\(--radius-md\)/);
+    expect(r).toMatch(/background:var\(--surface\)/);
+    expect(r).toMatch(/padding:var\(--space-4\)/);
+    expect(r).toMatch(/min-width:0/);
+  });
+
   it("Button sm a Chip: na dotyku plocha 44 px, vzhľad ostáva 36 px", () => {
     // Vzhľad sa nemení – výška 36 px platí pre myš aj dotyk.
     expect(pravidlo(".sfz-btn--sm")).toMatch(/min-height:36px/);

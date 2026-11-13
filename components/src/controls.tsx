@@ -5,8 +5,8 @@ const cx = (...a: Array<string | false | null | undefined>) => a.filter(Boolean)
 
 /* ---------- Button ---------- */
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  /** primary = plná modrá; secondary = modrý tint; tertiary = len text; danger = červená. */
-  variant?: "primary" | "secondary" | "tertiary" | "danger";
+  /** primary = plná modrá; secondary = modrý tint; outline = modrý tint s okrajom (cesta späť); tertiary = len text; danger = červená. */
+  variant?: "primary" | "secondary" | "outline" | "tertiary" | "danger";
   /** md = 44 px (dotyk), sm = 36 px, lg = 52 px. */
   size?: "sm" | "md" | "lg";
   /** Ikona pred textom. */
@@ -41,7 +41,7 @@ export interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
   icon: IconName | string;
   /** Povinný popis pre čítačku a tooltip. */
   label: string;
-  variant?: "primary" | "secondary" | "tertiary" | "danger";
+  variant?: "primary" | "secondary" | "outline" | "tertiary" | "danger";
   size?: "sm" | "md" | "lg";
 }
 

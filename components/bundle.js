@@ -1,4 +1,4 @@
-/* @ds-bundle: {"format":4,"namespace":"SFZ","components":[{"name":"Button"},{"name":"IconButton"},{"name":"Input"},{"name":"Textarea"},{"name":"Select"},{"name":"Checkbox"},{"name":"Toggle"},{"name":"Card"},{"name":"Badge"},{"name":"Chip"},{"name":"Alert"},{"name":"Toast"},{"name":"Avatar"},{"name":"Skeleton"},{"name":"EmptyState"},{"name":"Stepper"},{"name":"Accordion"},{"name":"AccordionItem"},{"name":"ProgressBar"},{"name":"Tabs"},{"name":"SectionTabs"},{"name":"NavBar"},{"name":"TabBar"},{"name":"Modal"},{"name":"Drawer"},{"name":"MenuPanel"},{"name":"MenuSheet"},{"name":"BottomSheet"},{"name":"Breadcrumbs"},{"name":"SearchField"},{"name":"SearchResults"},{"name":"Table"},{"name":"DataTable"},{"name":"Calendar"},{"name":"Icon"}]} */
+/* @ds-bundle: {"format":4,"namespace":"SFZ","components":[{"name":"Button"},{"name":"IconButton"},{"name":"Input"},{"name":"Textarea"},{"name":"Select"},{"name":"Checkbox"},{"name":"Toggle"},{"name":"Card"},{"name":"Frame"},{"name":"Badge"},{"name":"Chip"},{"name":"Alert"},{"name":"Toast"},{"name":"Avatar"},{"name":"Skeleton"},{"name":"EmptyState"},{"name":"Stepper"},{"name":"Accordion"},{"name":"AccordionItem"},{"name":"ProgressBar"},{"name":"Tabs"},{"name":"SectionTabs"},{"name":"NavBar"},{"name":"TabBar"},{"name":"Modal"},{"name":"Drawer"},{"name":"MenuPanel"},{"name":"MenuSheet"},{"name":"BottomSheet"},{"name":"Breadcrumbs"},{"name":"SearchField"},{"name":"SearchResults"},{"name":"Table"},{"name":"DataTable"},{"name":"Calendar"},{"name":"Icon"}]} */
 
 var SFZ = (() => {
   var __create = Object.create;
@@ -58,6 +58,7 @@ var SFZ = (() => {
     Drawer: () => Drawer,
     EmptyState: () => EmptyState,
     Field: () => Field,
+    Frame: () => Frame,
     ICON_PATHS: () => ICON_PATHS,
     Icon: () => Icon,
     IconButton: () => IconButton,
@@ -214,6 +215,9 @@ var SFZ = (() => {
   var cx2 = (...a) => a.filter(Boolean).join(" ");
   function Card({ title, action, variant = "raised", footer, flush, className, children, ...rest }) {
     return /* @__PURE__ */ React3.createElement("section", { className: cx2("sfz-card", `sfz-card--${variant}`, flush && "sfz-card--flush", className), ...rest }, (title || action) && /* @__PURE__ */ React3.createElement("header", { className: "sfz-card__head" }, title && /* @__PURE__ */ React3.createElement("h3", { className: "sfz-card__title" }, title), action && /* @__PURE__ */ React3.createElement("div", { className: "sfz-card__action" }, action)), /* @__PURE__ */ React3.createElement("div", { className: "sfz-card__body" }, children), footer && /* @__PURE__ */ React3.createElement("footer", { className: "sfz-card__foot" }, footer));
+  }
+  function Frame({ className, children, ...rest }) {
+    return /* @__PURE__ */ React3.createElement("div", { className: cx2("sfz-frame", className), ...rest }, children);
   }
   function Badge({ tone = "neutral", dot, className, children, ...rest }) {
     return /* @__PURE__ */ React3.createElement("span", { className: cx2("sfz-badge", `sfz-badge--${tone}`, className), ...rest }, dot && /* @__PURE__ */ React3.createElement("span", { className: "sfz-badge__dot", "aria-hidden": "true" }), children);

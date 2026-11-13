@@ -23,6 +23,9 @@
 .sfz-btn--primary:hover{background:var(--brand-blue-deep)}
 .sfz-btn--secondary{background:var(--brand-blue-tint);color:var(--brand-blue-ink)}
 .sfz-btn--secondary:hover{background:var(--surface-raised);color:var(--brand-blue-deep)}
+.sfz-btn--outline{box-sizing:border-box;border:1px solid var(--border-strong);background:var(--brand-blue-tint);color:var(--brand-blue-ink)}
+.sfz-btn--outline:hover{background:var(--surface-raised);color:var(--brand-blue-deep)}
+.sfz-btn--outline:disabled{border-color:var(--border)}
 .sfz-btn--tertiary{background:transparent;color:var(--brand-blue-ink)}
 .sfz-btn--tertiary:hover{background:var(--brand-blue-tint)}
 .sfz-btn--danger{background:var(--danger-solid);color:var(--on-brand)}
@@ -77,6 +80,7 @@
 .sfz-card__body{padding:var(--space-4)}
 .sfz-card--flush .sfz-card__body{padding:0}
 .sfz-card__foot{padding:var(--space-3) var(--space-4);border-top:1px solid var(--hairline);display:flex;gap:var(--space-2);flex-wrap:wrap}
+.sfz-frame{box-sizing:border-box;min-width:0;padding:var(--space-4);border:1px solid var(--border);border-radius:var(--radius-md);background:var(--surface);color:var(--ink)}
 @media (min-width:768px){.sfz-card__head{padding:var(--space-5) var(--space-5) 0}.sfz-card__body{padding:var(--space-5)}.sfz-card--flush .sfz-card__body{padding:0}.sfz-card__foot{padding:var(--space-3) var(--space-5)}}
 
 /* ---------- Badge / Chip ---------- */
