@@ -2,6 +2,21 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-17 – Logo aplikácie Rozvoj klubu
+
+**Čo sa urobilo**
+- Skupina `brand/logos/Rozvoj-klubu/` (A, B, ikona × farebný/biely/čierny, SVG + PNG, README) a ADR 0005. Ján Letko vybral z variantov A (podznačka), B (kompaktný), C (vertikálny), samostatný znak a ikona – porovnanie vedľa existujúcich podznačiek vo svetlej a tmavej téme, pri 16 – 180 px a v hlavičke na 375 px.
+- Tvary sú krivky z `Vzdelavanie-trenerov/*-cierne.svg` (znak, „SFZ“, R O Z V L) a z podtitulu `sfz-D-cierne.svg` (K U B), farebný znak z `vzdelavanie-trenerov-farebne.svg`; posunuté a zmenšené, nie prekreslené. Generátor (Python, mimo repozitára) skladá súbory z týchto ciest.
+
+**Čo treba vedieť**
+- Písmeno J v podkladoch nie je, je odvodené z U. Overiť u grafika (`NEXT.md`).
+- Podtitul loga SFZ a názvy podznačiek sú ten istý rez (šírky O, V, L po prepočte na výšku verzálok sedia na ±0,1 jednotky).
+- PNG vyrenderované `sips` z SVG zväčšeného na cieľovú šírku (1600 px, ikona 1024 px), priehľadné pozadie.
+
+**Čo nefungovalo a prečo**
+- `qlmanage -t` na PNG: kreslí SVG v pôvodnej veľkosti do štvorca s bielym pozadím – nepoužiteľné.
+- Variant B v prvej verzii mal názov ×1,75 a box s rezervou ako A; pri 36 px mali verzálky ≈ 7 px. Box sa zúžil na znak a názov zväčšil na ×2,2 (≈ 11 px).
+
 ## 2026-11-13 – v1.11.0: Button outline a Frame
 
 **Čo sa urobilo**
