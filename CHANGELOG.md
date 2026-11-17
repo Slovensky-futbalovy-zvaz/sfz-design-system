@@ -2,7 +2,7 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
-## [Nevydané]
+## [1.12.0] – 2026-11-17
 
 ### Pridané
 - Písmo ročníkových log **Graphik** (Commercial Type) v `brand/fonts/Graphik/` – 18 rezov TTF s README; číslice ročníka sú Graphik Regular, „GRASSROOTS GALA“ Graphik Black (overené krivkami). Podklad pre logá a tlač, nie webfont. Licenciu potvrdil Ján Letko (SFZ).

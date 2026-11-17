@@ -2,7 +2,7 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
-## 2026-11-17 – Logo aplikácie Rozvoj klubu
+## 2026-11-17 – v1.12.0: Logo aplikácie Rozvoj klubu
 
 **Čo sa urobilo**
 - Skupina `brand/logos/Rozvoj-klubu/` (A, B, ikona × farebný/biely/čierny, SVG + PNG, README) a ADR 0005. Ján Letko vybral z variantov A (podznačka), B (kompaktný), C (vertikálny), samostatný znak a ikona – porovnanie vedľa existujúcich podznačiek vo svetlej a tmavej téme, pri 16 – 180 px a v hlavičke na 375 px.
