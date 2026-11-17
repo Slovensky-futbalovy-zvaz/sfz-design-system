@@ -10,4 +10,4 @@ Písmo log SFZ Design Manual 2024 (Monotype, Copyright 2015 The Monotype Corpora
 
 ## Licencia
 
-Licenciu potvrdil Ján Letko 17. 11. 2026 (SFZ; manuál dodala spoločnosť Codes). Súbory boli dodané ako webfontový balík bez licenčného súboru – licenčný doklad je u SFZ, nie v tomto repozitári. Použitie podľa podmienok `LICENSE.md` tohto repozitára a licencie Monotype; fonty ďalej nešírte mimo SFZ a jeho zmluvných partnerov.
+Licenciu potvrdil Ján Letko 17. 11. 2026 (SFZ; manuál dodala spoločnosť Codes). Súbory boli dodané ako webfontový balík bez licenčného súboru – licenčný doklad je u SFZ, nie v tomto repozitári. Použitie podľa podmienok `LICENSE.md` tohto repozitára a licencie Monotype; bez písomného súhlasu SFZ ich smú používať len zamestnanci SFZ; ďalej ich nešírte.
