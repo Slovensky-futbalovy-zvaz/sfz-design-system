@@ -2,6 +2,27 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-17 – Logo aplikácie Rozvoj klubu
+
+**Čo sa urobilo**
+- Skupina `brand/logos/Rozvoj-klubu/` (A, B, ikona × farebný/biely/čierny, SVG + PNG, README) a ADR 0005. Ján Letko vybral z variantov A (podznačka), B (kompaktný), C (vertikálny), samostatný znak a ikona – porovnanie vedľa existujúcich podznačiek vo svetlej a tmavej téme, pri 16 – 180 px a v hlavičke na 375 px.
+- Tvary sú krivky z `Vzdelavanie-trenerov/*-cierne.svg` (znak, „SFZ“, R O Z V L) a z podtitulu `sfz-D-cierne.svg` (K U B), farebný znak z `vzdelavanie-trenerov-farebne.svg`; posunuté a zmenšené, nie prekreslené. Generátor (Python, mimo repozitára) skladá súbory z týchto ciest.
+
+**Čo treba vedieť**
+- Písmo log: v PDF manuálu 2024 sú vložené Gill Sans Nova SemiBold a Bold, Bau Pro a Graphik. S fontom Gill Sans Nova (dodal Ján) sa šírky a ľavé okraje 11 písmen názvu „Vzdelávanie trénerov“ zhodujú na ±0,02 jednotky so SemiBold a „SFZ“ s Bold; klasický Gill Sans z macOS sa líši až o 0,3. J v logách nie je a podmnožina v PDF ho nemá – je to krivka z Gill Sans Nova SemiBold (tabuľka `glyf`).
+- Podtitul loga SFZ a názvy podznačiek sú ten istý rez (šírky O, V, L po prepočte na výšku verzálok sedia na ±0,1 jednotky).
+- PNG vyrenderované `sips` z SVG zväčšeného na cieľovú šírku (1600 px, ikona 1024 px), priehľadné pozadie.
+
+- Písmo ročníkových log (Futbalista roka 2023, Grassroots Gala 2023, 2024): číslice ani písmená „GRASSROOTS GALA“ nesedia so žiadnym z 29 rezov Gill Sans Nova (najmenšia odchýlka ~0,5 – 1 jednotky, pri Gill Sans Nova v logách je ±0,02). Podmnožiny písiem v PDF manuálu ukazujú na Graphik (Regular = 0 2 3 4, Black = A G L O R S T, Medium a Bold = „TURNAJ“, „REGIONÁLNY“) – zapísané v `NEXT.md`.
+
+- Graphik (18 rezov TTF z balíka od Jána, bez EOT/WOFF a ukážok) v `brand/fonts/Graphik/`. Porovnanie šírky, výšky a ľavého okraja písmen log so všetkými rezmi: číslice ročníka (Futbalista roka 2023, Grassroots Gala) = Graphik Regular (súčet odchýlok 0,03 – 0,06; Light 0,4 – 0,8), „GRASSROOTS GALA“ = Graphik Black (0,1; Bold 1,5). Font obsahuje licenčné podmienky Commercial Type v tabuľke `name`. Ján potvrdil licenciu. Balík npm +2,7 MB.
+- Gill Sans Nova (43 rezov TTF z balíka od Jána, bez EOT/WOFF a ukážok) v `brand/fonts/Gill-Sans-Nova/` s README; Ján potvrdil licenciu. Balík npm ich obsahuje (`files` zahŕňa `brand`), +6,8 MB.
+
+**Čo nefungovalo a prečo**
+- Prvé J odvodené z U (pravý ťah a spodný oblúk) – Ján zamietol, Gill Sans má J pod účiarím. Druhé J z klasického Gill Sans (macOS) – nahradené, keď bol k dispozícii Gill Sans Nova.
+- `qlmanage -t` na PNG: kreslí SVG v pôvodnej veľkosti do štvorca s bielym pozadím – nepoužiteľné.
+- Variant B v prvej verzii mal názov ×1,75 a box s rezervou ako A; pri 36 px mali verzálky ≈ 7 px. Box sa zúžil na znak a názov zväčšil na ×2,2 (≈ 11 px).
+
 ## 2026-11-13 – v1.11.0: Button outline a Frame
 
 **Čo sa urobilo**
