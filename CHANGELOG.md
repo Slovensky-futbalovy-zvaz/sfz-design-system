@@ -2,6 +2,11 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [Nevydané]
+
+### Zmenené
+- Podmienky použitia `LICENSE.md`: bez predchádzajúceho písomného súhlasu SFZ smú obsah používať, upravovať a šíriť **len zamestnanci SFZ** (na pracovné úlohy pre SFZ). Zmluvní partneri – dodávatelia a agentúry – už nie sú oprávnení automaticky, potrebujú súhlas. Rozhodol Ján Letko 17. 11. 2026.
+
 ## [1.11.0] – 2026-11-13
 
 ### Pridané
