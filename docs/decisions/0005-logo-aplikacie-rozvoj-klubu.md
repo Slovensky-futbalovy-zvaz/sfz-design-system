@@ -18,7 +18,7 @@ Ján Letko vybral z návrhov A, B, C, samostatného znaku a ikony (porovnanie vo
   - znak SFZ a „SFZ“ z `Vzdelavanie-trenerov/` (čierna verzia; farebná má znak z farebnej verzie vrátane bieleho disku),
   - písmená R, O, Z, V, L z názvu „Vzdelávanie trénerov“, písmená K, U, B z podtitulu loga SFZ D – ten istý rez, prepočítaný na rovnakú výšku verzálok (10,17 vs. 4,78 jednotky),
   - písmo názvov podznačiek aj podtitulu loga SFZ je **Gill Sans Nova SemiBold**, veľké „SFZ“ **Gill Sans Nova Bold** (Monotype) – v PDF manuálu 2024 sú tieto rezy vložené a šírky aj ľavé okraje písmen V, Z, D, E, L, A, N, I, T, R, O resp. S, F, Z sa s krivkami log zhodujú na ±0,02 jednotky (klasický Gill Sans sa líši až o 0,3),
-  - písmeno J v logách manuálu nie je; je to krivka z Gill Sans Nova SemiBold v rovnakej výške verzálok – zostupuje pod účiarie ako v sadzbe. Font dodal Ján Letko 17. 11. 2026; do repozitára sa nevkladá, logo obsahuje len krivky.
+  - písmeno J v logách manuálu nie je; je to krivka z Gill Sans Nova SemiBold v rovnakej výške verzálok – zostupuje pod účiarie ako v sadzbe. Font dodal Ján Letko 17. 11. 2026 a je v `brand/fonts/Gill-Sans-Nova/`; logo obsahuje len krivky.
 - **A – podznačka:** presne skladba „Vzdelávanie trénerov SFZ“ – rovnaká veľkosť a pozícia názvu aj „SFZ“, len iný text. Oficiálne logo (prihlásenie, prezentácie, tlač, e-maily).
 - **B – kompaktný:** znak a názov v dvoch riadkoch, väčší (×2,2) a bez „SFZ“, box tesne okolo znaku. Len pre hlavičku webovej aplikácie: pri výške 36 px majú verzálky ≈ 11 px, pri A by mali ≈ 4 px. Príslušnosť k SFZ nesie znak.
 - **Ikona:** biely znak (podľa bielej verzie z manuálu – štít obrysom, kríž a trojvršie) na štvorci `brand-blue` so zaoblením 22,5 %. Favicon a ikona na ploche telefónu.
@@ -28,7 +28,7 @@ Ján Letko vybral z návrhov A, B, C, samostatného znaku a ikony (porovnanie vo
 ## Dôsledky
 
 - Aplikácia Rozvoj klubu berie logo z balíka (`brand/logos/Rozvoj-klubu/`) rovnako ako dnes logo SFZ; po vydaní novej verzie sa v nej nahradí logo v hlavičke, na prihlásení, favicon a ikona.
-- Licenciu Gill Sans Nova na strane SFZ treba mať doloženú (balík fontov prišiel ako webfont kit bez licenčného súboru, `NEXT.md`); logo obsahuje len krivky, nie font.
+- Licenciu Gill Sans Nova potvrdil Ján Letko (SFZ); licenčný doklad je u SFZ, nie v repozitári. Repozitár je verejný – fonty sa šíria len podľa `LICENSE.md` a licencie Monotype.
 - Logo neprešlo schválením marketingu SFZ ako vlastník manuálu; ak ho bude chcieť do manuálu, nahradí sa jeho verziou.
 - Biely disk vo farebnom znaku (ako v originále) je na `surface-raised` viditeľný ako biely kruh – rovnako ako pri ostatných podznačkách.
 

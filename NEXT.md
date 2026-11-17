@@ -12,7 +12,7 @@ Stav k 22. 10. 2026 (v1.5.0). Pred tvrdením, že bod je otvorený, overte `git 
 
 ## Logo Rozvoj klubu (ADR 0005)
 - [x] **Písmeno J** v logu Rozvoj klubu je z Gill Sans Nova SemiBold – písma log manuálu (17. 11. 2026).
-- [ ] Doložiť licenciu Gill Sans Nova (Monotype) na strane SFZ – font prišiel ako webfont kit bez licenčného súboru.
+- [x] Licencia Gill Sans Nova – potvrdil Ján Letko 17. 11. 2026 (SFZ, manuál od Codes); fonty v `brand/fonts/Gill-Sans-Nova/`.
 - [ ] Ukázať logo marketingu SFZ (vlastník manuálu) – ak ho prevezme do manuálu, nahradiť jeho verziou.
 
 ## Synchronizácia s artefaktom

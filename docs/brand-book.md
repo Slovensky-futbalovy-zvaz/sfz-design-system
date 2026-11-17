@@ -86,6 +86,7 @@ Vzory (nie React komponenty, platia pre ECharts, Recharts aj vlastné SVG): `Bar
 - Programy a projekty z manuálu, každý farebný/čierny/biely, SVG + PNG: **Narodny‑tim** (Sokoli, 30 rokov), **Regionalny‑turnaj**, **Skolsky‑pohar**, **Dajme‑spolu‑gol**, **Futbalista‑roka** (+ ročník 2023), **Grassroots‑gala** (+ ročníky 2023, 2024), **Konferencia‑sport‑a‑spolocnost** (A vertikálny, B horizontálny), **Sien‑slavy**, **Slovakia‑cup‑U18**, **Nadacia‑SFZ**, **Asociacia‑rozhodcov**, **Grassroots‑program**, **Konferencia‑SFZ**, **Vzdelavanie‑trenerov**.
 - **Rozvoj‑klubu**: logo aplikácie Rozvoj klubu – jediné mimo manuálu, poskladané z jeho kriviek podľa vzoru podznačiek (ADR 0005). A podznačka (oficiálne logo), B kompaktný bez „SFZ“ (len NavBar aplikácie), ikona (biely znak na `brand-blue` štvorci) – farebný/čierny/biely, SVG + PNG.
 - Vždy použite súbor zo systému; logo nikdy nekreslite ani neprefarbujte. Farebný variant iba na bielej alebo `surface-raised`; na modrej, fotografii a v tmavej téme biely; čierny do čiernobielej tlače. Ochranné zóny a farby sú v README každej skupiny.
+- **Písmo log**: Gill Sans Nova (`brand/fonts/Gill-Sans-Nova/`) – názvy podznačiek a podtitul loga SFZ SemiBold, „SFZ“ Bold. Len pre logá a tlač; web používa systémové písmo (časť Typografia).
 - Ročníkové varianty (Futbalista roka, Grassroots Gala) treba každý rok doplniť z aktuálneho manuálu.
 
 ## QR kód

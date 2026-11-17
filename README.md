@@ -20,6 +20,7 @@ Prehliadateľná verzia (brand book so živými náhľadmi): artefakt **SFZ Desi
 | `components/bundle.js` | UMD bundle `window.SFZ` pre stránky bez buildu (React 18 z CDN) |
 | `components/docs/` | Pravidlá použitia každého komponentu (props, kedy použiť, do/don't) |
 | `brand/logos/` | 16 značiek SFZ × farebná/čierna/biela, SVG + PNG; README každej skupiny má ochranné zóny. Navyše logo aplikácie Rozvoj klubu (`Rozvoj-klubu/`, ADR 0005) |
+| `brand/fonts/` | Gill Sans Nova (Monotype) – písmo log manuálu, 43 rezov TTF; podklad pre logá a tlač, nie webfont |
 | `docs/brand-book.md` | Pravidlá farieb, typografie, rozloženia, prístupnosti a tónu textu |
 | `docs/grafy/` | Vzory grafov (pruhový, čiarový, podiely, heatmapa, odchýlka, bodový, tok, karty ukazovateľov) a máp (body, kartogram, trasa, hustota), farby podľa úlohy, téma pre ECharts a štýl pre MapLibre |
 | `docs/prezentacie/` | Pravidlá pre slajdy 1920×1080 (titul, predel, obsah, čísla, časová os, logá) |
