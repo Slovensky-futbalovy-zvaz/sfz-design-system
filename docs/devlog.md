@@ -13,6 +13,8 @@ Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID s
 - Podtitul loga SFZ a názvy podznačiek sú ten istý rez (šírky O, V, L po prepočte na výšku verzálok sedia na ±0,1 jednotky).
 - PNG vyrenderované `sips` z SVG zväčšeného na cieľovú šírku (1600 px, ikona 1024 px), priehľadné pozadie.
 
+- Písmo ročníkových log (Futbalista roka 2023, Grassroots Gala 2023, 2024): číslice ani písmená „GRASSROOTS GALA“ nesedia so žiadnym z 29 rezov Gill Sans Nova (najmenšia odchýlka ~0,5 – 1 jednotky, pri Gill Sans Nova v logách je ±0,02). Podmnožiny písiem v PDF manuálu ukazujú na Graphik (Regular = 0 2 3 4, Black = A G L O R S T, Medium a Bold = „TURNAJ“, „REGIONÁLNY“) – zapísané v `NEXT.md`.
+
 **Čo nefungovalo a prečo**
 - Prvé J odvodené z U (pravý ťah a spodný oblúk) – Ján zamietol, Gill Sans má J pod účiarím. Druhé J z klasického Gill Sans (macOS) – nahradené, keď bol k dispozícii Gill Sans Nova.
 - `qlmanage -t` na PNG: kreslí SVG v pôvodnej veľkosti do štvorca s bielym pozadím – nepoužiteľné.
