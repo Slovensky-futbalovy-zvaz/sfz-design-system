@@ -2,6 +2,11 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [Nevydané]
+
+### Opravené
+- Logo Rozvoj klubu (A aj B, farebný, čierny, biely; SVG aj PNG): písmeno **J** stojí na účiarí ako ostatné písmená názvu a jeho vrch je presne vo výške verzálok (predtým zostupovalo pod účiarie a sedelo o 0,09 jednotky nižšie). Krivka J z Gill Sans Nova SemiBold s oblúkom posunutým hore, poloha podľa metrík písma; B je o 0,6 jednotky širší. Výber Jána Letka 18. 11. 2026 (ADR 0005).
+
 ## [1.12.0] – 2026-11-17
 
 ### Pridané

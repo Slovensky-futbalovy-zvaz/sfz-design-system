@@ -2,6 +2,17 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-18 – J v logu Rozvoj klubu na účiarí
+
+**Čo sa urobilo**
+- J v šiestich SVG (A, B × farebný/čierny/biely) nahradené krivkou J z Gill Sans Nova SemiBold: body pod y = 200 posunuté hore o 227 jednotiek (spodok oblúka na účiarí), mierka a vrch z R toho istého riadku, poloha z kerningu písma (HarfBuzz, OJ = 0) a prestrkania odvodeného metódou najmenších štvorcov z R, O, Z, V, O. Pri B, kde je J najpravejšie, sa plátno rozšírilo o 0,6 jednotky (pravý okraj ostal). PNG znova cez `sips`.
+- Ján vybral z náhľadov: J pod účiarím (pôvodné, s opravenou výškou a tromi medzerami O–J), J na účiarí zo základného J a z `J.alt01` – základné J.
+
+**Čo treba vedieť**
+- Pôvodné J sedelo o 0,09 jednotky nižšie a bolo o 0,1 % menšie, ako dáva písmo (vrch 8,963 namiesto 8,871 vo variante B) – chyba pri skladaní, nie v písme.
+- Gill Sans Nova nemá J na účiarí: `J` aj `J.alt01` siahajú na −227 / −231.
+- Náhľady s výrezom a pomocnými čiarami: Chrome headless (`--screenshot`) zo stránky s `<img>` / `<svg><image>`; `sips` na zložené SVG (vnorené `<svg>`) kreslí rozmazane a s čiernym pozadím.
+
 ## 2026-11-17 – v1.12.0: Logo aplikácie Rozvoj klubu
 
 **Čo sa urobilo**
