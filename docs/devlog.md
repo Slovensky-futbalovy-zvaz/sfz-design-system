@@ -15,6 +15,7 @@ Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID s
 
 - Písmo ročníkových log (Futbalista roka 2023, Grassroots Gala 2023, 2024): číslice ani písmená „GRASSROOTS GALA“ nesedia so žiadnym z 29 rezov Gill Sans Nova (najmenšia odchýlka ~0,5 – 1 jednotky, pri Gill Sans Nova v logách je ±0,02). Podmnožiny písiem v PDF manuálu ukazujú na Graphik (Regular = 0 2 3 4, Black = A G L O R S T, Medium a Bold = „TURNAJ“, „REGIONÁLNY“) – zapísané v `NEXT.md`.
 
+- Graphik (18 rezov TTF z balíka od Jána, bez EOT/WOFF a ukážok) v `brand/fonts/Graphik/`. Porovnanie šírky, výšky a ľavého okraja písmen log so všetkými rezmi: číslice ročníka (Futbalista roka 2023, Grassroots Gala) = Graphik Regular (súčet odchýlok 0,03 – 0,06; Light 0,4 – 0,8), „GRASSROOTS GALA“ = Graphik Black (0,1; Bold 1,5). Font obsahuje licenčné podmienky Commercial Type v tabuľke `name`. Ján potvrdil licenciu. Balík npm +2,7 MB.
 - Gill Sans Nova (43 rezov TTF z balíka od Jána, bez EOT/WOFF a ukážok) v `brand/fonts/Gill-Sans-Nova/` s README; Ján potvrdil licenciu. Balík npm ich obsahuje (`files` zahŕňa `brand`), +6,8 MB.
 
 **Čo nefungovalo a prečo**
