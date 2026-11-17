@@ -10,7 +10,8 @@ Stav k 22. 10. 2026 (v1.5.0). Pred tvrdením, že bod je otvorený, overte `git 
 - [ ] Build skript pre `components/bundle.js` (napr. esbuild) – dnes sa zmeny v `components/src` prenášajú do bundla ručne.
 
 ## Logo Rozvoj klubu (ADR 0005)
-- [ ] **Písmeno J** v logu Rozvoj klubu je z klasického Gill Sans SemiBold (macOS); manuál používa Gill Sans Nova. Keď bude k dispozícii Gill Sans Nova SemiBold (licencia SFZ / grafik), nahradiť J jej krivkou.
+- [x] **Písmeno J** v logu Rozvoj klubu je z Gill Sans Nova SemiBold – písma log manuálu (17. 11. 2026).
+- [ ] Doložiť licenciu Gill Sans Nova (Monotype) na strane SFZ – font prišiel ako webfont kit bez licenčného súboru.
 - [ ] Ukázať logo marketingu SFZ (vlastník manuálu) – ak ho prevezme do manuálu, nahradiť jeho verziou.
 
 ## Synchronizácia s artefaktom

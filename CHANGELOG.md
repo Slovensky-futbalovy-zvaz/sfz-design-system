@@ -5,7 +5,7 @@ Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie 
 ## [Nevydané]
 
 ### Pridané
-- Logo aplikácie Rozvoj klubu v `brand/logos/Rozvoj-klubu/`: A podznačka (skladba „Vzdelávanie trénerov SFZ“), B kompaktný bez „SFZ“ pre NavBar (pri 36 px čitateľný názov) a ikona (biely znak na `brand-blue` štvorci) – farebný, biely, čierny, SVG + PNG, README s ochrannou zónou a minimálnou veľkosťou. Prvé logo mimo SFZ Design Manual; poskladané z jeho kriviek, písmeno J z Gill Sans SemiBold – písma názvov podznačiek (ADR 0005). Podnet: aplikácia Rozvoj klubu, výber Jána Letka 17. 11. 2026.
+- Logo aplikácie Rozvoj klubu v `brand/logos/Rozvoj-klubu/`: A podznačka (skladba „Vzdelávanie trénerov SFZ“), B kompaktný bez „SFZ“ pre NavBar (pri 36 px čitateľný názov) a ikona (biely znak na `brand-blue` štvorci) – farebný, biely, čierny, SVG + PNG, README s ochrannou zónou a minimálnou veľkosťou. Prvé logo mimo SFZ Design Manual; poskladané z jeho kriviek, písmeno J z Gill Sans Nova SemiBold – písma názvov podznačiek (ADR 0005). Podnet: aplikácia Rozvoj klubu, výber Jána Letka 17. 11. 2026.
 
 ## [1.11.0] – 2026-11-13
 

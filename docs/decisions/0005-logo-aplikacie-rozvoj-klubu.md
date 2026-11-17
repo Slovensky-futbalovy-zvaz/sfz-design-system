@@ -14,11 +14,11 @@ Ján Letko vybral z návrhov A, B, C, samostatného znaku a ikony (porovnanie vo
 
 ## Rozhodnutie
 
-- Logo Rozvoj klubu je v `brand/logos/Rozvoj-klubu/` ako prvá skupina **mimo manuálu**. Je poskladané **z kriviek manuálu a písma jeho log** (Gill Sans), nič nie je prekreslené od oka:
+- Logo Rozvoj klubu je v `brand/logos/Rozvoj-klubu/` ako prvá skupina **mimo manuálu**. Je poskladané **z kriviek manuálu a písma jeho log** (Gill Sans Nova), nič nie je prekreslené od oka:
   - znak SFZ a „SFZ“ z `Vzdelavanie-trenerov/` (čierna verzia; farebná má znak z farebnej verzie vrátane bieleho disku),
   - písmená R, O, Z, V, L z názvu „Vzdelávanie trénerov“, písmená K, U, B z podtitulu loga SFZ D – ten istý rez, prepočítaný na rovnakú výšku verzálok (10,17 vs. 4,78 jednotky),
-  - písmo názvov podznačiek aj podtitulu loga SFZ je Gill Sans SemiBold – v PDF manuálu 2024 sú vložené Gill Sans Nova SemiBold a Bold (spolu s Bau Pro a Graphik) a sadzba Gill Sans SemiBold sa s krivkami log zhoduje (šírky V, O, R do 2 %),
-  - písmeno J v logách manuálu nie je a vložená Gill Sans Nova SemiBold ho v podmnožine nemá; J je preto krivka z Gill Sans SemiBold (klasický rez dodávaný s macOS) v rovnakej výške verzálok – zostupuje pod účiarie ako v sadzbe.
+  - písmo názvov podznačiek aj podtitulu loga SFZ je **Gill Sans Nova SemiBold**, veľké „SFZ“ **Gill Sans Nova Bold** (Monotype) – v PDF manuálu 2024 sú tieto rezy vložené a šírky aj ľavé okraje písmen V, Z, D, E, L, A, N, I, T, R, O resp. S, F, Z sa s krivkami log zhodujú na ±0,02 jednotky (klasický Gill Sans sa líši až o 0,3),
+  - písmeno J v logách manuálu nie je; je to krivka z Gill Sans Nova SemiBold v rovnakej výške verzálok – zostupuje pod účiarie ako v sadzbe. Font dodal Ján Letko 17. 11. 2026; do repozitára sa nevkladá, logo obsahuje len krivky.
 - **A – podznačka:** presne skladba „Vzdelávanie trénerov SFZ“ – rovnaká veľkosť a pozícia názvu aj „SFZ“, len iný text. Oficiálne logo (prihlásenie, prezentácie, tlač, e-maily).
 - **B – kompaktný:** znak a názov v dvoch riadkoch, väčší (×2,2) a bez „SFZ“, box tesne okolo znaku. Len pre hlavičku webovej aplikácie: pri výške 36 px majú verzálky ≈ 11 px, pri A by mali ≈ 4 px. Príslušnosť k SFZ nesie znak.
 - **Ikona:** biely znak (podľa bielej verzie z manuálu – štít obrysom, kríž a trojvršie) na štvorci `brand-blue` so zaoblením 22,5 %. Favicon a ikona na ploche telefónu.
@@ -28,7 +28,7 @@ Ján Letko vybral z návrhov A, B, C, samostatného znaku a ikony (porovnanie vo
 ## Dôsledky
 
 - Aplikácia Rozvoj klubu berie logo z balíka (`brand/logos/Rozvoj-klubu/`) rovnako ako dnes logo SFZ; po vydaní novej verzie sa v nej nahradí logo v hlavičke, na prihlásení, favicon a ikona.
-- J je z klasického Gill Sans, nie z Gill Sans Nova; rozdiel je do 1 – 2 %. Keď bude k dispozícii Gill Sans Nova SemiBold (licencia SFZ / grafik), J sa nahradí jej krivkou (`NEXT.md`). Krivka jedného znaku z písma dodávaného so systémom je v logu bežná prax, licenčné podmienky Gill Sans (Monotype) ale nikto z nás neoveril – rieši to aj náhrada za Gill Sans Nova s licenciou SFZ.
+- Licenciu Gill Sans Nova na strane SFZ treba mať doloženú (balík fontov prišiel ako webfont kit bez licenčného súboru, `NEXT.md`); logo obsahuje len krivky, nie font.
 - Logo neprešlo schválením marketingu SFZ ako vlastník manuálu; ak ho bude chcieť do manuálu, nahradí sa jeho verziou.
 - Biely disk vo farebnom znaku (ako v originále) je na `surface-raised` viditeľný ako biely kruh – rovnako ako pri ostatných podznačkách.
 
@@ -38,4 +38,5 @@ Ján Letko vybral z návrhov A, B, C, samostatného znaku a ikony (porovnanie vo
 - **Samostatný farebný znak ako favicon:** je to favicon všetkých webov SFZ, aplikáciu neodlíši; pri 16 px sa farebný štít zlieva.
 - **Znak a názov ako živý text písmom aplikácie (SF Pro):** čitateľné, ale nie je to logo – v e-mailoch, PDF a na iných zariadeniach sa písmo zmení.
 - **J odvodené z U (pravý ťah a spodný oblúk):** prvá verzia; Ján ho zamietol – nezodpovedalo písmu (Gill Sans má J pod účiarím).
+- **J z klasického Gill Sans SemiBold (macOS):** druhá verzia, kým nebol k dispozícii Gill Sans Nova; klasický rez sa od písma log líši až o 0,3 jednotky.
 - **Nový tvar alebo monogram „RK“:** manuál nepozná značky mimo znaku SFZ; kreslenie nového tvaru odporuje pravidlu „logo nikdy nekresliť“.
