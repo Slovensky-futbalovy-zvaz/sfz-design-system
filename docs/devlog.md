@@ -9,11 +9,12 @@ Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID s
 - Tvary sú krivky z `Vzdelavanie-trenerov/*-cierne.svg` (znak, „SFZ“, R O Z V L) a z podtitulu `sfz-D-cierne.svg` (K U B), farebný znak z `vzdelavanie-trenerov-farebne.svg`; posunuté a zmenšené, nie prekreslené. Generátor (Python, mimo repozitára) skladá súbory z týchto ciest.
 
 **Čo treba vedieť**
-- Písmeno J v podkladoch nie je, je odvodené z U. Overiť u grafika (`NEXT.md`).
+- Písmo názvov podznačiek a podtitulu loga SFZ je Gill Sans SemiBold: v PDF manuálu 2024 sú vložené Gill Sans Nova SemiBold a Bold, Bau Pro a Graphik; sadzba Gill Sans SemiBold sa s krivkami log zhoduje. J v logách nie je a podmnožina Gill Sans Nova v PDF ho tiež nemá – je z klasického Gill Sans SemiBold z macOS (`/System/Library/Fonts/Supplemental/GillSans.ttc`, krivka z tabuľky `glyf`).
 - Podtitul loga SFZ a názvy podznačiek sú ten istý rez (šírky O, V, L po prepočte na výšku verzálok sedia na ±0,1 jednotky).
 - PNG vyrenderované `sips` z SVG zväčšeného na cieľovú šírku (1600 px, ikona 1024 px), priehľadné pozadie.
 
 **Čo nefungovalo a prečo**
+- Prvé J odvodené z U (pravý ťah a spodný oblúk) – Ján zamietol, Gill Sans má J pod účiarím.
 - `qlmanage -t` na PNG: kreslí SVG v pôvodnej veľkosti do štvorca s bielym pozadím – nepoužiteľné.
 - Variant B v prvej verzii mal názov ×1,75 a box s rezervou ako A; pri 36 px mali verzálky ≈ 7 px. Box sa zúžil na znak a názov zväčšil na ×2,2 (≈ 11 px).
 
