@@ -1,6 +1,6 @@
 # NEXT – otvorené body
 
-Stav k 22. 10. 2026 (v1.5.0). Pred tvrdením, že bod je otvorený, overte `git log`.
+Stav k 18. 11. 2026 (v1.12.1). Pred tvrdením, že bod je otvorený, overte `git log`.
 
 ## Rozhodnúť
 - [ ] **Podmienky použitia (`LICENSE.md`)**: dať na kontrolu právnemu oddeleniu SFZ. Od 17. 11. 2026 (Ján Letko) bez súhlasu SFZ smú obsah používať a upravovať len zamestnanci SFZ; zmluvní partneri potrebujú písomný súhlas.
@@ -12,10 +12,12 @@ Stav k 22. 10. 2026 (v1.5.0). Pred tvrdením, že bod je otvorený, overte `git 
 - [ ] Build skript pre `components/bundle.js` (napr. esbuild) – dnes sa zmeny v `components/src` prenášajú do bundla ručne.
 
 ## Logo Rozvoj klubu (ADR 0005)
-- [x] **Písmeno J** v logu Rozvoj klubu je z Gill Sans Nova SemiBold – písma log manuálu (17. 11. 2026).
+- [x] **Písmeno J** v logu Rozvoj klubu je z Gill Sans Nova SemiBold – písma log manuálu (17. 11. 2026); od 18. 11. 2026 stojí na účiarí a vo výške verzálok (v1.12.1).
 - [x] Licencia Gill Sans Nova – potvrdil Ján Letko 17. 11. 2026 (SFZ, manuál od Codes); fonty v `brand/fonts/Gill-Sans-Nova/`.
 - [x] Licencia Graphik – potvrdil Ján Letko 17. 11. 2026; fonty v `brand/fonts/Graphik/`.
+- [ ] Nahradiť logo v aplikácii Rozvoj klubu po vydaní v1.12.1 (hlavička B, prihlásenie A; favicon a ikona bez zmeny).
 - [ ] Ukázať logo marketingu SFZ (vlastník manuálu) – ak ho prevezme do manuálu, nahradiť jeho verziou.
 
 ## Synchronizácia s artefaktom
-- [ ] Zmeny tokenov a komponentov robiť tu; do artefaktu SFZ Design System ich prenášať pri vydaní novej verzie.
+- Zmeny tokenov, komponentov a log robiť tu; do artefaktu SFZ Design System ich prenášať pri vydaní novej verzie (mapovanie v `docs/artefakt/README.md`). Písma z `brand/fonts/` a `LICENSE.md` sa neprenášajú.
+- [x] Artefakt zodpovedá v1.12.1 (18. 11. 2026).
