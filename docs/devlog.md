@@ -2,6 +2,17 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
+## 2026-11-18 – v1.13.0: ikony pre účet a vzhľad
+
+**Čo sa urobilo**
+- Sedem ikon z Lucide (`sun`, `moon`, `monitor`, `log-in`, `external-link`, `shield`, `mail`) v `icons.tsx`, `bundle.js`, dokumentácii a teste. Potrebuje ich osobné menu, prihlásenie a nastavenia v aplikácii Rozvoj klubu (maketa schválená Jánom Letkom).
+
+**Čo treba vedieť**
+- Rozbaľovacie menu (popover) DS nemá; aplikácia ho skladá z tokenov a ak sa osvedčí, presunie sa sem.
+
+**Čo nefungovalo a prečo**
+- Nič.
+
 ## 2026-11-18 – v1.12.1: J v logu Rozvoj klubu na účiarí
 
 **Čo sa urobilo**
