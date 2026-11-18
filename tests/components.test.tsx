@@ -307,6 +307,6 @@ describe("správanie", () => {
   });
 
   it("nové ikony sú v sade", () => {
-    for (const n of ["map", "map-pin", "compass", "book-open", "star", "flag", "handshake", "clipboard-list", "file-check"]) expect(SFZ.ICON_PATHS[n], n).toBeTruthy();
+    for (const n of ["map", "map-pin", "compass", "book-open", "star", "flag", "handshake", "clipboard-list", "file-check", "sun", "moon", "monitor", "log-in", "external-link", "shield", "mail"]) expect(SFZ.ICON_PATHS[n], n).toBeTruthy();
   });
 });

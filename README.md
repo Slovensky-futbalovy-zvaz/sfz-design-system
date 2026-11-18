@@ -56,13 +56,13 @@ Balík `@slovensky-futbalovy-zvaz/design-system` sa publikuje automaticky pri ka
 Inštalácia pod skráteným menom `@sfz/design-system` (alias, importy v kóde ostávajú rovnaké):
 
 ```bash
-npm install @sfz/design-system@npm:@slovensky-futbalovy-zvaz/design-system@^1.12.1
+npm install @sfz/design-system@npm:@slovensky-futbalovy-zvaz/design-system@^1.13.0
 ```
 
 ### Varianta B – priamo z gitu (bez tokenu)
 
 ```bash
-npm install github:Slovensky-futbalovy-zvaz/sfz-design-system#v1.12.1
+npm install github:Slovensky-futbalovy-zvaz/sfz-design-system#v1.13.0
 ```
 
 ```js

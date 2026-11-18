@@ -2,6 +2,11 @@
 
 Formát podľa [Keep a Changelog](https://keepachangelog.com/sk/1.1.0/), verzie podľa [SemVer](https://semver.org/lang/sk/).
 
+## [1.13.0] – 2026-11-18
+
+### Pridané
+- Ikony `sun`, `moon`, `monitor` (prepínač vzhľadu Svetlý / Tmavý / Systém), `log-in` (prihlásenie), `external-link` (odkaz mimo aplikácie), `shield` (bezpečnosť a správa) a `mail` (e-mail) z Lucide. Podnet: osobné menu, prihlásenie a nastavenia účtu v aplikácii Rozvoj klubu – návrh schválil Ján Letko 18. 11. 2026.
+
 ## [1.12.1] – 2026-11-18
 
 ### Opravené

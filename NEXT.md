@@ -1,6 +1,6 @@
 # NEXT – otvorené body
 
-Stav k 18. 11. 2026 (v1.12.1). Pred tvrdením, že bod je otvorený, overte `git log`.
+Stav k 18. 11. 2026 (v1.13.0). Pred tvrdením, že bod je otvorený, overte `git log`.
 
 ## Rozhodnúť
 - [ ] **Podmienky použitia (`LICENSE.md`)**: dať na kontrolu právnemu oddeleniu SFZ. Od 17. 11. 2026 (Ján Letko) bez súhlasu SFZ smú obsah používať a upravovať len zamestnanci SFZ; zmluvní partneri potrebujú písomný súhlas.
@@ -20,4 +20,4 @@ Stav k 18. 11. 2026 (v1.12.1). Pred tvrdením, že bod je otvorený, overte `git
 
 ## Synchronizácia s artefaktom
 - Zmeny tokenov, komponentov a log robiť tu; do artefaktu SFZ Design System ich prenášať pri vydaní novej verzie (mapovanie v `docs/artefakt/README.md`). Písma z `brand/fonts/` a `LICENSE.md` sa neprenášajú.
-- [x] Artefakt zodpovedá v1.12.1 (18. 11. 2026).
+- [ ] Preniesť do artefaktu v1.13.0 (7 nových ikon); artefakt zodpovedá v1.12.1.
