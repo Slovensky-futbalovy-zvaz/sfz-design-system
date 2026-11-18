@@ -2,7 +2,7 @@
 
 Pracovný denník repozitára. Najnovší záznam hore. E‑maily, tokeny a ID sú v zápisoch maskované.
 
-## 2026-11-18 – J v logu Rozvoj klubu na účiarí
+## 2026-11-18 – v1.12.1: J v logu Rozvoj klubu na účiarí
 
 **Čo sa urobilo**
 - J v šiestich SVG (A, B × farebný/čierny/biely) nahradené krivkou J z Gill Sans Nova SemiBold: body pod y = 200 posunuté hore o 227 jednotiek (spodok oblúka na účiarí), mierka a vrch z R toho istého riadku, poloha z kerningu písma (HarfBuzz, OJ = 0) a prestrkania odvodeného metódou najmenších štvorcov z R, O, Z, V, O. Pri B, kde je J najpravejšie, sa plátno rozšírilo o 0,6 jednotky (pravý okraj ostal). PNG znova cez `sips`.
